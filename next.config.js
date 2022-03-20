@@ -1,3 +1,5 @@
+const path = require("path");
+
 // It 'll create a handy report what's in our bundle when build is completed
 const WebpackBundleAnalyzer = require("webpack-bundle-analyzer");
 
@@ -6,16 +8,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   webpack(config, options) {
     const { dev } = options;
-    if (dev) {
-      config.module.rules.push({
-        test: /\.scss$/,
-        use: [
-          "style-loader", //3. Inject styles into DOM
-          "css-loader", //2. Turns css into commonjs
-          "sass-loader", //1. Turns sass into css
-        ],
-      });
-    }
     if (!dev) {
       //let us see original code when debugging in browser
       config.devtool = "source-map";
@@ -53,5 +45,8 @@ module.exports = {
       use: ["babel-loader"],
     });
     return config;
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
   },
 };
