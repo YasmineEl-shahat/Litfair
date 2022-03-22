@@ -1,0 +1,12 @@
+@import "../abstracts/variables.scss";
+@import "../components/button.scss";
+@import "../components/textInput.scss";
+
+nav {
+  margin: 5rem 11rem;
+}
+
+.navbar-right {
+  position: absolute;
+  margin-right: 0;
+}

@@ -1,5 +1,6 @@
 import Head from "next/head";
-
+import Navbar from "../comps/Navbar";
+import style from "../styles/pages/Home.module.scss";
 const Home = () => {
   return (
     <>
@@ -7,7 +8,6 @@ const Home = () => {
         <title>LitFair | Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>في انتظار ندى نسأل الله التساهيل</div>
     </>
   );
 };

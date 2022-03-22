@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Open+Sans:wght@300&family=Readex+Pro:wght@200&display=swap");
+@import "./abstracts/variables.scss";
+
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+  outline: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  //typography
+  font-size: $GlobalFont;
+  body {
+    background-color: $WhiteGlobal;
+    font-family: "Inter", sans-serif;
+  }
+}
+
+a {
+  color: inherit;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+}
+
+input,
+select,
+textarea,
+button {
+  border: none;
+  background: none;
+}
