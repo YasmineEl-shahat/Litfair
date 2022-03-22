@@ -1,9 +1,20 @@
 @import "../abstracts/variables.scss";
 @import "../components/button.scss";
+<<<<<<< HEAD
+=======
+@import "../components/textInput.scss";
+>>>>>>> ecdf55a0ba0678901e5344a31ff008710005330d
 
 nav {
   margin: 5rem 11rem;
 }
+<<<<<<< HEAD
 .navbar-brand {
   cursor: pointer;
+=======
+
+.navbar-right {
+  position: absolute;
+  margin-right: 0;
+>>>>>>> ecdf55a0ba0678901e5344a31ff008710005330d
 }

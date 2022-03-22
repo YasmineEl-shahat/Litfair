@@ -16,6 +16,7 @@
     color: $color;
   }
 }
+<<<<<<< HEAD
 
 @mixin mQ($args...) {
   @if length($args) == 1 {
@@ -29,3 +30,5 @@
     }
   }
 }
+=======
+>>>>>>> ecdf55a0ba0678901e5344a31ff008710005330d
