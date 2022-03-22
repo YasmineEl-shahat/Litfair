@@ -1,0 +1,31 @@
+@mixin placeholder-color($color) {
+  &::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: $color;
+  }
+  &:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: $color;
+  }
+  &::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: $color;
+  }
+}
+
+@mixin mQ($args...) {
+  @if length($args) == 1 {
+    @media screen and (max-width: nth($args, 1)) {
+      @content;
+    }
+  }
+  @if length($args) == 2 {
+    @media screen and (max-width: nth($args, 1)) and (min-width: nth($args, 2)) {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@import "../abstracts/variables.scss";
+body {
+  .btn--global {
+    padding: 0.75rem 0;
+
+    color: $WhiteGlobal;
+    &:hover {
+      color: $WhiteGlobal;
+    }
+  }
+
+  .btn--small {
+    width: 12rem;
+    font-size: 1.5rem;
+  }
+  .btn--big {
+    width: 28rem;
+    font-size: 2rem;
+    padding: 0;
+  }
+  .btn--blue {
+    background-color: $BlueGlobal;
+  }
+
+  .btn--VlightBlue {
+    background-color: $VLightBlue;
+  }
+
+  .btn--log {
+    color: $BlueGlobal;
+    font-weight: 700;
+    &:hover {
+      color: $BlueGlobal;
+    }
+  }
+}
