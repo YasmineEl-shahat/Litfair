@@ -1,0 +1,45 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+footer {
+  background-color: $BlueGlobal;
+}
+.panel-footer {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  text-transform: capitalize;
+  color: $WhiteGlobal;
+  .logo-white {
+    margin-top: 4rem;
+  }
+  .heading {
+    font-weight: 600;
+    font-size: $SHeadFont;
+    line-height: $MediumLineSpacing;
+    cursor: pointer;
+  }
+  .info {
+    font-weight: 500;
+    font-size: $InfoFont;
+    line-height: $InfoLineSpacing;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .connect {
+    cursor: auto;
+  }
+  .owe {
+    text-transform: lowercase;
+    margin-left: 1.3rem;
+  }
+  //   Extra small devices only
+  @include mQ(767px, 480px) {
+    section {
+      text-align: center;
+      hr ~ & {
+        width: 50%;
+      }
+    }
+  }
+}

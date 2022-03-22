@@ -16,3 +16,19 @@
     color: $color;
   }
 }
+<<<<<<< HEAD
+
+@mixin mQ($args...) {
+  @if length($args) == 1 {
+    @media screen and (max-width: nth($args, 1)) {
+      @content;
+    }
+  }
+  @if length($args) == 2 {
+    @media screen and (max-width: nth($args, 1)) and (min-width: nth($args, 2)) {
+      @content;
+    }
+  }
+}
+=======
+>>>>>>> ecdf55a0ba0678901e5344a31ff008710005330d
