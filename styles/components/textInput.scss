@@ -1,0 +1,17 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+.txt {
+  height: 4rem;
+  font-size: 2rem;
+  border: 1.5px solid $VLightGray;
+  color: $DarkGray;
+  @include placeholder-color($VLightGray);
+}
+.text--big {
+  width: 28rem;
+}
+
+.text--small {
+  width: 15rem;
+}
