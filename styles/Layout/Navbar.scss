@@ -1,20 +1,18 @@
 @import "../abstracts/variables.scss";
 @import "../components/button.scss";
-<<<<<<< HEAD
-=======
-@import "../components/textInput.scss";
->>>>>>> ecdf55a0ba0678901e5344a31ff008710005330d
 
 nav {
   margin: 5rem 11rem;
+  .custom-toggler {
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(92, 70, 249, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    }
+  }
+
+  .custom-toggler.navbar-toggler {
+    border: 1px solid $BlueGlobal;
+  }
 }
-<<<<<<< HEAD
 .navbar-brand {
   cursor: pointer;
-=======
-
-.navbar-right {
-  position: absolute;
-  margin-right: 0;
->>>>>>> ecdf55a0ba0678901e5344a31ff008710005330d
 }

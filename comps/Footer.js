@@ -79,7 +79,7 @@ const Footer = () => {
               <br />
               <br />
               <br />
-              <div className="copy">
+              <div>
                 &copy; 2022 Litfair. All rights are reserved
                 <br />
                 <span className="owe">owned by</span> Trashat.
