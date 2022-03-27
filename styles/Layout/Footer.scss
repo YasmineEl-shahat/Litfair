@@ -3,6 +3,7 @@
 footer {
   background-color: $BlueGlobal;
 }
+
 .panel-footer {
   padding-top: 4rem;
   padding-bottom: 4rem;
@@ -34,12 +35,10 @@ footer {
     margin-left: 1.3rem;
   }
   //   Extra small devices only
-  @include mQ(767px, 480px) {
+  @include mQ(767px) {
     section {
+      width: 100%;
       text-align: center;
-      hr ~ & {
-        width: 50%;
-      }
     }
   }
 }

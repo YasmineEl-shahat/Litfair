@@ -16,7 +16,7 @@ const Navbar = () => {
             </Link>
           </div>
           <button
-            className="navbar-toggler navbar-toggler-right collapsed"
+            className=" navbar-toggler navbar-toggler-right collapsed custom-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -24,26 +24,20 @@ const Navbar = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon"></span>
+            <span className=" navbar-toggler-icon"></span>
           </button>
           <div className="navbar-collapse collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
                 <Link className="nav-link" href="/login" passHref>
-                  <button
-                    className=" btn--global btn--small btn--log"
-                    type="submit"
-                  >
+                  <button className=" btn--global btn--small btn--log">
                     Login
                   </button>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" href="/register" passHref>
-                  <button
-                    className="btn btn--global btn--small btn--blue"
-                    type="submit"
-                  >
+                  <button className="btn btn--global btn--small btn--blue">
                     Join Now
                   </button>
                 </Link>

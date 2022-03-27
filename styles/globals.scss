@@ -1,5 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Open+Sans:wght@300&family=Readex+Pro:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Open+Sans:wght@300&family=Readex+Pro:wght@200&display=swap");
 @import "./abstracts/variables.scss";
+@import "./abstracts/mixins.scss";
 
 * {
   box-sizing: border-box;
@@ -15,6 +16,51 @@ html {
   body {
     background-color: $WhiteGlobal;
     font-family: "Inter", sans-serif;
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: linear-gradient($BlueGlobal, transparent);
+      border-radius: 6px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      text-transform: capitalize;
+      color: $BlueGlobal;
+    }
+
+    h1 {
+      font-size: $HeadFont;
+      font-weight: 900;
+      line-height: $HeadLineSpacing;
+      &::before {
+        content: "";
+        width: 5.5rem;
+        height: 5.6rem;
+        margin-right: -4.5rem;
+        margin-bottom: -1.5rem;
+        display: inline-block;
+        border-radius: 50%;
+        background-color: $VLightBlue;
+      }
+    }
+    h2 {
+      font-size: $MediumFont;
+      font-weight: 900;
+      line-height: $MediumLineSpacing;
+    }
+    h3 {
+      font-size: $SHeadFont;
+      font-weight: 700;
+      line-height: $InfoLineSpacing;
+    }
+    .HeadBackgroundWrap {
+      @include flexCenter;
+      margin-bottom: 8rem;
+    }
   }
 }
 
