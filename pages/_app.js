@@ -3,6 +3,9 @@ import "../styles/Layout/Navbar.scss";
 import "../styles/Layout/Footer.scss";
 import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../styles/components/label.scss";
+import "../styles/components/textInput.scss";
+
 
 import { useEffect } from "react";
 

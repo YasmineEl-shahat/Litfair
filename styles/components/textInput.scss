@@ -2,7 +2,7 @@
 @import "../abstracts/mixins.scss";
 
 .txt {
-  height: 4rem;
+  height: 3.5rem;
   font-size: 2rem;
   border: 1.5px solid $VLightGray;
   color: $DarkGray;
@@ -10,6 +10,7 @@
 }
 .text--big {
   width: 28rem;
+  
 }
 
 .text--small {
