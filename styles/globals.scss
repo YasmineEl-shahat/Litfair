@@ -13,9 +13,11 @@
 html {
   //typography
   font-size: $GlobalFont;
+
   body {
     background-color: $WhiteGlobal;
     font-family: "Inter", sans-serif;
+    overflow-x: hidden;
     &::-webkit-scrollbar {
       width: 0.5rem;
     }
@@ -46,6 +48,9 @@ html {
         border-radius: 50%;
         background-color: $VLightBlue;
       }
+      @include mQ(750px) {
+        font-size: $MediumFont;
+      }
     }
     h2 {
       font-size: $MediumFont;
@@ -60,6 +65,11 @@ html {
     .HeadBackgroundWrap {
       @include flexCenter;
       margin-bottom: 8rem;
+    }
+    .selected {
+      color: $BlueGlobal;
+      background: #e6efff;
+      border: 1px solid $BlueGlobal;
     }
   }
 }

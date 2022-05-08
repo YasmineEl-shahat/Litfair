@@ -100,26 +100,81 @@
 .guides {
   @include flexCenter;
   flex-wrap: wrap;
-  font-size: $MediumFont;
   color: $BlueGlobal;
-  line-height: $MediumLineSpacing;
+  font-size: $MediumFont;
   font-weight: 600;
-  text-transform: capitalize;
-
-  article {
-    margin: auto 2rem;
-    width: 35rem;
-  }
   .firstWord {
     font-size: $HeadFont;
+    text-transform: capitalize;
+    @include mQ(992px) {
+      font-size: $MediumFont;
+    }
+    @include mQ(767.2px) {
+      font-size: $SHeadFont;
+    }
+    @include mQ(508px) {
+      font-size: $InfoFont;
+    }
+    @include mQ(451px) {
+      font-size: 1.3rem;
+    }
+  }
+  article {
+    .hidNum {
+      text-align: left;
+      display: none;
+      @include mQ(451px) {
+        display: block;
+      }
+    }
+    width: 40%;
+    @include mQ(1199.2px) {
+      width: 35%;
+    }
+    @include mQ(992px) {
+      width: 40%;
+      margin: 1rem 0;
+      font-size: $SHeadFont;
+    }
+    @include mQ(767.2px) {
+      width: 35%;
+      font-size: $InfoFont;
+    }
+    @include mQ(508px) {
+      font-size: 1.3rem;
+    }
+    @include mQ(451px) {
+      font-size: 1rem;
+    }
   }
   .num {
-    @include cardBorder;
     @include flexCenter;
+    font-size: $SHeadFont;
+    font-weight: 400;
+    text-transform: capitalize;
+    @include cardBorder;
     width: 5rem;
     height: 5rem;
+
+    margin: 0px 3rem;
     background: $BlueGlobal;
     color: $WhiteGlobal;
+    position: relative;
+    @include mQ(451px) {
+      display: none;
+    }
+    &::after {
+      content: " ";
+      z-index: -100;
+      width: 0.5rem;
+      border-radius: 1rem;
+      height: 42rem;
+      background: $BlueGlobal;
+      position: absolute;
+      @include mQ(750px) {
+        height: 30rem;
+      }
+    }
   }
 }
 
@@ -133,6 +188,7 @@
   text-transform: capitalize;
   background-color: $AliceBlue;
   padding: 2rem 0px;
+  margin-top: 20rem;
   article {
     margin-top: 20rem;
   }
