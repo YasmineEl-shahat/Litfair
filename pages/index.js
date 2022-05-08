@@ -162,6 +162,7 @@ const Home = () => {
           </div>
           <div className={` ${style.guides}`}>
             <article>
+              <h3 className={style.hidNum}>Step 1</h3>
               <span className={style.firstWord}>Create</span> a new account
               <br />
               that contains all of your
@@ -188,6 +189,7 @@ const Home = () => {
             </article>
             <article className={`${style.num}`}>2</article>
             <article>
+              <h3 className={style.hidNum}>Step 2</h3>
               <span className={style.firstWord}>Apply</span> for a position
               <br />
               that matches your skills
@@ -196,6 +198,7 @@ const Home = () => {
           </div>
           <div className={` ${style.guides}`}>
             <article>
+              <h3 className={style.hidNum}>Step 3</h3>
               <span className={style.firstWord}>Track</span> your application
               <br />
               state in each of Our <br />

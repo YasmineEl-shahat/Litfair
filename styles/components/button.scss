@@ -33,4 +33,13 @@ body {
       color: $BlueGlobal;
     }
   }
+  .btn--white {
+
+    background-color: $WhiteGlobal;
+    color: $BlueGlobal;
+    border: 0.1rem solid;
+    border-color: $BlueGlobal;
+    font-size: $InfoFont;
+    padding: 0.21rem;
+  }
 }
