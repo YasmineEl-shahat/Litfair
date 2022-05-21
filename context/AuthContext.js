@@ -45,7 +45,6 @@ export const AuthProvider = ({ children }) => {
         Authorization: "Bearer" + " " + auth,
       },
     });
-    
     if (response.status === 200) {
       let { tokenObject } = await response.json();
       setAuth(tokenObject);
