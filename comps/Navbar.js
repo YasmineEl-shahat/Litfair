@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
+import SeekerNavbar from "../src/SeekerHome";
+import CompanyNavbar from "../src/CompanyHome";
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
@@ -37,14 +39,14 @@ const Navbar = () => {
                 className="navbar-collapse collapse"
                 id="navbarSupportedContent"
               >
-                Hi seeker
+                <SeekerNavbar/>
               </div>
             ) : (
               <div
                 className="navbar-collapse collapse"
                 id="navbarSupportedContent"
               >
-                Hi Company
+                <CompanyNavbar/>
               </div>
             )
           ) : (
