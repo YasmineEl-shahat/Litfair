@@ -67,3 +67,16 @@
   border-radius: 0.7rem;
   box-shadow: $shadowGlob;
 }
+
+//for centering an element
+@mixin Centering {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin centerX {
+  left: 50%;
+  transform: translateX(-50%);
+}

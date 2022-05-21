@@ -4,17 +4,30 @@
 .welcomeSec {
   margin: 3rem 0rem;
   color: $VDarkGray;
-  font-size: $SHeadFont;
+  font-size: $MediumFont;
   @include flexAround;
+  flex-wrap: wrap;
+
   h2 {
-    margin-top: 5rem;
+    font-size: $HeadFont;
+    line-height: $MediumLineSpacing;
+
+    margin: 3rem 0;
+    @include mQ(750px) {
+      font-size: $MediumFont;
+      line-height: $MediumLineSpacing;
+    }
   }
 
   .welcome {
     font-weight: 500;
-    line-height: $InfoLineSpacing;
+    line-height: $MediumLineSpacing;
+    @include mQ(750px) {
+      font-size: $SHeadFont;
+      line-height: $InfoLineSpacing;
+    }
     button {
-      margin: 1rem 0px;
+      margin: 3rem 0;
     }
   }
 }
@@ -25,6 +38,9 @@
   background-color: $AliceBlue;
   @include cardBorder;
   @include flexBet;
+  @include mQ(460px) {
+    margin: 8rem 0;
+  }
   align-items: center;
   overflow: auto;
   &::-webkit-scrollbar {
@@ -73,6 +89,12 @@
     @include grid(2rem, 35rem, 20rem);
     .Adv {
       @include cardBorder;
+      @include mQ(390px) {
+        width: 100%;
+        h3 {
+          font-size: 1rem;
+        }
+      }
       padding: 5rem 2rem;
       background-color: $LightViolet;
       display: block;
@@ -189,6 +211,10 @@
   background-color: $AliceBlue;
   padding: 2rem 0px;
   margin-top: 20rem;
+  @include mQ(700px) {
+    font-size: $SHeadFont;
+    line-height: $InfoLineSpacing;
+  }
   article {
     margin-top: 20rem;
   }

@@ -18,6 +18,7 @@ html {
     background-color: $WhiteGlobal;
     font-family: "Inter", sans-serif;
     overflow-x: hidden;
+
     &::-webkit-scrollbar {
       width: 0.5rem;
     }
@@ -50,26 +51,33 @@ html {
       }
       @include mQ(750px) {
         font-size: $MediumFont;
+        line-height: $MediumLineSpacing;
       }
     }
     h2 {
       font-size: $MediumFont;
       font-weight: 900;
       line-height: $MediumLineSpacing;
+      @include mQ(750px) {
+        font-size: $SHeadFont;
+        line-height: $InfoLineSpacing;
+      }
     }
     h3 {
       font-size: $SHeadFont;
       font-weight: 700;
       line-height: $InfoLineSpacing;
+      @include mQ(750px) {
+        font-size: $InfoFont;
+      }
     }
     .HeadBackgroundWrap {
       @include flexCenter;
       margin-bottom: 8rem;
     }
-    .selected {
-      color: $BlueGlobal;
-      background: #e6efff;
-      border: 1px solid $BlueGlobal;
+    .invalid {
+      color: red;
+      text-align: left;
     }
   }
 }
@@ -86,7 +94,16 @@ ul {
 input,
 select,
 textarea,
-button {
+button,
+datalist {
   border: none;
   background: none;
+}
+
+input::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
+button {
+  cursor: pointer;
 }

@@ -1,18 +1,58 @@
 @import "../abstracts/variables.scss";
 @import "../abstracts/mixins.scss";
 
-.txt {
-  height: 3.5rem;
-  font-size: 2rem;
-  border: 1.5px solid $VLightGray;
-  color: $DarkGray;
-  @include placeholder-color($VLightGray);
-}
-.text--big {
-  width: 28rem;
-  
-}
+body {
+  .txt {
+    height: 3.5rem;
+    font-size: 2rem;
+    border: 1.5px solid $VLightGray;
+    border-radius: 3px;
+    color: $DarkGray;
+    padding-left: 1rem;
+    @include placeholder-color($VLightGray);
+  }
+  .text--big {
+    width: 28rem;
+    @include mQ(390px) {
+      font-size: $InfoFont;
+    }
+  }
 
-.text--small {
-  width: 15rem;
+  .text--small {
+    width: 13rem;
+    @include mQ(390px) {
+      font-size: $InfoFont;
+    }
+  }
+  .text--name {
+    @include mQ(1900px, 1260px) {
+      width: 44rem;
+    }
+    @include mQ(390px) {
+      width: 100%;
+      font-size: $InfoFont;
+    }
+  }
+  .text--career {
+    width: 80%;
+    height: 4rem;
+    @include mQ(650px) {
+      width: 100%;
+      // font-size: 1rem;
+    }
+  }
+  .text--customBig {
+    @include mQ(390px) {
+      width: 100%;
+    }
+  }
+  .txtArea {
+    height: 15rem;
+    &::-webkit-resizer {
+      display: none;
+    }
+  }
+  .invalid-txt {
+    border: 1px solid red;
+  }
 }

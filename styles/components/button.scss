@@ -1,17 +1,16 @@
 @import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
 body {
   .btn--global {
     padding: 0.75rem 0;
-
+    border-radius: 2px;
     color: $WhiteGlobal;
-    &:hover {
-      color: $WhiteGlobal;
-    }
   }
 
   .btn--small {
     width: 12rem;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
   .btn--big {
     width: 28rem;
@@ -25,15 +24,23 @@ body {
   .btn--VlightBlue {
     background-color: $VLightBlue;
   }
+  .btn--onb {
+    float: right;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    margin-right: 1rem;
 
+    font-size: $InfoFont;
+    @include mQ(1900px, 1199px) {
+      margin-right: 15rem;
+    }
+  }
   .btn--log {
     color: $BlueGlobal;
     font-weight: 700;
-    &:hover {
-      color: $BlueGlobal;
-    }
   }
   .btn--white {
+    border-radius: 2px;
 
     background-color: $WhiteGlobal;
     color: $BlueGlobal;

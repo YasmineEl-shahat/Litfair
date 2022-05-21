@@ -1,6 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
+
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -26,24 +31,45 @@ const Navbar = () => {
           >
             <span className=" navbar-toggler-icon"></span>
           </button>
-          <div className="navbar-collapse collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <Link className="nav-link" href="/login" passHref>
-                  <button className=" btn--global btn--small btn--log">
-                    Login
-                  </button>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" href="/register" passHref>
-                  <button className="btn btn--global btn--small btn--blue">
-                    Join Now
-                  </button>
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {user ? (
+            user.role === "Seeker" ? (
+              <div
+                className="navbar-collapse collapse"
+                id="navbarSupportedContent"
+              >
+                Hi seeker
+              </div>
+            ) : (
+              <div
+                className="navbar-collapse collapse"
+                id="navbarSupportedContent"
+              >
+                Hi Company
+              </div>
+            )
+          ) : (
+            <div
+              className="navbar-collapse collapse"
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav ms-auto">
+                <li className="nav-item">
+                  <Link className="nav-link" href="/login" passHref>
+                    <button className=" btn--global btn--small btn--log">
+                      Login
+                    </button>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" href="/seekerRegister" passHref>
+                    <button className="btn btn--global btn--small btn--blue">
+                      Join Now
+                    </button>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </nav>
     </>

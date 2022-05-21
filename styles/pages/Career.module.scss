@@ -1,0 +1,190 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+// Wide Screens nums
+.nums {
+  @include flexCenter;
+  @include mQ(558px) {
+    display: none;
+  }
+  .num {
+    margin: 5rem 10rem;
+    @include flexCenter;
+    flex-direction: column;
+    h3 {
+      text-align: center;
+      font-size: $InfoFont;
+      background-color: $WhiteGlobal;
+      @include mQ(750px) {
+        font-size: 1rem;
+      }
+    }
+    h3:nth-child(1) {
+      width: 3.5rem;
+      height: 3.5rem;
+      @include flexCenter;
+      border: 1px solid $BlueGlobal;
+      border-radius: 50%;
+      cursor: auto;
+    }
+    .activeNum {
+      color: $WhiteGlobal;
+      background-color: $BlueGlobal;
+    }
+    &::after {
+      content: " ";
+      height: 1px;
+      width: calc(310% - 10px);
+      display: inline-block;
+      background: $BlueGlobal;
+      z-index: -11;
+      position: relative;
+      right: -18rem;
+      top: -6rem;
+      @include mQ(991.9px) {
+        width: calc(460% - 10px);
+        right: -15rem;
+        top: -9rem;
+      }
+      @include mQ(750px) {
+        width: calc(660% - 10px);
+        right: -13rem;
+      }
+    }
+    &:last-of-type {
+      &::after {
+        content: " ";
+        height: 1px;
+        width: 0;
+      }
+    }
+  }
+  .af {
+    &::after {
+      content: " ";
+      height: 1px;
+      width: calc(280% - 10px);
+      display: inline-block;
+      background: $BlueGlobal;
+      z-index: -11;
+      position: relative;
+      right: -20rem;
+      top: -6rem;
+      @include mQ(1199.9px) {
+        width: calc(290% - 10px);
+        top: -9rem;
+      }
+      @include mQ(991.9px) {
+        width: calc(400% - 10px);
+        right: -15rem;
+        top: -9rem;
+      }
+      @include mQ(750px) {
+        width: calc(550% - 10px);
+      }
+    }
+  }
+}
+// Small Screens
+.numsSmall {
+  display: none;
+
+  @include mQ(558px) {
+    display: block;
+    background: $BlueGlobal;
+    color: $WhiteGlobal;
+    font-size: $InfoFont;
+    padding: 1em;
+    span {
+      margin-right: 13rem;
+      text-transform: capitalize;
+    }
+    @include mQ(468px) {
+      span {
+        margin-right: 5rem;
+      }
+    }
+    @include mQ(307.9px) {
+      span {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
+//head
+.head {
+  @include mQ(558px) {
+    display: none;
+  }
+  @include flexCenter;
+  flex-direction: column;
+  color: $VDarkGray;
+  font-size: $SHeadFont;
+  line-height: $InfoLineSpacing;
+  font-weight: 700;
+  margin: 3rem 0px;
+  h4 {
+    font-size: $MediumFont;
+    font-weight: 900;
+    line-height: $MediumLineSpacing;
+  }
+}
+
+.content {
+  @include cardBorder;
+  padding: 5rem;
+  margin: 2rem 1rem;
+  @include mQ(1900px, 1199px) {
+    margin: 2rem 15rem;
+  }
+  @include mQ(350px) {
+    padding: 1rem;
+  }
+  span {
+    display: block;
+    margin-bottom: 2rem;
+    font-size: $SHeadFont;
+    line-height: $InfoLineSpacing;
+    font-weight: 600;
+    color: $VDarkGray;
+    @include mQ(450px) {
+      font-size: $InfoFont;
+    }
+  }
+  ul {
+    @include grid(0.5rem, 18em, 5em);
+    margin: auto -2rem;
+    li {
+      @include flexCenter;
+      padding: 0.5rem;
+      font-size: $InfoFont;
+      color: $VDarkGray;
+      background: $VLightGray;
+      border: 1px solid $LightGray;
+      border-radius: 3px;
+      opacity: 1;
+      cursor: pointer;
+      i {
+        margin-left: 1rem;
+      }
+      @include mQ(390px) {
+        width: 90%;
+      }
+    }
+  }
+  .selected {
+    color: $BlueGlobal;
+    background: #e6efff;
+    border: 1px solid $BlueGlobal;
+  }
+  .name {
+    display: inline-block;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    @include mQ(390px) {
+      width: 100%;
+      font-size: $InfoFont;
+    }
+  }
+}
