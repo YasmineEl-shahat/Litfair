@@ -1,0 +1,96 @@
+@import "../abstracts/variables.scss";
+
+@import "../abstracts/mixins.scss";
+@import "./login.module.scss";
+
+.main {
+  // background-image: url("../../public/assets/register/reg-img.png") no-repeat;
+}
+.photoWrap {
+}
+.regImg {
+  background: rgba(92, 70, 249, 20);
+  position: fixed;
+}
+.rightForm {
+  background-color: $WhiteGlobal;
+  //  margin-top: auto;
+  // margin-bottom: auto;
+  flex-direction: column;
+  // box-shadow: 0.1rem 0.1rem 1rem #0000005C;
+  border-bottom-left-radius: 2rem;
+  border-top-left-radius: 2rem;
+  width: 45rem;
+  height: 100%;
+  text-align: center;
+
+  right: 0rem;
+  position: fixed;
+
+  @include flexCenter;
+  @include mQ(756px) {
+    @include centerX;
+    border-radius: 2rem;
+  }
+}
+
+.header {
+  color: $WhiteGlobal;
+  font-size: $HeadFont;
+  line-height: $HeadLineSpacing;
+  position: fixed;
+  text-align: left;
+  left: 10rem;
+  top: 50%;
+  transform: translate(0, -50%);
+  @include mQ(1137px) {
+    font-size: $MediumFont;
+    line-height: $MediumLineSpacing;
+  }
+  @include mQ(902px) {
+    left: 2rem;
+    font-size: $SHeadFont;
+    line-height: $InfoLineSpacing;
+  }
+  @include mQ(756px) {
+    display: none;
+  }
+}
+.circleTop {
+  @include mQ(756px) {
+    display: none;
+  }
+}
+.seekerBtn {
+  width: 14rem;
+  font-size: 1.5rem;
+  border-radius: 2px;
+
+  background-color: $WhiteGlobal;
+  color: $BlueGlobal;
+  padding: 0.21rem;
+  box-shadow: 0.2rem 0.3rem 1.2rem #00000029;
+  margin-top: 2rem;
+  margin-bottom: 1.2rem;
+}
+.companyBtn {
+  border-radius: 2px;
+  width: 14rem;
+  font-size: 1.5rem;
+  background-color: $BlueGlobal;
+  color: $WhiteGlobal;
+
+  padding: 0.21rem;
+  box-shadow: 0.2rem 0.3rem 1.2rem #00000029;
+}
+.policy {
+  font-size: 75%;
+  color: $BlueGlobal;
+  margin-top: 0.5rem;
+}
+.passwordIcon {
+  cursor: pointer;
+}
+.uTxtBlue {
+  cursor: pointer;
+}

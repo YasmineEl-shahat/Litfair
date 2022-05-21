@@ -1,0 +1,36 @@
+@import "../abstracts/variables.scss";
+
+@import "../abstracts/mixins.scss";
+@import "./login.module.scss";
+
+.contain {
+  position: absolute;
+  max-width: 80rem;
+  height: 50rem;
+  margin: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.myright {
+  position: relative;
+  border-radius: 2.5rem;
+  height: 100%;
+  padding: 2.5rem;
+  @include flexCenter;
+}
+
+.fName {
+  position: relative;
+  //margin-right: 1rem;
+  //  left: 10rem;
+  //  top: -5rem
+}
+.lName {
+  position: relative;
+  right: 5rem;
+}
+.byside {
+  width: 100%;
+}
