@@ -55,14 +55,14 @@ const Navbar = () => {
               <ul className="navbar-nav ms-auto">
                 <li className="nav-item">
                   <Link className="nav-link" href="/login" passHref>
-                    <button className=" btn--global btn--small btn--log">
+                    <button className="btn--global btn--small btn--log">
                       Login
                     </button>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" href="/seekerRegister" passHref>
-                    <button className="btn btn--global btn--small btn--blue">
+                    <button className="btn--global btn--small btn--blue">
                       Join Now
                     </button>
                   </Link>

@@ -45,8 +45,8 @@ export const AuthProvider = ({ children }) => {
         Authorization: "Bearer" + " " + auth,
       },
     });
-    let { tokenObject } = await response.json();
     if (response.status === 200) {
+      let { tokenObject } = await response.json();
       setAuth(tokenObject);
       setUser(jwt_decode(tokenObject));
       if (typeof window !== "undefined") cookieCutter.set("auth", tokenObject);

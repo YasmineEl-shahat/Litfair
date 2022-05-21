@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useEffect } from "react";
 import $ from "jquery";
 import style from "../../styles/pages/Career.module.scss";
-import { change_month, change_year } from "../../functions/birthdate";
 const baseUrl = process.env.API_URL;
 export const getStaticProps = async () => {
   const res = await fetch(baseUrl + "job-config");

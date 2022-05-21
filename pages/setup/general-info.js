@@ -3,24 +3,36 @@ import style from "../../styles/pages/Career.module.scss";
 import { change_month, change_year, birth } from "../../functions/birthdate";
 import { useLayoutEffect, useState } from "react";
 
-const GInfo = () => {
+const baseUrl = process.env.API_URL;
+export const getStaticProps = async () => {
+  const res = await fetch(baseUrl + "location/countries");
+  const countries = await res.json();
+
+  return {
+    props: { countries: countries },
+  };
+};
+
+const GInfo = (countries) => {
   useLayoutEffect(() => {
     birth();
   }, []);
 
+  // variables
+  const country_list = countries.countries;
+
   //state
   const [selectedCountry, setSelectedCountry] = useState("");
+  const [cities, setCities] = useState([]);
+  const [submitting, setSubsubmitting] = useState(false);
 
-  //fill country list
-  const countries = require("countrycitystatejson").getCountries();
-  const country_names = countries.map((country) => country.name);
-  country_names.sort();
-  var countrylist = [];
-  for (let i = 0; i < country_names.length; i++) {
-    countrylist.push(
-      <option value={country_names[i]}>{country_names[i]}</option>
-    );
-  }
+  //helper Fun
+  const changeCities = async (country) => {
+    const res = await fetch(baseUrl + "location/cities?country=" + country);
+    const citiesRes = await res.json();
+    setCities(citiesRes);
+  };
+
   return (
     <>
       <Head>
@@ -120,7 +132,13 @@ const GInfo = () => {
               className="txt text--big text--customBig form-select"
               required
             />
-            <datalist id="nat">{countrylist}</datalist>
+            <datalist id="nat">
+              {country_list.map((country) => (
+                <option value={country.country} key={country._id}>
+                  {country.country}
+                </option>
+              ))}
+            </datalist>
           </article>
           <article className={style.content}>
             <span>Your Location</span>
@@ -128,14 +146,35 @@ const GInfo = () => {
             <input
               list="country"
               placeholder="Select..."
-              className="txt text--big text--customBig "
+              className="txt text--big text--customBig form-select"
               required
+              onChange={(e) => {
+                changeCities(e.target.value);
+              }}
             />
-            <datalist id="country">{countrylist}</datalist>
+            <datalist id="country">
+              {country_list.map((country) => (
+                <option value={country.country} key={country._id}>
+                  {country.country}
+                </option>
+              ))}
+            </datalist>
             <label className="label--global" htmlFor="city">
               City
             </label>
-            <select id="city" name="city"></select>
+            <input
+              list="city"
+              placeholder="Select..."
+              className="txt text--big text--customBig form-select"
+              required
+            />
+            <datalist id="city">
+              {cities.map((city) => (
+                <option value={city.city} key={city._id}>
+                  {city.city}
+                </option>
+              ))}
+            </datalist>
           </article>
           <article className={style.content}>
             <span>Contact Info</span>
@@ -149,6 +188,21 @@ const GInfo = () => {
               required
             />
           </article>
+
+          <div className="btn--wrap">
+            <button
+              onClick={() => router.back()}
+              className="btn btn--global btn--cancel"
+            >
+              back
+            </button>
+            <button
+              className="btn btn--global btn--blue  btn--onb"
+              type="submit"
+            >
+              {submitting ? "Saving..." : "Save and Continue"}
+            </button>
+          </div>
         </form>
         {/* End Content Section */}
       </main>

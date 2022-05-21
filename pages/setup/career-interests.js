@@ -44,6 +44,7 @@ const Career = (job) => {
     });
   }, []);
 
+  // variables
   const jobConfig = job.job;
 
   const [jobTitles, setJobTitles] = useState([]);

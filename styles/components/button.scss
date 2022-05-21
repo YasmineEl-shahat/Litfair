@@ -29,11 +29,21 @@ body {
     padding: 1rem;
     margin-bottom: 2rem;
     margin-right: 1rem;
-
     font-size: $InfoFont;
     @include mQ(1900px, 1199px) {
       margin-right: 15rem;
     }
+  }
+
+  .btn--cancel {
+    padding: 1rem;
+    font-size: $InfoFont;
+    border: 1px solid $BlueGlobal;
+    background-color: $WhiteGlobal;
+    color: $BlueGlobal;
+  }
+  .btn--wrap {
+    @include flexBet;
   }
   .btn--log {
     color: $BlueGlobal;
