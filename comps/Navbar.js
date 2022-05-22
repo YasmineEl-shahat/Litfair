@@ -2,8 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
-import SeekerNavbar from "../src/SeekerHome";
-import CompanyNavbar from "../src/CompanyHome";
+import SeekerNavbar from "./SeekerNavbar";
+import CompanyNavbar from "./CompanyNavbar";
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
