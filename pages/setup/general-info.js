@@ -1,4 +1,6 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
+
 import style from "../../styles/pages/Career.module.scss";
 import { change_month, change_year, birth } from "../../functions/birthdate";
 import { useLayoutEffect, useState } from "react";
@@ -14,6 +16,8 @@ export const getStaticProps = async () => {
 };
 
 const GInfo = (countries) => {
+  const router = useRouter();
+
   useLayoutEffect(() => {
     birth();
   }, []);
@@ -192,14 +196,11 @@ const GInfo = (countries) => {
           <div className="btn--wrap">
             <button
               onClick={() => router.back()}
-              className="btn btn--global btn--cancel"
+              className=" btn--global btn--small btn--cancel cancel--onb"
             >
               back
             </button>
-            <button
-              className="btn btn--global btn--blue  btn--onb"
-              type="submit"
-            >
+            <button className=" btn--global btn--blue  btn--onb" type="submit">
               {submitting ? "Saving..." : "Save and Continue"}
             </button>
           </div>

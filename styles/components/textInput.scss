@@ -55,4 +55,30 @@ body {
   .invalid-txt {
     border: 1px solid red;
   }
+
+  input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  input[type="file"] + label {
+    font-size: $InfoFont;
+    cursor: pointer;
+    margin-bottom: 5rem;
+    display: block;
+    width: 16rem;
+    background-color: $BlueGlobal;
+    color: white;
+    padding: 0.5rem 2rem;
+    border-radius: 2px;
+    i {
+      background: transparent;
+      position: static;
+      margin-top: 0;
+      margin-right: 1rem;
+    }
+  }
 }

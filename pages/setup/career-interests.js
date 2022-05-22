@@ -1,12 +1,17 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
+import { useEffect, useState, useContext } from "react";
+import { AsyncPaginate } from "react-select-async-paginate";
 import $ from "jquery";
 import style from "../../styles/pages/Career.module.scss";
-import { AsyncPaginate } from "react-select-async-paginate";
 import {
   loadJobTitles,
   loadJobCategories,
 } from "../../functions/Api/loadOptions";
+import AuthContext from "../../context/AuthContext";
+import { Router } from "react-router-dom";
+
 const baseUrl = process.env.API_URL;
 
 export const getStaticProps = async () => {
@@ -43,13 +48,101 @@ const Career = (job) => {
       });
     });
   }, []);
+  const { auth } = useContext(AuthContext);
 
   // variables
   const jobConfig = job.job;
+  const router = useRouter();
 
+  //state
+  const [career_lvl, setCareer_lvl] = useState("");
+  const [jobType, setJobType] = useState([]);
   const [jobTitles, setJobTitles] = useState([]);
   const [jobCategories, setJobCategories] = useState([]);
+  const [currentState, setCurrentState] = useState("");
   const [submitting, setSubsubmitting] = useState(false);
+  const [error, setError] = useState("");
+
+  //functions
+  const submit = async (e) => {
+    //prevent page from reloading
+    e.preventDefault();
+    // change the submit button state
+    setSubsubmitting(true);
+    if (
+      !career_lvl ||
+      !jobType.length ||
+      !jobTitles.length ||
+      !jobCategories.length ||
+      !currentState
+    ) {
+      setError("Fill the required fields!");
+      setSubsubmitting(false);
+      return;
+    } else {
+      setError("");
+      console.log("token", auth);
+      //customize state to be sent in body
+      const jobTitle = jobTitles.map((title) => title.value);
+      const jobCategory = jobCategories.map((title) => title.value);
+      console.log(career_lvl);
+      console.log(jobType);
+      console.log(jobTitle);
+      console.log(jobCategory);
+      console.log(currentState);
+      //waiting for api response
+      let response = await fetch(baseUrl + "seeker/details/update", {
+        method: "PUT",
+        // mode: "cors",
+        // credentials: "origin",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer" + " " + auth,
+        },
+        body: JSON.stringify({
+          career_lvl,
+          jobType,
+          jobTitle,
+          jobCategory,
+          currentState,
+        }),
+      })
+        // handle response's different status
+        .then(async (response) => {
+          console.log(response);
+          const err = await response.json();
+          console.log(err);
+
+          if (response.ok) {
+            setSubsubmitting(false);
+            router.push("/setup/general-info");
+
+            if (popup) {
+              popup.style.display = "none";
+            }
+            if (successPop) {
+              successPop.style.display = "block";
+            }
+          }
+          if (response.status === 400) {
+            // So, a server-side validation error occurred.
+            // Server side validation returns a string error message, so parse as text instead of json.
+            const error = response.text();
+            throw new Error(error);
+          }
+          if (response.status === 502) {
+            response.json().then((data) => {
+              const { sent } = data;
+            });
+            throw new Error("Network response was not ok.");
+          }
+        })
+        .catch((e) => {
+          setSubsubmitting(false);
+          setError(e.toString());
+        });
+    }
+  };
 
   return (
     <>
@@ -87,12 +180,19 @@ const Career = (job) => {
         </section>
         {/* End Head Section */}
         {/* Content Section */}
-        <form>
+        <form onSubmit={(e) => submit(e)}>
           <article className={style.content}>
             <span>What is your current career level?</span>
             <ul id="level">
               {Object.keys(jobConfig.experience_type).map((key, index) => (
-                <li>{jobConfig.experience_type[key]}</li>
+                <li
+                  onClick={() => {
+                    setCareer_lvl(jobConfig.experience_type[key]);
+                  }}
+                  key={key}
+                >
+                  {jobConfig.experience_type[key]}
+                </li>
               ))}
             </ul>
           </article>
@@ -100,8 +200,22 @@ const Career = (job) => {
             <span>What type(s) of jobs are you open to?</span>
             <ul className="job-type">
               {Object.keys(jobConfig.job_type).map((key, index) => (
-                <li>
-                  {jobConfig.job_type[key]} <i class="fa-solid fa-plus"></i>
+                <li
+                  key={key}
+                  onClick={() => {
+                    const current = jobType.find(
+                      (type) => type === jobConfig.job_type[key]
+                    );
+                    if (!current)
+                      setJobType([...jobType, jobConfig.job_type[key]]);
+                    else {
+                      setJobType(
+                        jobType.filter((job) => job !== jobConfig.job_type[key])
+                      );
+                    }
+                  }}
+                >
+                  {jobConfig.job_type[key]} <i className="fa-solid fa-plus"></i>
                 </li>
               ))}
             </ul>
@@ -134,17 +248,20 @@ const Career = (job) => {
           </article>
           <article className={style.content}>
             <span>What is your current job search status? </span>
-            <select className="txt text--career form-select">
+            <select
+              onChange={(e) => setCurrentState(e.target.value)}
+              className="txt text--career form-select"
+            >
               <option value="">Select ...</option>
               {Object.keys(jobConfig.job_status).map((key, index) => (
-                <option value={jobConfig.job_status[key]}>
+                <option value={jobConfig.job_status[key]} key={key}>
                   {jobConfig.job_status[key]}
                 </option>
               ))}
             </select>
           </article>
-
-          <button className="btn btn--global btn--blue  btn--onb" type="submit">
+          <span className="invalid cancel--onb">{error}</span>
+          <button className="btn--global btn--blue  btn--onb" type="submit">
             {submitting ? "Saving..." : "Save and Continue"}
           </button>
         </form>

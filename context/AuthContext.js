@@ -49,7 +49,10 @@ export const AuthProvider = ({ children }) => {
       let { tokenObject } = await response.json();
       setAuth(tokenObject);
       setUser(jwt_decode(tokenObject));
-      if (typeof window !== "undefined") cookieCutter.set("auth", tokenObject);
+      if (typeof window !== "undefined") {
+        // cookieCutter.set("auth", "", { expires: new Date(0) });
+        cookieCutter.set("auth", tokenObject);
+      }
     } else {
       logoutUser();
     }
@@ -57,7 +60,8 @@ export const AuthProvider = ({ children }) => {
 
   //renew token on every reload
   useEffect(() => {
-    checkToken();
+    const path = ["/login", "/seekerRegister", "/companyRegister"];
+    if (!path.includes(router.asPath)) checkToken();
 
     let hour = 1000 * 60 * 60;
     let interval = setInterval(function () {

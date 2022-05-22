@@ -35,8 +35,16 @@ body {
     }
   }
 
+  .cancel--onb {
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+    @include mQ(1900px, 1199px) {
+      margin-left: 15rem;
+    }
+  }
   .btn--cancel {
-    padding: 1rem;
+    padding: 0rem 1rem;
+
     font-size: $InfoFont;
     border: 1px solid $BlueGlobal;
     background-color: $WhiteGlobal;
