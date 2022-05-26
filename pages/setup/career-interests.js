@@ -10,7 +10,6 @@ import {
   loadJobCategories,
 } from "../../functions/Api/loadOptions";
 import AuthContext from "../../context/AuthContext";
-import { Router } from "react-router-dom";
 
 const baseUrl = process.env.API_URL;
 
@@ -23,6 +22,22 @@ export const getStaticProps = async () => {
   };
 };
 const Career = (job) => {
+  //hooks
+  const { auth } = useContext(AuthContext);
+  const router = useRouter();
+
+  // variables
+  const jobConfig = job.job;
+
+  //state
+  const [career_lvl, setCareer_lvl] = useState("");
+  const [jobType, setJobType] = useState([]);
+  const [jobTitles, setJobTitles] = useState([]);
+  const [jobCategories, setJobCategories] = useState([]);
+  const [currentState, setCurrentState] = useState("");
+  const [submitting, setSubsubmitting] = useState(false);
+  const [error, setError] = useState("");
+
   useEffect(() => {
     //level list interact
     const levelList = document.querySelectorAll("#level > li");
@@ -48,21 +63,6 @@ const Career = (job) => {
       });
     });
   }, []);
-  const { auth } = useContext(AuthContext);
-
-  // variables
-  const jobConfig = job.job;
-  const router = useRouter();
-
-  //state
-  const [career_lvl, setCareer_lvl] = useState("");
-  const [jobType, setJobType] = useState([]);
-  const [jobTitles, setJobTitles] = useState([]);
-  const [jobCategories, setJobCategories] = useState([]);
-  const [currentState, setCurrentState] = useState("");
-  const [submitting, setSubsubmitting] = useState(false);
-  const [error, setError] = useState("");
-
   //functions
   const submit = async (e) => {
     //prevent page from reloading
@@ -78,23 +78,16 @@ const Career = (job) => {
     ) {
       setError("Fill the required fields!");
       setSubsubmitting(false);
-      return;
     } else {
       setError("");
-      console.log("token", auth);
+
       //customize state to be sent in body
       const jobTitle = jobTitles.map((title) => title.value);
       const jobCategory = jobCategories.map((title) => title.value);
-      console.log(career_lvl);
-      console.log(jobType);
-      console.log(jobTitle);
-      console.log(jobCategory);
-      console.log(currentState);
+
       //waiting for api response
       let response = await fetch(baseUrl + "seeker/details/update", {
         method: "PUT",
-        // mode: "cors",
-        // credentials: "origin",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer" + " " + auth,
@@ -109,20 +102,9 @@ const Career = (job) => {
       })
         // handle response's different status
         .then(async (response) => {
-          console.log(response);
-          const err = await response.json();
-          console.log(err);
-
           if (response.ok) {
             setSubsubmitting(false);
             router.push("/setup/general-info");
-
-            if (popup) {
-              popup.style.display = "none";
-            }
-            if (successPop) {
-              successPop.style.display = "block";
-            }
           }
           if (response.status === 400) {
             // So, a server-side validation error occurred.

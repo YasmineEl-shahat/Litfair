@@ -3,9 +3,11 @@ import { useRouter } from "next/router";
 
 import style from "../../styles/pages/Career.module.scss";
 import { change_month, change_year, birth } from "../../functions/birthdate";
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState, useContext } from "react";
+import AuthContext from "../../context/AuthContext";
 
 const baseUrl = process.env.API_URL;
+
 export const getStaticProps = async () => {
   const res = await fetch(baseUrl + "location/countries");
   const countries = await res.json();
@@ -16,25 +18,111 @@ export const getStaticProps = async () => {
 };
 
 const GInfo = (countries) => {
-  const router = useRouter();
-
   useLayoutEffect(() => {
     birth();
   }, []);
+
+  //hooks
+  const { auth } = useContext(AuthContext);
+  const router = useRouter();
 
   // variables
   const country_list = countries.countries;
 
   //state
-  const [selectedCountry, setSelectedCountry] = useState("");
   const [cities, setCities] = useState([]);
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [nationality, setNationality] = useState("");
+  const [gender, setGender] = useState("");
+  const [phone_number, setPhone_number] = useState("");
   const [submitting, setSubsubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   //helper Fun
   const changeCities = async (country) => {
     const res = await fetch(baseUrl + "location/cities?country=" + country);
     const citiesRes = await res.json();
     setCities(citiesRes);
+  };
+  //phone validation
+  const validatePhone = () => {
+    const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+    return re.test(phone_number);
+  };
+
+  const submit = async (e) => {
+    //prevent page from reloading
+    e.preventDefault();
+    // change the submit button state
+    setSubsubmitting(true);
+    if (
+      !day ||
+      !month ||
+      !year ||
+      !fname ||
+      !lname ||
+      !country ||
+      !city ||
+      !nationality ||
+      !gender ||
+      !phone_number
+    ) {
+      setError("Fill the required fields!");
+      setSubsubmitting(false);
+      return;
+    }
+    if (!validatePhone()) {
+      setError("Invalid phone");
+      return;
+    }
+    //customize state to be sent in body
+    setError("");
+    const date_of_birth = year + "-" + month + "-" + day;
+    //waiting for api response
+    let response = await fetch(baseUrl + "seeker/profile/update", {
+      method: "PUT",
+
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + " " + auth,
+      },
+      body: JSON.stringify({
+        date_of_birth,
+        fname,
+        lname,
+        country,
+        city,
+        nationality,
+        gender,
+        phone_number,
+      }),
+    })
+      // handle response's different status
+      .then(async (response) => {
+        if (response.ok) {
+          setSubsubmitting(false);
+          router.push("/setup/professional-info");
+        }
+        if (response.status === 400) {
+          // So, a server-side validation error occurred.
+          // Server side validation returns a string error message, so parse as text instead of json.
+          const error = response.text();
+          throw new Error(error);
+        }
+        if (response.status === 502) {
+          throw new Error("Network response was not ok.");
+        }
+      })
+      .catch((e) => {
+        setSubsubmitting(false);
+        setError(e.toString());
+      });
   };
 
   return (
@@ -74,7 +162,7 @@ const GInfo = (countries) => {
         </section>
         {/* End Head Section */}
         {/* Content Section */}
-        <form>
+        <form onSubmit={(e) => submit(e)}>
           <article className={style.content}>
             <span>Your Personal Info</span>
             <div className={style.name}>
@@ -86,7 +174,8 @@ const GInfo = (countries) => {
                 type="text"
                 name="fname"
                 placeholder="First Name"
-                required
+                value={fname}
+                onChange={(e) => setFname(e.target.value)}
               />
             </div>
             <div className={style.name}>
@@ -98,7 +187,8 @@ const GInfo = (countries) => {
                 type="text"
                 name="lname"
                 placeholder="Last Name"
-                required
+                value={lname}
+                onChange={(e) => setLname(e.target.value)}
               />
             </div>
             <label className="label--global">Birthday</label>
@@ -106,26 +196,49 @@ const GInfo = (countries) => {
               className={`txt text--small form-select  ${style.name}`}
               id="day"
               name="dd"
+              onChange={(e) => setDay(e.target.value)}
             ></select>
             <select
               className={`txt text--small form-select ${style.name}`}
               id="month"
               name="mm"
-              onChange={change_month(this)}
+              onChange={(e) => {
+                setMonth(e.target.value);
+                change_month(e.target);
+              }}
             ></select>
             <select
               className={`txt text--small form-select ${style.name}`}
               id="year"
               name="yyyy"
-              onChange={change_year(this)}
+              onChange={(e) => {
+                setYear(e.target.value);
+                change_year(e.target);
+              }}
             ></select>
             <label className="label--global">Gender</label>
             <div className="radio--block ">
-              <input name="gender" type="radio" id="gender1" value="Male" />
+              <input
+                name="gender"
+                type="radio"
+                id="gender1"
+                value="Male"
+                onChange={(e) => {
+                  if (e.target.checked) setGender(e.target.value);
+                }}
+              />
               <label htmlFor="gender1">Male</label>
             </div>
             <div className="radio--block">
-              <input name="gender" type="radio" id="gender2" value="Female" />
+              <input
+                name="gender"
+                type="radio"
+                id="gender2"
+                value="Female"
+                onChange={(e) => {
+                  if (e.target.checked) setGender(e.target.value);
+                }}
+              />
               <label htmlFor="gender2">Female</label>
             </div>
 
@@ -134,7 +247,8 @@ const GInfo = (countries) => {
               list="nat"
               placeholder="Select..."
               className="txt text--big text--customBig form-select"
-              required
+              value={nationality}
+              onChange={(e) => setNationality(e.target.value)}
             />
             <datalist id="nat">
               {country_list.map((country) => (
@@ -151,9 +265,10 @@ const GInfo = (countries) => {
               list="country"
               placeholder="Select..."
               className="txt text--big text--customBig form-select"
-              required
+              value={country}
               onChange={(e) => {
                 changeCities(e.target.value);
+                setCountry(e.target.value);
               }}
             />
             <datalist id="country">
@@ -170,7 +285,8 @@ const GInfo = (countries) => {
               list="city"
               placeholder="Select..."
               className="txt text--big text--customBig form-select"
-              required
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
             />
             <datalist id="city">
               {cities.map((city) => (
@@ -189,9 +305,11 @@ const GInfo = (countries) => {
               className="txt text--big text--customBig"
               type="tel"
               name="phone"
-              required
+              value={phone_number}
+              onChange={(e) => setPhone_number(e.target.value)}
             />
           </article>
+          <span className="invalid cancel--onb">{error}</span>
 
           <div className="btn--wrap">
             <button
