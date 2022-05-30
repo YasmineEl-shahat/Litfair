@@ -57,7 +57,8 @@ export const AuthProvider = ({ children }) => {
 
   //renew token on every reload
   useEffect(() => {
-    checkToken();
+    const path = ["/login","/seekerRegister","/CompanyRegister"];
+    if(!path.includes(router.asPath)) checkToken();
 
     let hour = 1000 * 60 * 60;
     let interval = setInterval(function () {

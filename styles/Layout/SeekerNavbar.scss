@@ -1,0 +1,38 @@
+@import "../abstracts/variables.scss";
+
+
+
+    li .bar{
+    &::after{
+        content: " ";
+        display: block;
+        background: transparent;
+        margin: auto;
+        width: 0rem;
+        height: 3px;
+        transition: width 0.5 ease, background 0.5 ease;
+    }
+
+    &:hover{
+       // color: $BlueGlobal;
+        &::after{
+            width: 50%;
+            background: $BlueGlobal;
+            transition: 0.5s;
+        }
+    }
+}
+.bar{
+    &:hover{
+        color: $BlueGlobal;
+    }
+
+}
+
+.searching{
+    width: 30rem;
+    border: transparent ;
+   // border-radius: 0.5rem;
+   // border-color: aqua;
+}
+

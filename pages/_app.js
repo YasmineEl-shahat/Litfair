@@ -3,8 +3,10 @@ import "../styles/Layout/Navbar.scss";
 import "../styles/Layout/Footer.scss";
 import "../styles/components/label.scss";
 import "../styles/components/textInput.scss";
+import "../styles/Layout/SeekerNavbar.scss";
 import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 
 import { AuthProvider } from "../context/AuthContext";
 
