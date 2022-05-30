@@ -109,13 +109,26 @@ const PInfo = (job) => {
         setUploadPercentage(100);
 
         setTimeout(() => {
-          setUploaded(true);
           setUploadPercentage(0);
+          setUploaded(true);
         }, 1000);
         // }, 1000);
       })
       .catch((err) => {
         setUploadPercentage(0);
+      });
+  };
+
+  const deleteCV = () => {
+    const options = { headers: { Authorization: "Bearer" + " " + auth } };
+    axios
+      .delete(baseUrl + "seeker/details/CV/delete/", options)
+      .then((res) => {
+        setUploaded(false);
+        document.getElementById("cv").value = "";
+      })
+      .catch((err) => {
+        setUploaded(true);
       });
   };
 
@@ -311,7 +324,9 @@ const PInfo = (job) => {
                 </p>
                 <div>
                   <p className="btn">Review</p>
-                  <p className="btn">Delete</p>
+                  <p onClick={deleteCV} className="btn">
+                    Delete
+                  </p>
                 </div>
               </div>
             ) : uploadPercentage > 0 ? (
@@ -341,7 +356,14 @@ const PInfo = (job) => {
             >
               back
             </button>
-            <button className=" btn--global btn--blue  btn--onb" type="submit">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/");
+              }}
+              className=" btn--global btn--blue  btn--onb"
+              type="submit"
+            >
               {submitting ? "Saving..." : "Let's Start"}
             </button>
           </div>
