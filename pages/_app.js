@@ -1,8 +1,11 @@
 import "../styles/globals.scss";
 import "../styles/Layout/Navbar.scss";
 import "../styles/Layout/Footer.scss";
+import "../styles/Layout/EditProfileSide.scss";
+
 import "../styles/components/label.scss";
 import "../styles/components/textInput.scss";
+
 import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 

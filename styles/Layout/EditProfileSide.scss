@@ -1,0 +1,26 @@
+@import "../abstracts/variables.scss";
+@import "./abstracts/mixins.scss";
+
+.profileSide {
+  display: inline-block;
+  transition: 0.3s;
+  font-size: $InfoFont;
+  box-shadow: $shadowGlob;
+  //   margin: 10rem;
+  .sectionSide {
+    box-shadow: 0px 1px 1px $VLightGray;
+    padding: 0.5rem;
+    padding-right: 5rem;
+
+    cursor: pointer;
+
+    &:hover {
+      background: $VLightGray;
+    }
+    .icon {
+      color: $BlueGlobal;
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+  }
+}

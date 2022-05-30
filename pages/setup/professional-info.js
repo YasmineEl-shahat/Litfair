@@ -1,8 +1,18 @@
 import Head from "next/head";
-import { useEffect } from "react";
+import { useRouter } from "next/router";
+
+import { useEffect, useState, useContext } from "react";
+import { AsyncPaginate } from "react-select-async-paginate";
+
+import axios from "axios";
 import $ from "jquery";
+
 import style from "../../styles/pages/Career.module.scss";
-import { change_month, change_year } from "../../functions/birthdate";
+import { ProgressBar } from "react-bootstrap";
+
+import { loadSkills } from "../../functions/Api/loadOptions";
+import AuthContext from "../../context/AuthContext";
+
 const baseUrl = process.env.API_URL;
 export const getStaticProps = async () => {
   const res = await fetch(baseUrl + "job-config");
@@ -13,7 +23,40 @@ export const getStaticProps = async () => {
   };
 };
 const PInfo = (job) => {
+  //hooks
+  const { auth } = useContext(AuthContext);
+  const router = useRouter();
+
+  // variables
   const jobConfig = job.job;
+  const dateNow = new Date();
+  let grad_year = [];
+  const degree_list = [
+    "Bachelor's Degree",
+    "Master's Degree",
+    "Doctorate's Degree",
+    "High School",
+    "Deploma",
+  ];
+  let fields = [];
+
+  //state
+  const [experience_lvl, setExperience_lvl] = useState("");
+  const [degree, setDegree] = useState("");
+  const [field, setField] = useState("");
+  const [university, setUniversity] = useState("");
+  const [date, setDate] = useState("");
+  const [grade, setGrade] = useState("");
+  const [skills, setSkills] = useState([]);
+  const [submitting, setSubsubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [uploadPercentage, setUploadPercentage] = useState(0);
+  const [uploaded, setUploaded] = useState(false);
+  //fill graduation year
+  for (let i = dateNow.getFullYear() + 7; i >= 1950; i--) {
+    // years start i
+    grad_year.push(<option value={i}>{i}</option>);
+  }
 
   useEffect(() => {
     //level list interact
@@ -33,12 +76,121 @@ const PInfo = (job) => {
     }
     $(function () {
       $(".level").on("focus", "li", function () {
-        console.log("fff");
         $(this).toggleClass("selected");
-        console.log(this);
       });
     }); //end of loading
   }, []);
+
+  //submittion
+
+  const uploadCV = ({ target: { files } }) => {
+    let data = new FormData();
+    data.append("cv", files[0]);
+    const options = {
+      headers: {
+        Authorization: "Bearer" + " " + auth,
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress: (progressEvent) => {
+        const { loaded, total } = progressEvent;
+
+        let percent = Math.floor((loaded * 100) / total);
+
+        if (percent < 100) {
+          setUploadPercentage(percent);
+        }
+      },
+    };
+
+    axios
+      .post(baseUrl + "seeker/details/CV", data, options)
+      .then((res) => {
+        // setTimeout(() => {
+        setUploadPercentage(100);
+
+        setTimeout(() => {
+          setUploadPercentage(0);
+          setUploaded(true);
+        }, 1000);
+        // }, 1000);
+      })
+      .catch((err) => {
+        setUploadPercentage(0);
+      });
+  };
+
+  const deleteCV = () => {
+    const options = { headers: { Authorization: "Bearer" + " " + auth } };
+    axios
+      .delete(baseUrl + "seeker/details/CV/delete/", options)
+      .then((res) => {
+        setUploaded(false);
+        document.getElementById("cv").value = "";
+      })
+      .catch((err) => {
+        setUploaded(true);
+      });
+  };
+
+  const submit = async (e) => {
+    //prevent page from reloading
+    e.preventDefault();
+    // change the submit button state
+    setSubsubmitting(true);
+    if (
+      !experience_lvl ||
+      !degree ||
+      !field ||
+      !university ||
+      !date ||
+      !grade ||
+      !skills.length
+    ) {
+      setError("Fill the required fields!");
+      setSubsubmitting(false);
+    } else {
+      setError("");
+
+      //customize state to be sent in body
+      fields = [...field];
+      const education = { degree, fields, university, date, grade };
+      const skills_ = skills.map((skill) => skill.value);
+      //waiting for api response
+      let response = await fetch(baseUrl + "seeker/details/update", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer" + " " + auth,
+        },
+        body: JSON.stringify({
+          experience_lvl,
+          education,
+          skills: skills_,
+        }),
+      })
+        // handle response's different status
+        .then(async (response) => {
+          console.log(response);
+          if (response.ok) {
+            setSubsubmitting(false);
+            router.push("/");
+          }
+          if (response.status === 400) {
+            // So, a server-side validation error occurred.
+            // Server side validation returns a string error message, so parse as text instead of json.
+            const error = response.text();
+            throw new Error(error);
+          }
+          if (response.status === 502) {
+            throw new Error("Network response was not ok.");
+          }
+        })
+        .catch((e) => {
+          setSubsubmitting(false);
+          setError(e.toString());
+        });
+    }
+  };
   return (
     <>
       <Head>
@@ -78,14 +230,17 @@ const PInfo = (job) => {
         </section>
         {/* End Head Section */}
         {/* Content Section */}
-        <form>
+        <form onSubmit={(e) => submit(e)}>
           <article className={style.content}>
             <span>How many years of experience do you have?</span>
 
-            <select id="exp" className="txt text--career form-select">
+            <select
+              onChange={(e) => setExperience_lvl(e.target.value)}
+              className="txt text--career form-select"
+            >
               <option value="">Select ...</option>
               {Object.keys(jobConfig.experience_type).map((key, index) => (
-                <option value={jobConfig.experience_type[key]}>
+                <option value={jobConfig.experience_type[key]} key={key}>
                   {jobConfig.experience_type[key]}
                 </option>
               ))}
@@ -94,19 +249,124 @@ const PInfo = (job) => {
           <article className={style.content}>
             <span>What is your current educational level?</span>
             <ul id="level">
-              <li>Bachelor&apos;s Degree</li>
-              <li>Master&apos;s Degree</li>
-              <li>Doctorate&apos;s Degree</li>
-              <li>High School</li>
-              <li>Deploma</li>
+              {degree_list.map((deg) => (
+                <li
+                  onClick={() => {
+                    setDegree(deg);
+                  }}
+                  key={deg}
+                >
+                  {deg}
+                </li>
+              ))}
             </ul>
           </article>
-          <article className={style.content}></article>
+          <article className={style.content}>
+            <span>Degree Details</span>
+            <label className="label--global">Field of study</label>
+            <input
+              placeholder="Ex.Engineering"
+              className="txt text--career"
+              onChange={(e) => setField([e.target.value])}
+            />
+            <label className="label--global">University/institution</label>
+            <input
+              placeholder="Enter University"
+              className="txt  text--career "
+              onChange={(e) => setUniversity(e.target.value)}
+            />
+            <label className="label--global">
+              When did you get your degree?
+            </label>
+            <select
+              onChange={(e) => setDate(e.target.value)}
+              className="txt text--career form-select"
+            >
+              <option value="">Select ...</option>
+              {grad_year}
+            </select>
+            <label className="label--global">Grade</label>
+            <select
+              onChange={(e) => setGrade(e.target.value)}
+              className="txt text--career form-select"
+            >
+              <option value="">Select ...</option>
+              <option value="A/ Excellent / 85-100%">
+                A/ Excellent / 85-100%
+              </option>
+              <option value="B / Very Good / 75-85%">
+                B / Very Good / 75-85%
+              </option>
+              <option value="C / Good / 65 - 75%">C / Good / 65 - 75%</option>
+              <option value="D / Fair / 50 - 65%">D / Fair / 50 - 65%</option>
+              <option value="Not Specified">Not Specified</option>
+            </select>
+          </article>
           <article className={style.content}>
             <span>What Skills, Tools....</span>
 
-            <textarea className="txt" placeholder="Ex.Engineering" />
+            <AsyncPaginate
+              className="text--career"
+              value={skills}
+              placeholder="Ex. Digital Marketing"
+              loadOptions={loadSkills}
+              isMulti
+              onChange={setSkills}
+              closeMenuOnSelect={false}
+            />
           </article>
+          <article className={style.content}>
+            <span>Upload Your CV </span>
+            {uploaded ? (
+              <div className={style.uploadedCV}>
+                <p>
+                  <i className="fa-solid fa-file"></i> Uploaded
+                </p>
+                <div>
+                  <p className="btn">Review</p>
+                  <p onClick={deleteCV} className="btn">
+                    Delete
+                  </p>
+                </div>
+              </div>
+            ) : uploadPercentage > 0 ? (
+              <ProgressBar
+                now={uploadPercentage}
+                striped={true}
+                label={`${uploadPercentage}%`}
+              />
+            ) : (
+              <>
+                <input type="file" id="cv" onChange={uploadCV} />
+                <label htmlFor="cv">
+                  <i className="fa-solid fa-arrow-up-from-bracket"></i>Upload CV
+                </label>
+              </>
+            )}
+          </article>
+          <span className="invalid cancel--onb">{error}</span>
+
+          <div className="btn--wrap">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                router.back();
+              }}
+              className=" btn--global btn--small btn--cancel cancel--onb"
+            >
+              back
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                router.push("/");
+              }}
+              className=" btn--global btn--blue  btn--onb"
+              type="submit"
+            >
+              {submitting ? "Saving..." : "Let's Start"}
+            </button>
+          </div>
         </form>
         {/* End Content Section */}
       </main>

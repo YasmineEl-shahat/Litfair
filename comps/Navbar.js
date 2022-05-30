@@ -39,14 +39,14 @@ const Navbar = () => {
                 className="navbar-collapse collapse"
                 id="navbarSupportedContent"
               >
-                <SeekerNavbar/>
+                <SeekerNavbar />
               </div>
             ) : (
               <div
                 className="navbar-collapse collapse"
                 id="navbarSupportedContent"
               >
-                <CompanyNavbar/>
+                <CompanyNavbar />
               </div>
             )
           ) : (

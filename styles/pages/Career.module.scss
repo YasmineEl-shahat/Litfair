@@ -187,4 +187,22 @@
       font-size: $InfoFont;
     }
   }
+
+  .uploadedCV {
+    @include flexBet;
+    padding: 1rem;
+    align-items: center;
+    p {
+      margin-bottom: 0;
+    }
+    margin: 1rem;
+    border: 1px solid $LightGray;
+    div {
+      p {
+        &:first-of-type {
+          color: $BlueGlobal;
+        }
+      }
+    }
+  }
 }
