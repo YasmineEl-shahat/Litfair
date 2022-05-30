@@ -1,0 +1,6 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+.info {
+  display: inline-block;
+  @include cardBorder;
+}
