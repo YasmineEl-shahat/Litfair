@@ -1,0 +1,28 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+.right{
+    padding: 10rem 0;
+  background-color: $WhiteGlobal;
+  margin-top: auto;
+  margin-bottom: auto;
+  //flex-direction: row;
+  box-shadow: 0.1rem 0.1rem 1.2rem #0000005c;
+  border-radius: 1rem;
+  width: 30rem;
+  height: 50rem;
+  text-align: center;
+  //display: inline-block;
+  @include flexCenter;
+
+  
+}
+.left{
+    background-color: $WhiteGlobal;
+    box-shadow: 0.1rem 0.1rem 1.2rem #0000005c;
+    width: 30rem;
+    height: 50rem;
+    text-align: center;
+    //display: inline-block;
+   // flex-direction: row;
+    @include flexCenter;
+}
