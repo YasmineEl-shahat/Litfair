@@ -1,45 +1,47 @@
 import style from "../styles/pages/SeekerHome.module.scss";
 import AuthContext from "../context/AuthContext";
-import { createContext, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-//const {auth} = useContext(AuthContext);
-//const router = useRouter();
-//const [loading, setLoading]= useState(true);
-//const [posts, setPosts]= useState([]);
+const baseUrl = process.env.API_URL;
 
-const getData = async ()=> {
-    const res =await fetch(baseUrl);
-    const {data} = await res.json();
-    setPosts(data);
+const SeekerHome = (props) => {
+  //state
+  const { auth } = useContext(AuthContext);
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState([]);
+
+  const getData = async () => {
+    // Fetch data from external API
+    const res = await fetch(baseUrl + "jobs", {
+      headers: {
+        Authorization: "Bearer" + " " + auth,
+      },
+    });
+    const { msg } = await res.json();
+
+    setPosts(msg);
     setLoading(false);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
 
-
-}
-///useEffect(()=>{
- //   getData();
-
-//},[]);
-const SeekerHome =(props) =>{
-
-
-  
-    return(
-        <>
+  return (
+    <>
+      {loading ? (
+        <div>loading...</div>
+      ) : (
         <div>
-       {/* loading ? (<div>loading...</div>)*/}
-        <span className={style.right}>
-
-            
-        </span>
-        <span className={style.left}>
-
-            
-        </span>
-
+          <span className={style.right}></span>
+          <span className={style.left}></span>
+          {posts.map((post) => (
+            <h1 key={post._id}>{post.title}</h1>
+          ))}
         </div>
-        </>
-        
-    )
-}
+      )}
+    </>
+  );
+};
 export default SeekerHome;

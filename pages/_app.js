@@ -5,14 +5,8 @@ import "../styles/Layout/EditProfileSide.scss";
 
 import "../styles/components/label.scss";
 import "../styles/components/textInput.scss";
-<<<<<<< HEAD
-import "../styles/Layout/SeekerNavbar.scss";
-=======
-
->>>>>>> f31c332b9561ae560666521fbc3441f05a3af7ea
 import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 
 import { AuthProvider } from "../context/AuthContext";
 
