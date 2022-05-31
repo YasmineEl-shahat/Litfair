@@ -8,7 +8,6 @@ import "../styles/components/textInput.scss";
 import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
 import { AuthProvider } from "../context/AuthContext";
 
 import { useEffect } from "react";
