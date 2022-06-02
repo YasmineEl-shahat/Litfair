@@ -2,7 +2,6 @@ import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import cookieCutter from "cookie-cutter";
 import { useRouter } from "next/router";
-import { get } from "jquery";
 
 const AuthContext = createContext();
 export default AuthContext;
