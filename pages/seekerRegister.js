@@ -8,12 +8,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useState } from "react";
+import cookieCutter from "cookie-cutter";
+import AuthContext from "../context/AuthContext";
+import { useContext } from "react";
 
 const baseUrl = process.env.API_URL;
 const seekerRegister = () => {
-  const router = useRouter();
-  //state
-  const [backError, setBackError] = useState("");
+  //extract context data
+  const { onSubmit, backError } = useContext(AuthContext);
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("First Name is required"),
@@ -37,47 +39,6 @@ const seekerRegister = () => {
   const { errors } = formState;
 
   //submittion functions
-  async function onSubmit(data) {
-    // display form data on success
-    const { firstName, lastName, email, password } = data;
-    //waiting for api response
-    let response = await fetch(baseUrl + "adduser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-        role: "Seeker",
-        fname: firstName,
-        lname: lastName,
-      }),
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          router.push("/login");
-        }
-        if (response.status === 400) {
-          // So, a server-side validation error occurred.
-          // Server side validation returns a string error message, so parse as text instead of json.
-          const res = await response.json();
-          const { msg } = res;
-          if (msg === "Validation error") {
-            setBackError("Email taken");
-            throw new Error("Email taken");
-          }
-          // const error = response.text();
-          // throw new Error(error);
-        }
-        if (response.status === 502) {
-          throw new Error("Network response was not ok.");
-        }
-      })
-      .catch((e) => {
-        // setBackError(e.text());
-      });
-  }
 
   const submitGoogle = async () => {
     //waiting for api response
@@ -92,7 +53,6 @@ const seekerRegister = () => {
         console.log(response);
         if (response.ok) {
           const res = await response.json();
-          console.log(res);
           window.open(baseUrl + "google/login", "_self");
         }
         if (response.status === 400) {

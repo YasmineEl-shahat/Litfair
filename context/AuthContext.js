@@ -95,6 +95,56 @@ export const AuthProvider = ({ children }) => {
     else return true;
   };
 
+  //seekerRegister
+  async function onSubmit(data) {
+    // display form data on success
+    const { firstName, lastName, email, password } = data;
+    //waiting for api response
+    let response = await fetch(baseUrl + "adduser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        role: "Seeker",
+        fname: firstName,
+        lname: lastName,
+      }),
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          const res = await response.json();
+          const { TokenObject } = res;
+          setAuth(TokenObject);
+          setUser(jwt_decode(TokenObject));
+
+          cookieCutter.set("auth", TokenObject);
+
+          router.push("/registeredSuccessfully");
+        }
+        if (response.status === 400) {
+          // So, a server-side validation error occurred.
+          // Server side validation returns a string error message, so parse as text instead of json.
+          const res = await response.json();
+          const { msg } = res;
+          if (msg === "Validation error") {
+            setBackError("Email taken");
+            throw new Error("Email taken");
+          }
+          // const error = response.text();
+          // throw new Error(error);
+        }
+        if (response.status === 502) {
+          throw new Error("Network response was not ok.");
+        }
+      })
+      .catch((e) => {
+        // setBackError(e.text());
+      });
+  }
+
   //login
   const login = async (e) => {
     e.preventDefault();
@@ -193,6 +243,7 @@ export const AuthProvider = ({ children }) => {
     logoutUser,
     googleLogin,
     handleGoogleFailure,
+    onSubmit,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

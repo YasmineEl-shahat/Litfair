@@ -64,7 +64,7 @@ const Navbar = () => {
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" href="/seekerRegister" passHref>
-                    <button className="btn btn--global btn--small btn--blue">
+                    <button className="btn--global btn--small btn--blue">
                       Join Now
                     </button>
                   </Link>

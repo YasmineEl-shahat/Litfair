@@ -52,8 +52,7 @@ const LiveInterview = () => {
     const options = {
       headers: {
         Authorization: "Bearer" + " " + auth,
-        mode: "cors",
-        credentials: "origin",
+
         "Content-Type": "multipart/form-data",
       },
     };
@@ -98,6 +97,7 @@ const LiveInterview = () => {
                 setVideo(videoBlob);
 
                 uploadVideo();
+                // setUploaded(true);
               }}
             />
           </div>

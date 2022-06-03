@@ -72,7 +72,7 @@ const Login = () => {
               alt="logo"
             />
           </div>
-          <h2 className={style.texthead}>Welcome back to LitFair! </h2>
+          <h2 className={style.texthead}>Welcome to LitFair! </h2>
 
           <form onSubmit={(e) => login(e)}>
             {backError && (
