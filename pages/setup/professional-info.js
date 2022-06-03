@@ -74,11 +74,7 @@ const PInfo = (job) => {
         this.classList.add(`${style.selected}`);
       });
     }
-    $(function () {
-      $(".level").on("focus", "li", function () {
-        $(this).toggleClass("selected");
-      });
-    }); //end of loading
+    //end of loading
   }, []);
 
   //submittion

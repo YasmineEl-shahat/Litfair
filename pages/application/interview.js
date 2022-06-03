@@ -39,32 +39,33 @@ const LiveInterview = () => {
   const { auth } = useContext(AuthContext);
 
   //convert blob stream to video to be sent to the server
-  const convertBlobToVideo = () => {
-    const videoConverted = new File([video], "file.webm", {
+  const convertBlobToVideo = (videoBlob) => {
+    const videoConverted = new File([videoBlob], "file.webm", {
       type: "video/webm",
     });
     return videoConverted;
   };
 
-  const uploadVideo = () => {
+  const uploadVideo = (videoBlob) => {
     let data = new FormData();
-    data.append("video", convertBlobToVideo());
+    console.log(convertBlobToVideo());
+    data.append("video", convertBlobToVideo(videoBlob));
     const options = {
       headers: {
         Authorization: "Bearer" + " " + auth,
 
-        "Content-Type": "multipart/form-data",
+        // "Content-Type": "multipart/form-data",
       },
     };
 
     axios
       .post(baseUrl + "upload_video", data, options)
-      .then(async (res) => {
-        const { msg } = await res.json();
+      .then((res) => {
+        const { msg } = res.data;
         console.log(msg);
-        setUploaded(true);
       })
       .catch((err) => {
+        console.log(err);
         setUploaded(false);
       });
   };
@@ -94,9 +95,9 @@ const LiveInterview = () => {
               onRecordingComplete={(videoBlob) => {
                 // Do something with the video...
 
-                setVideo(videoBlob);
+                // setVideo(videoBlob);
 
-                uploadVideo();
+                uploadVideo(videoBlob);
                 // setUploaded(true);
               }}
             />
