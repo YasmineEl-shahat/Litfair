@@ -49,6 +49,10 @@ const SeekerNavbar =() =>{
                 </li>
                 <li className="nav-item">
                 <img src="assets/Landing/logo.png" className="photo"></img>
+                <div>
+                  
+
+                </div>
 
       {/*          <button
             className=" navbar-toggler navbar-toggler-right collapsed custom-toggler"
