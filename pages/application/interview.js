@@ -1,42 +1,28 @@
-import { useLayoutEffect, useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Layout from "../../comps/layout";
 import VideoRecorder from "react-video-recorder";
 import style from "../../styles/pages/Interview.module.scss";
 import AuthContext from "../../context/AuthContext";
 import axios from "axios";
-
+import Actions from "../../src/defaults/render-actions";
 const baseUrl = process.env.API_URL;
 
 const LiveInterview = () => {
-  //   useLayoutEffect(() => {
-  //     const videoElem = document.getElementById("stream-elem");
-
-  //     var startBtn = document.getElementById("start-stream");
-  //     var endBtn = document.getElementById("stop-media");
-
-  //     var recorder;
-
-  //     const settings = {
-  //       video: true,
-  //       audio: true,
-  //     };
-
-  //     startBtn.addEventListener("click", function (e) {
-  //       navigator.mediaDevices.getUserMedia(settings).then((stream) => {
-  //         videoElem.srcObject = stream;
-  //         recorder = new MediaRecorder(stream);
-  //       });
-  //     });
-
-  //     endBtn.addEventListener("click", function (e) {
-  //       videoElem.pause();
-  //     });
-  //   });
-  const [video, setVideo] = useState([]);
   const [uploaded, setUploaded] = useState(false);
 
   //hooks
   const { auth } = useContext(AuthContext);
+  useEffect(() => {
+    const player = document.getElementsByClassName(
+      "Interview_stream__q_kgU"
+    )[0];
+
+    // const startRec = document.getElementsByClassName(
+    //   "button__Button-hkteey-0 jLcHAe"
+    // )[0];
+    // const startRec = document.
+    // if (startRec) startRec.innerText = "";
+  }, []);
 
   //convert blob stream to video to be sent to the server
   const convertBlobToVideo = (videoBlob) => {
@@ -63,6 +49,7 @@ const LiveInterview = () => {
       .then((res) => {
         const { msg } = res.data;
         console.log(msg);
+        setUploaded(true);
       })
       .catch((err) => {
         console.log(err);
@@ -72,33 +59,20 @@ const LiveInterview = () => {
   return (
     <>
       <main className={`container ${style.VidCont}`}>
-        {/* <video autoplay="" id="stream-elem" controls width="600" height="400">
-        </video> */}
-
-        {/* <button
-          style={{ margin: "2rem" }}
-          className=" btn--global btn--blue btn--small"
-          id="start-stream"
-        >
-          Start Stream
-        </button> */}
-        {/* 
-        <button className=" btn--global btn--blue btn--small" id="stop-media">
-          Stop Stream
-        </button> */}
         {uploaded ? (
           <div>Your answer submited successfully</div>
         ) : (
           <div className={style.stream}>
             <VideoRecorder
               renderDisconnectedView={function noRefCheck() {}}
+              // renderActions={function noRefCheck() {
+              //   return <Actions />;
+              //   // return <Test isRecording={true} onStopRecording={true} />;
+              // }}
               onRecordingComplete={(videoBlob) => {
                 // Do something with the video...
 
-                // setVideo(videoBlob);
-
                 uploadVideo(videoBlob);
-                // setUploaded(true);
               }}
             />
           </div>
@@ -116,3 +90,16 @@ LiveInterview.getLayout = function getLayout(page) {
 };
 
 export default LiveInterview;
+
+const Test = ({ isRecording, onStopRecording }) => {
+  if (isRecording) {
+    return (
+      <button
+        type="button"
+        className="btn--global"
+        onClick={onStopRecording}
+        data-qa="stop-recording"
+      />
+    );
+  }
+};
