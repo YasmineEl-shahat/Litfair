@@ -1,59 +1,58 @@
 @import "../abstracts/variables.scss";
 @import "../abstracts/mixins.scss";
 
+li .bar {
+  font-size: $SHeadFont;
+  padding: 0.5rem;
+  color: $VDarkGray;
+  &::after {
+    content: " ";
+    display: block;
+    background: transparent;
+    margin: auto;
+    width: 0rem;
+    height: 3px;
+    transition: width 0.5 ease, background 0.5 ease;
+  }
 
-
-    li .bar{
-    &::after{
-        content: " ";
-        display: block;
-        background: transparent;
-        margin: auto;
-        width: 0rem;
-        height: 3px;
-        transition: width 0.5 ease, background 0.5 ease;
-    }
-
-    &:hover{
-       // color: $BlueGlobal;
-        &::after{
-            width: 50%;
-            background: $BlueGlobal;
-            transition: 0.5s;
-        }
-    }
-}
-.bar{
-    &:hover{
-        color: $BlueGlobal;
-    }
-
-}
-
-.searching{
-    display: inline-block;
-    width:30rem;
-      height: 3rem;
-      margin-left: 5rem;
-      font-size: 1.5rem;
-      border: 1.5px solid $VLightGray;
+  &:hover {
+    &::after {
+      width: 50%;
       border-radius: 3px;
-      color: $DarkGray;
-      padding-left: 1rem;
-      //margin: 1.5rem;
-      @include placeholder-color($VLightGray);
+      background: $BlueGlobal;
+      transition: 0.5s;
+    }
+  }
 }
-.searchIcon{
-    position: relative;
-    right: 2rem;
+.bar {
+  &:hover {
+    color: $BlueGlobal;
+  }
 }
-.photo{
-    vertical-align: middle;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    position: absolute;
-    right: -8rem;
-    border: 1.5px solid $VLightGray;
 
+.searching {
+  display: inline-block;
+  width: 30rem;
+  height: 3rem;
+  margin-left: 5rem;
+  font-size: 1.5rem;
+  border: 1.5px solid $VLightGray;
+  border-radius: 3px;
+  color: $DarkGray;
+  padding-left: 1rem;
+  //margin: 1.5rem;
+  @include placeholder-color($VLightGray);
+}
+.searchIcon {
+  position: relative;
+  right: 2rem;
+}
+.photo {
+  vertical-align: middle;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  position: absolute;
+  right: -8rem;
+  border: 1.5px solid $VLightGray;
 }
