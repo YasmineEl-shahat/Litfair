@@ -1,4 +1,5 @@
 @import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
 
 
 
@@ -30,9 +31,29 @@
 }
 
 .searching{
-    width: 30rem;
-    border: transparent ;
-   // border-radius: 0.5rem;
-   // border-color: aqua;
+    display: inline-block;
+    width:30rem;
+      height: 3rem;
+      margin-left: 5rem;
+      font-size: 1.5rem;
+      border: 1.5px solid $VLightGray;
+      border-radius: 3px;
+      color: $DarkGray;
+      padding-left: 1rem;
+      //margin: 1.5rem;
+      @include placeholder-color($VLightGray);
 }
+.searchIcon{
+    position: relative;
+    right: 2rem;
+}
+.photo{
+    vertical-align: middle;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    position: absolute;
+    right: -8rem;
+    border: 1.5px solid $VLightGray;
 
+}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { AsyncPaginate } from "react-select-async-paginate";
+import style from "../styles/pages/SeekerHome.module.scss";
+
 
 const SeekerNavbar =() =>{
     return(
@@ -31,23 +32,35 @@ const SeekerNavbar =() =>{
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" href="" passHref>
-                    <button className="  btn--small button bar">
+                    <button className="btn--small button bar">
                       Applications
                     </button>
                   </Link>
                 </li>
-                <li className="nav-item">
+                  <li className="nav-item">
 
-                <div class="input-group">
-                <div class="form-outline">
-              <input type="search" id="form1" class="form-control" />
-               <label class="form-label" for="form1">Search</label>
-               </div>
                
+            <input type="text" class="searching" placeholder="Search for jobs, companies.." />
+  
                <button >
-                <i class="fas fa-search"></i>
-                   </button>
-                    </div>
+                <i class="fas fa-search searchIcon"></i>
+               </button>
+    
+                </li>
+                <li className="nav-item">
+                <img src="assets/Landing/logo.png" className="photo"></img>
+
+      {/*          <button
+            className=" navbar-toggler navbar-toggler-right collapsed custom-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className=" navbar-toggler-icon"></span>
+    </button>*/}
                 </li>
                 
               </ul>
