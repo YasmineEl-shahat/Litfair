@@ -3,26 +3,22 @@ import EditProfileSideBar from "../../../comps/EditProfileSideBar";
 import style from "../../../styles/pages/EditProfile.module.scss";
 import { useLayoutEffect } from "react";
 import { backgroundSelect } from "../../../functions/backgroundSelect";
-const GeneralInfo = () => {
+const Password = () => {
   useLayoutEffect(() => {
-    backgroundSelect("generalSide");
+    backgroundSelect("passSide");
   }, []);
   return (
     <>
       <main className="container">
         <EditProfileSideBar />
-        <section className={style.info}>
-          <div className="HeadBackgroundWrap">
-            <h3 className="circlebef">Basic Info</h3>
-          </div>
-        </section>
+        <section className={style.info}></section>
       </main>
     </>
   );
 };
 
-GeneralInfo.getLayout = function getLayout(page) {
-  return <Layout title="General Info">{page}</Layout>;
+Password.getLayout = function getLayout(page) {
+  return <Layout title="Password">{page}</Layout>;
 };
 
-export default GeneralInfo;
+export default Password;

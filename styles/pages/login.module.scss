@@ -115,3 +115,15 @@
   top: -0.1rem;
   font-size: 1.6rem;
 }
+.checkWrap {
+  @include flexCenter;
+  flex-direction: column;
+}
+.checkCont {
+  border: 10px solid $LightViolet;
+  border-radius: 50%;
+  width: 10rem;
+  text-align: center;
+  color: $VLightBlue;
+  font-size: $HeadFont;
+}

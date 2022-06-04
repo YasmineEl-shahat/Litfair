@@ -75,9 +75,26 @@ html {
       @include flexCenter;
       margin-bottom: 8rem;
     }
+
+    .circlebef {
+      &::before {
+        content: "";
+        width: 2.5rem;
+        height: 2.6rem;
+        margin-right: -2.5rem;
+        margin-bottom: -0.5rem;
+        display: inline-block;
+        border-radius: 50%;
+        background-color: $VLightBlue;
+      }
+    }
     .invalid {
       color: red;
       text-align: left;
+    }
+    .selectedBack {
+      color: $WhiteGlobal;
+      background: $BlueGlobal;
     }
   }
 }

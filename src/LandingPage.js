@@ -26,7 +26,7 @@ const Landing = () => {
               job hunters and talent acquisition team.
               <br />
               <Link className="nav-link" href="/seekerRegister" passHref>
-                <button className="btn btn--global btn--small btn--blue">
+                <button className=" btn--global btn--small btn--blue">
                   Get Started
                 </button>
               </Link>
