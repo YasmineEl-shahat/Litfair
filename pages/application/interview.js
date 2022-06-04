@@ -8,21 +8,13 @@ import Actions from "../../src/defaults/render-actions";
 const baseUrl = process.env.API_URL;
 
 const LiveInterview = () => {
+  //state
   const [uploaded, setUploaded] = useState(false);
+  const [sending, setSending] = useState(false);
 
   //hooks
   const { auth } = useContext(AuthContext);
-  useEffect(() => {
-    const player = document.getElementsByClassName(
-      "Interview_stream__q_kgU"
-    )[0];
-
-    // const startRec = document.getElementsByClassName(
-    //   "button__Button-hkteey-0 jLcHAe"
-    // )[0];
-    // const startRec = document.
-    // if (startRec) startRec.innerText = "";
-  }, []);
+  useEffect(() => {}, []);
 
   //convert blob stream to video to be sent to the server
   const convertBlobToVideo = (videoBlob) => {
@@ -50,10 +42,12 @@ const LiveInterview = () => {
         const { msg } = res.data;
         console.log(msg);
         setUploaded(true);
+        setSending(false);
       })
       .catch((err) => {
         console.log(err);
         setUploaded(false);
+        setSending(false);
       });
   };
   return (
@@ -61,17 +55,23 @@ const LiveInterview = () => {
       <main className={`container ${style.VidCont}`}>
         {uploaded ? (
           <div>Your answer submited successfully</div>
+        ) : sending ? (
+          <div>Sending...</div>
         ) : (
           <div className={style.stream}>
             <VideoRecorder
-              renderDisconnectedView={function noRefCheck() {}}
-              // renderActions={function noRefCheck() {
-              //   return <Actions />;
-              //   // return <Test isRecording={true} onStopRecording={true} />;
-              // }}
+              renderDisconnectedView={function noRefCheck() {
+                // const startRec = document.getElementsByClassName(
+                //   "button__Button-hkteey-0 jLcHAe"
+                // )[0];
+                // const cam = document.createElement(
+                //   `<p className="fa-solid fa-camera"></p>`
+                // );
+                // if (startRec) startRec.appendChild(cam);
+              }}
               onRecordingComplete={(videoBlob) => {
                 // Do something with the video...
-
+                setSending(true);
                 uploadVideo(videoBlob);
               }}
             />

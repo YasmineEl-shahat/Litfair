@@ -67,23 +67,4 @@ body {
     font-size: $InfoFont;
     padding: 0.21rem;
   }
-  button[data-qa="turn-on-camera"] {
-    color: $BlueGlobal;
-  }
-  .jLcHAe {
-    background: none;
-    color: black;
-    border-radius: 4px;
-    height: 40px;
-    padding: 0px 18px;
-    border: none;
-    margin: -8px;
-    font-size: 14px;
-    font-weight: bold;
-    outline: none;
-    cursor: pointer;
-    &:hover {
-      background: none;
-    }
-  }
 }
