@@ -5,6 +5,9 @@ li .bar {
   font-size: $SHeadFont;
   padding: 0.5rem;
   color: $VDarkGray;
+  @include mQ(1055px) {
+    font-size: $InfoFont;
+  }
   &::after {
     content: " ";
     display: block;
@@ -34,31 +37,43 @@ li .bar {
   display: inline-block;
   width: 30rem;
   height: 3rem;
-  margin-left: 5rem;
   font-size: 1.5rem;
   border: 1.5px solid $VLightGray;
   border-radius: 3px;
   color: $DarkGray;
   padding-left: 1rem;
-  //margin: 1.5rem;
   @include placeholder-color($VLightGray);
+  @include mQ(421px) {
+    width: 25rem;
+    font-size: 1rem;
+  }
+  @include mQ(358px) {
+    width: 20rem;
+  }
 }
+// .searchParent {
+//   position: relative;
+// }
 .searchIcon {
   position: relative;
   right: 2rem;
+  // top: 1rem;
 }
 .photo {
   vertical-align: middle;
   width: 3rem;
   height: 3rem;
+  margin: 0 1rem;
   border-radius: 50%;
   position: absolute;
-  right: -8rem;
   border: 1.5px solid $VLightGray;
+  @include mQ(991.9px) {
+    margin-top: 1rem;
+  }
 }
-.menu{
-    width: 35px;
-    height: 5px;
-    background-color: black;
-    margin: 6px 0;
+.menu {
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
 }

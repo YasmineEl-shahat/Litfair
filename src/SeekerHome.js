@@ -61,7 +61,9 @@ const SeekerHome = (props) => {
 
                 <div className={style.informations}>
                   <div className={style.postTitle}> {post.title} </div>
-                  <div className={style.job_type}> {post.job_type} </div>
+                  {post.job_type && (
+                    <div className={style.job_type}> {post.job_type} </div>
+                  )}
 
                   <div className={style.subInfo}>
                     <div className={style.experience}>
@@ -85,7 +87,7 @@ const SeekerHome = (props) => {
                     <BsBookmark />
                   </i>
                   <button
-                    className={` btn--global btn--small btn--blue ${style.btnDetails}`}
+                    className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
                     type="submit"
                   >
                     Details
