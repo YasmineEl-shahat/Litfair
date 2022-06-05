@@ -1,9 +1,10 @@
 @import "../abstracts/variables.scss";
 @import "../abstracts/mixins.scss";
 
-li .bar {
+.bar {
   font-size: $SHeadFont;
   padding: 0.5rem;
+  margin: 1rem;
   color: $VDarkGray;
   @include mQ(1055px) {
     font-size: $InfoFont;
@@ -17,19 +18,14 @@ li .bar {
     height: 3px;
     transition: width 0.5 ease, background 0.5 ease;
   }
-
   &:hover {
+    color: $BlueGlobal;
     &::after {
       width: 50%;
       border-radius: 3px;
       background: $BlueGlobal;
       transition: 0.5s;
     }
-  }
-}
-.bar {
-  &:hover {
-    color: $BlueGlobal;
   }
 }
 

@@ -7,17 +7,17 @@ const SeekerNavbar = () => {
     <ul className="navbar-nav ms-auto">
       <li className="nav-item">
         <Link className="nav-link" href="" passHref>
-          <button className="  bar ">Job Browser</button>
+          <a className="bar ">Job Browser</a>
         </Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link" href="" passHref>
-          <button className="  bar">Saved</button>
+          <a className="bar">Saved</a>
         </Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link" href="" passHref>
-          <button className="  bar">Applications</button>
+          <a className="bar">Applications</a>
         </Link>
       </li>
       <li className="nav-item searchParent">

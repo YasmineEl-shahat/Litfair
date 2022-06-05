@@ -72,7 +72,7 @@ const LiveInterview = () => {
               onRecordingComplete={(videoBlob) => {
                 // Do something with the video...
                 setSending(true);
-                uploadVideo(videoBlob);
+                // uploadVideo(videoBlob);
               }}
             />
           </div>

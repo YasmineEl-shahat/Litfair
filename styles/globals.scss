@@ -76,6 +76,10 @@ html {
       @include flexCenter;
       margin-bottom: 8rem;
     }
+    a {
+      cursor: pointer;
+      text-decoration: none;
+    }
 
     .circlebef {
       &::before {
@@ -98,11 +102,6 @@ html {
       background: $BlueGlobal;
     }
   }
-}
-
-a {
-  color: inherit;
-  cursor: pointer;
 }
 
 ul {
