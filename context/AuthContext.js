@@ -35,7 +35,8 @@ export const AuthProvider = ({ children }) => {
     if (typeof window !== "undefined") {
       cookieCutter.set("auth", "", { expires: new Date(0) });
     }
-    router.replace("/");
+
+    if (router.asPath !== "/") router.replace("/");
   };
 
   //handle Expired tokens

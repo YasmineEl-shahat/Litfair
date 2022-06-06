@@ -1,10 +1,15 @@
 @import "../abstracts/variables.scss";
 @import "../abstracts/mixins.scss";
 
-li .bar {
+.bar {
   font-size: $SHeadFont;
+  font-weight: 600;
   padding: 0.5rem;
+  margin: 1rem;
   color: $VDarkGray;
+  @include mQ(1055px) {
+    font-size: $InfoFont;
+  }
   &::after {
     content: " ";
     display: block;
@@ -14,8 +19,8 @@ li .bar {
     height: 3px;
     transition: width 0.5 ease, background 0.5 ease;
   }
-
   &:hover {
+    color: $BlueGlobal;
     &::after {
       width: 50%;
       border-radius: 3px;
@@ -24,24 +29,29 @@ li .bar {
     }
   }
 }
-.bar {
-  &:hover {
-    color: $BlueGlobal;
-  }
-}
 
 .searching {
   display: inline-block;
   width: 30rem;
   height: 3rem;
-  margin-left: 5rem;
   font-size: 1.5rem;
   border: 1.5px solid $VLightGray;
   border-radius: 3px;
   color: $DarkGray;
   padding-left: 1rem;
-  //margin: 1.5rem;
   @include placeholder-color($VLightGray);
+  @include mQ(421px) {
+    width: 25rem;
+    font-size: 1rem;
+  }
+  @include mQ(358px) {
+    width: 20rem;
+  }
+}
+.searchParent {
+  @include mQ(2000px, 1200px) {
+    margin-left: 10rem;
+  }
 }
 .searchIcon {
   position: relative;
@@ -51,14 +61,17 @@ li .bar {
   vertical-align: middle;
   width: 3rem;
   height: 3rem;
+  margin: 0 1rem;
   border-radius: 50%;
   position: absolute;
-  right: -8rem;
   border: 1.5px solid $VLightGray;
+  @include mQ(991.9px) {
+    margin-top: 1rem;
+  }
 }
-.menu{
-    width: 35px;
-    height: 5px;
-    background-color: black;
-    margin: 6px 0;
+.menu {
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
 }

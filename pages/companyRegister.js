@@ -116,17 +116,21 @@ const CompanyRegister = () => {
         <div className={style.rightForm}>
           <div className="">
             <div className={style.imageDev}>
-              <img className={style.image} src="assets\Landing/logo.png" />
+              <img
+                className={style.image}
+                src="assets\Landing/logo.png"
+                alt="logo"
+              />
             </div>
 
-            <Link href="/seekerRegister">
+            <Link href="/seekerRegister" passHref>
               <span>
                 <button className={style.seekerBtn} type="submit">
                   Job Seeker
                 </button>
               </span>
             </Link>
-            <Link href="/companyRegister">
+            <Link href="/companyRegister" passHref>
               <span>
                 <button className={style.companyBtn} type="submit">
                   Company

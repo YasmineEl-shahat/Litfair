@@ -1,30 +1,36 @@
 @import "../abstracts/variables.scss";
 @import "../abstracts/mixins.scss";
-.box{
+.box {
   @include flexCenter;
 }
-.right{
-
+.right {
   background-color: $WhiteGlobal;
 
   flex-direction: column;
-   box-shadow: 0.1rem 0.1rem 1rem #0000005C;
- 
+  @include cardBorder;
   width: 50%;
   height: 100%;
-
+  @include mQ(1242px) {
+    width: 60%;
+  }
+  @include mQ(1021px) {
+    width: 70%;
+  }
+  @include mQ(870px) {
+    width: 80%;
+  }
+  @include mQ(749px) {
+    width: 90%;
+  }
   margin-bottom: 5rem;
 }
-.left{
-    
-
-
- // background-color: $WhiteGlobal;
+.left {
+  // background-color: $WhiteGlobal;
   //  margin-top: auto;
   // margin-bottom: auto;
   //flex-direction: column;
-   box-shadow: 0.1rem 0.1rem 1rem #0000005C;
- position: relative;
+  box-shadow: 0.1rem 0.1rem 1rem #0000005c;
+  position: relative;
   width: 30rem;
   height: 40rem;
   text-align: center;
@@ -39,16 +45,16 @@
   }
 }
 
-.sort{
+.sort {
   color: black;
   margin-top: 2rem;
   margin-left: 2rem;
   display: inline;
 }
-.filter{
- // border-radius:  solid 1rem;
+.filter {
+  // border-radius:  solid 1rem;
   display: inline-block;
-width:15rem;
+  width: 15rem;
   height: 3;
   font-size: 1.7rem;
   border: 1.5px solid $VLightGray;
@@ -59,15 +65,15 @@ width:15rem;
   @include placeholder-color($VLightGray);
 }
 
-.job{
-position: relative;
+.job {
+  position: relative;
   border: 1.5px solid $VLightGray;
   border-radius: 3px;
   margin: 2rem;
   display: flex;
   flex-direction: row;
 }
-.arrowIcon{
+.arrowIcon {
   position: relative;
   right: 4rem;
 
@@ -75,84 +81,89 @@ position: relative;
   font-weight: bold;
   cursor: pointer;
 }
-.jobImgContainer{
-
+.jobImgContainer {
   @include flexCenter;
   border: 0.5px solid $BlueGlobal;
   border-radius: 10px;
   margin: 1rem;
   width: 25%;
   height: 25%;
-
 }
-.jobImg{
+.jobImg {
   position: relative;
- margin: 3rem;
- margin-left: 2rem;
- margin-right: 2rem;
- width: 100%;
- height: 100%;
+  margin: 3rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  width: 100%;
+  height: 100%;
 }
-.informations{
+.informations {
   //display: inline;
- // display: flex;
+  // display: flex;
   flex-direction: column;
   margin: 1rem;
- // @include flexCenter;
+  // @include flexCenter;
   //border: 0.5px solid $BlueGlobal;
   //padding: 1rem;
 }
-.postTitle{
+.postTitle {
   display: inline;
-  color:$BlackGlobal;
+  color: $BlackGlobal;
   font-size: $SHeadFont;
   font-weight: bold;
-
+  @include mQ(399px) {
+    font-size: $InfoFont;
+  }
 }
 
-.job_type{
+.job_type {
   display: inline;
   color: $BlueGlobal;
   font-size: 1.2rem;
   font-weight: bold;
-  background-color: #CBB0F3;
-
+  padding: 0.1rem 0.2rem;
+  background-color: #cbb0f3;
 }
-.subInfo{
+.subInfo {
   @include flexCenter;
-  //flex-direction: row;
+  flex-wrap: wrap;
+
+  margin-top: 0.5rem;
+  @include mQ(563px) {
+    display: inline-block;
+  }
 }
-.experience{
-  font-size: 1.2rem;
+.experience,
+.location {
+  font-size: $InfoFont;
   margin-right: 3rem;
+  @include mQ(399px) {
+    font-size: 1rem;
+  }
 }
-.expIcon{
+.expIcon,
+.locationIcon {
   color: $BlueGlobal;
+  margin-right: 0.5rem;
+  font-size: $InfoFont;
 }
-.location{
-  font-size: 1.2rem;
-  margin-right: 3rem;
-}
-.locationIcon{
+
+.bookmark {
+  position: absolute;
+
   color: $BlueGlobal;
+  right: 1rem;
+  font-size: $InfoFont;
+  cursor: pointer;
 }
-.bookmark{
-  color: $BlueGlobal;
-  size: 10rem;
-  left: 18rem;
-  position: relative;
-}
-.lastSection{
-  //position: relative;
+.lastSection {
+  // position: relative;
   margin: 1rem;
 }
-.btnDetails{
+.btnDetails {
   position: absolute;
   bottom: 0;
   right: 0;
   margin-bottom: 1rem;
   margin-right: 1rem;
-  
- 
 }
-

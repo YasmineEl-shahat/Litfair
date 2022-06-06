@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=Open+Sans:wght@300&family=Readex+Pro:wght@200&display=swap");
 @import "./abstracts/variables.scss";
 @import "./abstracts/mixins.scss";
+@import "./components/video.scss";
 
 * {
   box-sizing: border-box;
@@ -75,11 +76,15 @@ html {
       @include flexCenter;
       margin-bottom: 8rem;
     }
+    a {
+      cursor: pointer;
+      text-decoration: none;
+    }
 
     .circlebef {
       &::before {
         content: "";
-        width: 2.5rem;
+        width: 3rem;
         height: 2.6rem;
         margin-right: -2.5rem;
         margin-bottom: -0.5rem;
@@ -97,11 +102,6 @@ html {
       background: $BlueGlobal;
     }
   }
-}
-
-a {
-  color: inherit;
-  cursor: pointer;
 }
 
 ul {

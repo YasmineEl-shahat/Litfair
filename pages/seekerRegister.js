@@ -13,7 +13,7 @@ import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
 
 const baseUrl = process.env.API_URL;
-const seekerRegister = () => {
+const SeekerRegister = () => {
   //extract context data
   const { onSubmit, backError } = useContext(AuthContext);
 
@@ -100,17 +100,21 @@ const seekerRegister = () => {
         <div className={style.rightForm}>
           <div className="">
             <div className={style.imageDev}>
-              <img className={style.image} src="assets/Landing/logo.png" />
+              <img
+                className={style.image}
+                src="assets/Landing/logo.png"
+                alt="logo"
+              />
             </div>
 
-            <Link href="/seekerRegister">
+            <Link href="/seekerRegister" passHref>
               <span>
                 <button className={style.seekerBtn} type="submit">
                   Job Seeker
                 </button>
               </span>
             </Link>
-            <Link href="/companyRegister">
+            <Link href="/companyRegister" passHref>
               <span>
                 <button className={style.companyBtn} type="submit">
                   Company
@@ -293,4 +297,4 @@ const seekerRegister = () => {
   );
 };
 
-export default seekerRegister;
+export default SeekerRegister;
