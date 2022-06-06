@@ -26,13 +26,15 @@ const SeekerNavbar = () => {
               </li>
               <li className="nav-item">
                 <input
+
                   type="text"
                   class="searching"
                   placeholder="Search for jobs, companies.."
                 />
 
                 <button>
-                  <i class="fas fa-search searchIcon"></i>
+                  <i class="fas fa-search searchIcon"
+                  ></i>
                 </button>
               </li>
               <li className="nav-item">
