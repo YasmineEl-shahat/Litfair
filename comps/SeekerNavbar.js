@@ -32,7 +32,7 @@ const SeekerNavbar = () => {
         </button>
       </li>
       <li className="nav-item">
-        <img src="assets/Landing/logo.png" className="photo"></img>
+        <img src="/assets/Landing/logo.png" className="photo" alt="pic"></img>
       </li>
     </ul>
   );

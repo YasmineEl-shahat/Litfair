@@ -3,6 +3,7 @@
 
 .bar {
   font-size: $SHeadFont;
+  font-weight: 600;
   padding: 0.5rem;
   margin: 1rem;
   color: $VDarkGray;
@@ -47,13 +48,14 @@
     width: 20rem;
   }
 }
-// .searchParent {
-//   position: relative;
-// }
+.searchParent {
+  @include mQ(2000px, 1200px) {
+    margin-left: 10rem;
+  }
+}
 .searchIcon {
   position: relative;
   right: 2rem;
-  // top: 1rem;
 }
 .photo {
   vertical-align: middle;

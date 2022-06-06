@@ -4,7 +4,6 @@
 body {
   .WroCl {
     overflow: visible;
-    min-height: 300 px;
     background-color: #e3e3e333;
     border: 1px solid #e3e3e3;
   }
@@ -16,7 +15,6 @@ body {
     background: $BlueGlobal;
     color: $WhiteGlobal;
     font-weight: lighter;
-    position: absolute;
     &:hover {
       background: $BlueGlobal;
     }

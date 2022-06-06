@@ -1,12 +1,75 @@
 @import "../abstracts/variables.scss";
 @import "../abstracts/mixins.scss";
 
+.mainCont,
 .VidCont {
   @include flexCenter;
+}
+
+.questionCarCont,
+.questionCont {
+  @include cardBorder;
+  padding: 2rem;
+  margin: 2rem;
+  h4 {
+    font-weight: 700;
+    color: $VDarkGray;
+    margin-bottom: 2rem;
+  }
+  p {
+    color: $vidGray;
+  }
+}
+.questionCont {
+  margin-top: 0;
+  height: 57rem;
+}
+.questionCarCont {
+  width: 70%;
+  height: 120vh;
+  padding: 2rem 6rem;
+  margin-bottom: 20rem;
+  border-radius: 0.5rem;
+}
+@include mQ(991.9px) {
+  .questionCarCont {
+    width: 100%;
+    padding: 2rem;
+  }
+}
+@include mQ(405px) {
+  .questionCarCont {
+    padding: 0.5rem;
+  }
+  .questionCont {
+    padding: 1rem;
+    margin: 1rem;
+  }
+}
+.VidCont {
   .stream {
     width: 55rem;
     height: 40rem;
-    margin-bottom: 2rem;
-    margin-bottom: 10rem;
+    margin-bottom: 7rem;
+  }
+}
+.carousel {
+  .customInd {
+    bottom: -10rem;
+
+    button {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 100%;
+      background-color: $BlueGlobal;
+      color: $WhiteGlobal;
+      text-indent: 0px;
+      font-size: $InfoFont;
+      &:not([aria-current="true"]) {
+        background: #e3e3e333;
+        color: $VDarkGray;
+        opacity: 1;
+      }
+    }
   }
 }
