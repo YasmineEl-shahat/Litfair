@@ -59,17 +59,16 @@
 
     button {
       width: 5rem;
-      height: 5rem;
+      height: 4rem;
+      margin: 1rem;
       border-radius: 100%;
       background-color: $BlueGlobal;
       color: $WhiteGlobal;
       text-indent: 0px;
       font-size: $InfoFont;
-      &:not([aria-current="true"]) {
-        background: #e3e3e333;
-        color: $VDarkGray;
-        opacity: 1;
-      }
+      background: #e3e3e333;
+      color: $VDarkGray;
+      opacity: 1;
     }
   }
 }
