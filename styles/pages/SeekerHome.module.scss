@@ -82,6 +82,7 @@
   cursor: pointer;
 }
 .jobImgContainer {
+  flex-shrink: 0;
   @include flexCenter;
   border: 0.5px solid $BlueGlobal;
   border-radius: 10px;
@@ -98,13 +99,8 @@
   height: 100%;
 }
 .informations {
-  //display: inline;
-  // display: flex;
   flex-direction: column;
   margin: 1rem;
-  // @include flexCenter;
-  //border: 0.5px solid $BlueGlobal;
-  //padding: 1rem;
 }
 .postTitle {
   display: inline;
