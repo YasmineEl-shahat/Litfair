@@ -48,7 +48,11 @@
   textarea {
     width: 100%;
   }
-
+  label {
+    span {
+      font-size: 1rem;
+    }
+  }
   button[type="submit"] {
     margin-right: 1rem;
     margin-top: 2rem;
