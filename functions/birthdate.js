@@ -3,7 +3,6 @@ import $ from "jquery";
 var Days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // index => month [0-11]
 
 export const birth = (selectedYear, selectedMon, selectedDay) => {
-  console.log(typeof selectedMon);
   var option = '<option value="day">day</option>';
   if (!selectedDay) selectedDay = "day";
   for (var i = 1; i <= Days[0]; i++) {

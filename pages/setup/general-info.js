@@ -61,11 +61,13 @@ const GInfo = (countries) => {
           setGender(res.gender);
 
           setLoading(false);
-          const y = res.date_of_birth.slice(0, 4);
+          if (res.date_of_birth) {
+            const y = res.date_of_birth.slice(0, 4);
 
-          const m = res.date_of_birth.slice(5, 7);
-          const d = res.date_of_birth.slice(8, 10);
-          birth(y, Number(m), Number(d));
+            const m = res.date_of_birth.slice(5, 7);
+            const d = res.date_of_birth.slice(8, 10);
+            birth(y, Number(m), Number(d));
+          } else birth();
         }
         if (response.status === 400) {
           // So, a server-side validation error occurred.
