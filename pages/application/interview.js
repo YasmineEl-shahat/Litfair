@@ -34,8 +34,10 @@ const LiveInterview = () => {
 
   //change Slide
   const changeSlide = () => {
-    setCurrent(current + 1);
-    setUploaded(false);
+    if (current !== questions.length) {
+      setCurrent(current + 1);
+      setUploaded(false);
+    }
   };
 
   const uploadVideo = (videoBlob) => {
@@ -90,14 +92,22 @@ const LiveInterview = () => {
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide-to={index}
-                className={current === index + 1 ? `active` : ``}
+                className={
+                  index + 1 < current
+                    ? `fa-solid fa-check active`
+                    : current === index + 1
+                    ? `active `
+                    : ``
+                }
                 aria-label={`Slide ${index + 1}`}
                 aria-current={current === index + 1 ? `true` : `false`}
                 disabled={
-                  uploaded === true && index + 2 === current ? `false` : `true`
+                  uploaded === "true" && index + 2 === current
+                    ? `false`
+                    : `true`
                 }
               >
-                {index + 1}
+                {index + 1 < current ? "" : index + 1}
               </button>
             ))}
           </div>
