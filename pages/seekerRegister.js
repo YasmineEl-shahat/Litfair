@@ -50,7 +50,6 @@ const SeekerRegister = () => {
       "Access-Control-Allow-Credentials": "false",
     })
       .then(async (response) => {
-        console.log(response);
         if (response.ok) {
           const res = await response.json();
           window.open(baseUrl + "google/login", "_self");

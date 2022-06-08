@@ -13,6 +13,7 @@ body {
   }
   .text--big {
     width: 28rem;
+
     @include mQ(390px) {
       font-size: $InfoFont;
     }
@@ -26,7 +27,7 @@ body {
   }
   .text--name {
     @include mQ(1900px, 1260px) {
-      width: 44rem;
+      width: 43rem;
     }
     @include mQ(390px) {
       width: 100%;
@@ -38,7 +39,6 @@ body {
     height: 4rem;
     @include mQ(650px) {
       width: 100%;
-      // font-size: 1rem;
     }
   }
   .text--customBig {
