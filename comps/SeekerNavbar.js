@@ -64,7 +64,11 @@ const SeekerNavbar = () => {
         </form>
       </li>
       <li className="nav-item">
-        <img src="/assets/Landing/logo.png" className="photo" alt="pic"></img>
+        <img
+          src="/assets/profile/blank-profile-picture.png"
+          className="photo"
+          alt="pic"
+        ></img>
       </li>
     </ul>
   );
