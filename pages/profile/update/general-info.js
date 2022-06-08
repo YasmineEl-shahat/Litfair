@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 
 import { backgroundSelect } from "../../../functions/backgroundSelect";
 import AuthContext from "../../../context/AuthContext";
+import { Spinner } from "react-bootstrap";
 
 const baseUrl = process.env.API_URL;
 
@@ -23,14 +24,14 @@ const GeneralInfo = (countries) => {
   //state
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
-  const [email, setEmail] = useState("");
   const [phone_number, setPhone_number] = useState("");
+  const [description, setDescription] = useState("");
   const [cities, setCities] = useState([]);
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
+  const [nationality, setNationality] = useState("");
   const [submitting, setSubsubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [description, setDescription] = useState("");
 
   // variables
   const country_list = countries.countries;
@@ -64,10 +65,10 @@ const GeneralInfo = (countries) => {
           const res = await response.json();
           setFname(res.fname);
           setLname(res.lname);
-          setEmail(res.email);
           setPhone_number(res.phone_number);
           setCountry(res.country);
           setCity(res.city);
+          setNationality(res.nationality);
           setLoading(false);
         }
         if (response.status === 400) {
@@ -89,7 +90,7 @@ const GeneralInfo = (countries) => {
     <main className={` ${style.main}`}>
       <EditProfileSideBar />
       {loading ? (
-        <div>loading...</div>
+        <Spinner />
       ) : (
         <section className={style.info}>
           <h3 className="circlebef">Basic Info</h3>
@@ -123,16 +124,21 @@ const GeneralInfo = (countries) => {
             </section>
             <section>
               <div className={carStyle.name}>
-                <label className="label--global" htmlFor="email">
-                  Email Address
-                </label>
+                <label className="label--global">Nationality</label>
                 <input
-                  className="txt text--big"
-                  type="text"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  list="nat"
+                  placeholder="Select..."
+                  className="txt text--big text--customBig"
+                  value={nationality}
+                  onChange={(e) => setNationality(e.target.value)}
                 />
+                <datalist id="nat">
+                  {country_list.map((country) => (
+                    <option value={country.country} key={country._id}>
+                      {country.country}
+                    </option>
+                  ))}
+                </datalist>
               </div>
               <div className={carStyle.name}>
                 <label className="label--global" htmlFor="phone">

@@ -1,12 +1,11 @@
-import style from "../styles/pages/SeekerHome.module.scss";
 import AuthContext from "../context/AuthContext";
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-
+import Spinner from "../comps/Spinner";
 import Jobs from "../comps/jobs";
 const baseUrl = process.env.API_URL;
 
-const SeekerHome = (props) => {
+const SeekerHome = () => {
   //state
   const { auth } = useContext(AuthContext);
   const router = useRouter();
@@ -28,6 +27,6 @@ const SeekerHome = (props) => {
   useEffect(() => {
     getData();
   }, []);
-  return <>{loading ? <div>loading...</div> : <Jobs posts={posts} />}</>;
+  return <>{loading ? <Spinner /> : <Jobs posts={posts} />}</>;
 };
 export default SeekerHome;

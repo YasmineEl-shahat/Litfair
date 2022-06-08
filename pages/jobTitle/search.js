@@ -13,11 +13,9 @@ export async function getServerSideProps({ query }) {
   };
 }
 const Search = ({ job }) => {
-  console.log(job);
   return (
     <>
-      {" "}
-      <Jobs posts={job} />{" "}
+      <Jobs posts={job} />
     </>
   );
 };
