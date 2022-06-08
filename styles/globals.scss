@@ -101,6 +101,13 @@ html {
       color: $WhiteGlobal;
       background: $BlueGlobal;
     }
+
+    .carousel-indicators {
+      .active {
+        background-color: $BlueGlobal;
+        color: $WhiteGlobal;
+      }
+    }
   }
 }
 
