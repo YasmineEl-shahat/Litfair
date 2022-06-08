@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import {  useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 const baseUrl = process.env.API_URL + "/jobTitle/search";
 
@@ -9,8 +9,7 @@ const SeekerNavbar = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [jobs, setJobs] = useState([]);
- //  const apparels = ["Women", "Kids", "Men"];
-
+  //  const apparels = ["Women", "Kids", "Men"];
 
   const getData = async () => {
     const res = await fetch(baseUrl);
@@ -28,7 +27,7 @@ const SeekerNavbar = () => {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    //if (document.getElementsByName("search")[0].value !== "")
+    if (document.getElementById("search").value !== "")
       router.push(`/jobTitle/search?jobTitle=${search}`);
   };
 
@@ -51,16 +50,17 @@ const SeekerNavbar = () => {
       </li>
       <li className="nav-item searchParent">
         <form onSubmit={submitHandler} className="searchForm">
-        <input
-          type="text"
-          class="searching"
-          placeholder="Search for jobs, companies.."
-          onChange={searchChangeHandler}
-        />
+          <input
+            id="search"
+            type="text"
+            class="searching"
+            placeholder="Search for jobs, companies.."
+            onChange={searchChangeHandler}
+          />
 
-        <button type="submit">
-          <i class="fas fa-search searchIcon"></i>
-        </button>
+          <button type="submit">
+            <i class="fas fa-search searchIcon"></i>
+          </button>
         </form>
       </li>
       <li className="nav-item">

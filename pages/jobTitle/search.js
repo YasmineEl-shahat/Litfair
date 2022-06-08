@@ -1,32 +1,27 @@
-import { useRouter } from "next/router";
 import Jobs from "../../comps/jobs";
 const baseUrl = process.env.API_URL;
-
-
+import Layout from "../../comps/layout";
 export async function getServerSideProps({ query }) {
-    const res = await fetch(baseUrl + "/jobTitle/search");
-  //  var { postTitle } = await res.json();
- //   postTitle = postTitle.filter((value) => {
- //    return value.name !== "";
-//  });
-    const searchQuery = query.search || "";
-    const category = query.category || "";
-  
-    const jobRes = await fetch(
-      baseUrl + "/jobTitle/search?search=" + searchQuery + "&category=" + category
-    );
-    const job = await jobRes.json();
-    return {
-      props: {searchQuery, category, job }, // will be passed to the page component as props
-    };
-  }
-const Search=(props)=>{
+  const searchQuery = query.jobTitle || "";
 
-    
-    return(
-        <>
-        <Jobs/>
-        </>
-    )
+  const jobRes = await fetch(
+    baseUrl + "jobTitle/search?jobTitle=" + searchQuery
+  );
+  const job = await jobRes.json();
+  return {
+    props: { job }, // will be passed to the page component as props
+  };
 }
+const Search = ({ job }) => {
+  console.log(job);
+  return (
+    <>
+      {" "}
+      <Jobs posts={job} />{" "}
+    </>
+  );
+};
+Search.getLayout = function getLayout(page) {
+  return <Layout title="Job Search">{page}</Layout>;
+};
 export default Search;

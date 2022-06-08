@@ -1,19 +1,41 @@
 @import "../abstracts/variables.scss";
 @import "./abstracts/mixins.scss";
 
+.mobile-navigation {
+  display: none;
+  background-color: $BlueGlobal;
+  color: $WhiteGlobal;
+  padding: 1.5rem;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: $InfoFont;
+  text-align: center;
+  width: 100%;
+
+  @include mQ(880px) {
+    display: block;
+    position: fixed;
+    top: 0;
+  }
+}
 .profileSide {
-  display: inline-block;
   transition: 0.3s;
   font-size: $InfoFont;
   box-shadow: $shadowGlob;
-  //   margin: 10rem;
+  flex-shrink: 0;
+  @include mQ(880px) {
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    background-color: white;
+    top: 5.4rem;
+    display: none;
+  }
   .sectionSide {
     box-shadow: 0px 1px 1px $VLightGray;
     padding: 0.5rem;
     padding-right: 5rem;
-
     cursor: pointer;
-
     &:hover {
       background: $VLightGray;
     }
@@ -22,5 +44,11 @@
       display: inline-block;
       margin-right: 0.5rem;
     }
+    @include mQ(880px) {
+      padding: 1.5rem;
+    }
   }
+}
+.visible {
+  display: block;
 }

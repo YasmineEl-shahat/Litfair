@@ -178,15 +178,6 @@
     background: #e6efff;
     border: 1px solid $BlueGlobal;
   }
-  .name {
-    display: inline-block;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    @include mQ(390px) {
-      width: 100%;
-      font-size: $InfoFont;
-    }
-  }
 
   .uploadedCV {
     @include flexBet;
@@ -204,5 +195,18 @@
         }
       }
     }
+  }
+}
+.name {
+  display: inline-block;
+  margin-right: 1rem;
+  margin: 0 1rem;
+  margin-bottom: 1rem;
+  @include mQ(645px) {
+    width: 97%;
+  }
+  @include mQ(390px) {
+    width: 90%;
+    font-size: $InfoFont;
   }
 }

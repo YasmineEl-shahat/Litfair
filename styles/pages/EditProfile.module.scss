@@ -1,6 +1,56 @@
 @import "../abstracts/variables.scss";
 @import "../abstracts/mixins.scss";
+
+.main {
+  @include flexCenter;
+
+  align-items: flex-start;
+
+  @include mQ(991.9px) {
+    margin: 0rem 10rem;
+  }
+
+  @include mQ(880px) {
+    flex-wrap: wrap;
+    margin: 0;
+  }
+}
 .info {
-  display: inline-block;
   @include cardBorder;
+  padding: 1rem;
+  color: $VDarkGray;
+  margin-left: 2rem;
+  margin-bottom: 10rem;
+  font-weight: 700;
+  flex-shrink: 0;
+
+  @include mQ(880px) {
+    margin: 0 2rem;
+    margin-bottom: 10rem;
+  }
+  @include mQ(645px) {
+    flex-shrink: 1;
+    input {
+      width: 100%;
+    }
+  }
+  .form-select {
+    color: $VDarkGray;
+  }
+  input,
+  textarea {
+    background: $editLightGray;
+    border: none;
+  }
+  .txtar {
+    display: block;
+  }
+  textarea {
+    width: 100%;
+  }
+
+  button[type="submit"] {
+    margin-right: 1rem;
+    margin-top: 2rem;
+  }
 }
