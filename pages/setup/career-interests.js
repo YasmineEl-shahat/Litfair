@@ -10,7 +10,7 @@ import {
   loadJobCategories,
 } from "../../functions/Api/loadOptions";
 import AuthContext from "../../context/AuthContext";
-
+import Spinner from "../../comps/Spinner";
 const baseUrl = process.env.API_URL;
 
 export const getStaticProps = async () => {
@@ -22,10 +22,6 @@ export const getStaticProps = async () => {
   };
 };
 const Career = (job) => {
-  //hooks
-  const { auth } = useContext(AuthContext);
-  const router = useRouter();
-
   // variables
   const jobConfig = job.job;
 
@@ -35,10 +31,34 @@ const Career = (job) => {
   const [jobTitles, setJobTitles] = useState([]);
   const [jobCategories, setJobCategories] = useState([]);
   const [currentState, setCurrentState] = useState("");
+  const [loading, setLoading] = useState(true);
   const [submitting, setSubsubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  useEffect(() => {
+  //hooks
+  const { auth, user } = useContext(AuthContext);
+  const router = useRouter();
+  useEffect(async () => {
+    const user_id = user.id;
+    //waiting for api response
+    const res = await fetch(baseUrl + "seeker/details/view/" + user_id);
+    const { career_lvl, jobType, jobCategory, jobTitle, currentState } =
+      await res.json();
+    const jobCategory_ = jobCategory.map((cat) => ({
+      label: cat.jobCategories,
+      value: cat._id,
+    }));
+    const jobTitle_ = jobTitle.map((title) => ({
+      label: title["job title"],
+      value: title._id,
+    }));
+    setCareer_lvl(career_lvl);
+    setJobType(jobType);
+    setJobTitles(jobTitle_);
+    setJobCategories(jobCategory_);
+    setCurrentState(currentState);
+    if (loading) setLoading(false);
+
     //level list interact
     const levelList = document.querySelectorAll("#level > li");
 
@@ -83,7 +103,7 @@ const Career = (job) => {
 
       //customize state to be sent in body
       const jobTitle = jobTitles.map((title) => title.value);
-      const jobCategory = jobCategories.map((title) => title.value);
+      const jobCategory = jobCategories.map((cat) => cat.value);
 
       //waiting for api response
       let response = await fetch(baseUrl + "seeker/details/update", {
@@ -162,91 +182,115 @@ const Career = (job) => {
         </section>
         {/* End Head Section */}
         {/* Content Section */}
-        <form onSubmit={(e) => submit(e)}>
-          <article className={style.content}>
-            <span>What is your current career level?</span>
-            <ul id="level">
-              {Object.keys(jobConfig.experience_type).map((key, index) => (
-                <li
-                  onClick={() => {
-                    setCareer_lvl(jobConfig.experience_type[key]);
-                  }}
-                  key={key}
-                >
-                  {jobConfig.experience_type[key]}
-                </li>
-              ))}
-            </ul>
-          </article>
-          <article className={style.content}>
-            <span>What type(s) of jobs are you open to?</span>
-            <ul className="job-type">
-              {Object.keys(jobConfig.job_type).map((key, index) => (
-                <li
-                  key={key}
-                  onClick={() => {
-                    const current = jobType.find(
-                      (type) => type === jobConfig.job_type[key]
-                    );
-                    if (!current)
-                      setJobType([...jobType, jobConfig.job_type[key]]);
-                    else {
-                      setJobType(
-                        jobType.filter((job) => job !== jobConfig.job_type[key])
-                      );
+        {loading ? (
+          <Spinner />
+        ) : (
+          <form onSubmit={(e) => submit(e)}>
+            <article className={style.content}>
+              <span>What is your current career level?</span>
+              <ul id="level">
+                {Object.keys(jobConfig.experience_type).map((key, index) => (
+                  <li
+                    className={
+                      jobConfig.experience_type[key] === career_lvl
+                        ? style.selected
+                        : ""
                     }
-                  }}
-                >
-                  {jobConfig.job_type[key]} <i className="fa-solid fa-plus"></i>
-                </li>
-              ))}
-            </ul>
-          </article>
-          <article className={style.content}>
-            <span>
-              What are the job titles that describe what are looking for?
-            </span>
-            <AsyncPaginate
-              className="text--career "
-              value={jobTitles}
-              placeholder="Ex. Developer"
-              loadOptions={loadJobTitles}
-              isMulti
-              onChange={setJobTitles}
-              closeMenuOnSelect={false}
-            />
-          </article>
-          <article className={style.content}>
-            <span>What job categories are you interested in?</span>
-            <AsyncPaginate
-              className="text--career "
-              value={jobCategories}
-              placeholder="Select..."
-              loadOptions={loadJobCategories}
-              isMulti
-              onChange={setJobCategories}
-              closeMenuOnSelect={false}
-            />
-          </article>
-          <article className={style.content}>
-            <span>What is your current job search status? </span>
-            <select
-              onChange={(e) => setCurrentState(e.target.value)}
-              className="txt text--career form-select"
-            >
-              <option value="">Select ...</option>
-              {Object.keys(jobConfig.job_status).map((key, index) => (
-                <option value={jobConfig.job_status[key]} key={key}>
-                  {jobConfig.job_status[key]}
-                </option>
-              ))}
-            </select>
-          </article>
-          <span className="invalid cancel--onb">{error}</span>
-          <button className="btn--global btn--blue  btn--onb" type="submit">
-            {submitting ? "Saving..." : "Save and Continue"}
-          </button>
-        </form>
+                    onClick={() => {
+                      setCareer_lvl(jobConfig.experience_type[key]);
+                    }}
+                    key={key}
+                  >
+                    {jobConfig.experience_type[key]}
+                  </li>
+                ))}
+              </ul>
+            </article>
+            <article className={style.content}>
+              <span>What type(s) of jobs are you open to?</span>
+              <ul className="job-type">
+                {Object.keys(jobConfig.job_type).map((key, index) => (
+                  <li
+                    className={
+                      jobType.includes(jobConfig.job_type[key])
+                        ? style.selected
+                        : ""
+                    }
+                    key={key}
+                    onClick={() => {
+                      const current = jobType.find(
+                        (type) => type === jobConfig.job_type[key]
+                      );
+                      if (!current)
+                        setJobType([...jobType, jobConfig.job_type[key]]);
+                      else {
+                        setJobType(
+                          jobType.filter(
+                            (job) => job !== jobConfig.job_type[key]
+                          )
+                        );
+                      }
+                    }}
+                  >
+                    {jobConfig.job_type[key]}{" "}
+                    <i
+                      className={
+                        jobType.includes(jobConfig.job_type[key])
+                          ? "fa-solid fa-check"
+                          : "fa-solid fa-plus"
+                      }
+                    ></i>
+                  </li>
+                ))}
+              </ul>
+            </article>
+            <article className={style.content}>
+              <span>
+                What are the job titles that describe what are looking for?
+              </span>
+              <AsyncPaginate
+                className="text--career "
+                value={jobTitles}
+                placeholder="Ex. Developer"
+                loadOptions={loadJobTitles}
+                isMulti
+                onChange={setJobTitles}
+                closeMenuOnSelect={false}
+              />
+            </article>
+            <article className={style.content}>
+              <span>What job categories are you interested in?</span>
+              <AsyncPaginate
+                className="text--career "
+                value={jobCategories}
+                placeholder="Select..."
+                loadOptions={loadJobCategories}
+                isMulti
+                onChange={setJobCategories}
+                closeMenuOnSelect={false}
+              />
+            </article>
+            <article className={style.content}>
+              <span>What is your current job search status? </span>
+              <select
+                value={currentState}
+                onChange={(e) => setCurrentState(e.target.value)}
+                className="txt text--career form-select"
+              >
+                <option value="">Select ...</option>
+                {Object.keys(jobConfig.job_status).map((key, index) => (
+                  <option value={jobConfig.job_status[key]} key={key}>
+                    {jobConfig.job_status[key]}
+                  </option>
+                ))}
+              </select>
+            </article>
+            <span className="invalid cancel--onb">{error}</span>
+            <button className="btn--global btn--blue  btn--onb" type="submit">
+              {submitting ? "Saving..." : "Save and Continue"}
+            </button>
+          </form>
+        )}
         {/* End Content Section */}
       </main>
     </>

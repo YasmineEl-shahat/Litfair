@@ -154,7 +154,11 @@
   }
   ul {
     @include grid(0.5rem, 18em, 5em);
-    margin: auto -2rem;
+    padding-left: 0;
+    @include mQ(390px) {
+      @include flexCenter;
+      flex-direction: column;
+    }
     li {
       @include flexCenter;
       padding: 0.5rem;

@@ -33,7 +33,7 @@ const GInfo = (countries) => {
   const [nationality, setNationality] = useState("");
   const [gender, setGender] = useState("");
   const [phone_number, setPhone_number] = useState("");
-  const [submitting, setSubsubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -63,9 +63,11 @@ const GInfo = (countries) => {
           setLoading(false);
           if (res.date_of_birth) {
             const y = res.date_of_birth.slice(0, 4);
-
+            setYear(y);
             const m = res.date_of_birth.slice(5, 7);
+            setMonth(m);
             const d = res.date_of_birth.slice(8, 10);
+            setDay(d);
             birth(y, Number(m), Number(d));
           } else birth();
         }
@@ -100,7 +102,7 @@ const GInfo = (countries) => {
     //prevent page from reloading
     e.preventDefault();
     // change the submit button state
-    setSubsubmitting(true);
+    setSubmitting(true);
     if (
       !day ||
       !month ||
@@ -114,7 +116,7 @@ const GInfo = (countries) => {
       !phone_number
     ) {
       setError("Fill the required fields!");
-      setSubsubmitting(false);
+      setSubmitting(false);
       return;
     }
     if (!validatePhone()) {
@@ -146,7 +148,7 @@ const GInfo = (countries) => {
       // handle response's different status
       .then(async (response) => {
         if (response.ok) {
-          setSubsubmitting(false);
+          setSubmitting(false);
           router.push("/setup/professional-info");
         }
         if (response.status === 400) {
@@ -160,7 +162,7 @@ const GInfo = (countries) => {
         }
       })
       .catch((e) => {
-        setSubsubmitting(false);
+        setSubmitting(false);
         setError(e.toString());
       });
   };

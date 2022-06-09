@@ -23,7 +23,6 @@
   margin-bottom: 10rem;
   font-weight: 700;
   flex-shrink: 0;
-
   @include mQ(880px) {
     margin: 0 2rem;
     margin-bottom: 10rem;
@@ -51,10 +50,76 @@
   label {
     span {
       font-size: 1rem;
+      margin-left: 0;
     }
   }
-  button[type="submit"] {
+  span {
+    margin-left: 1.5rem;
+  }
+  button {
     margin-right: 1rem;
     margin-top: 2rem;
+  }
+  .btnExp {
+    margin-top: 28rem;
+  }
+
+  p {
+    &:not(:first-of-type) {
+      margin-top: 3rem;
+    }
+    font-size: $SHeadFont;
+    line-height: $InfoLineSpacing;
+    font-weight: 600;
+    color: $VDarkGray;
+    @include mQ(450px) {
+      font-size: $InfoFont;
+    }
+  }
+  ul {
+    @include grid(0.5rem, 15em, 5em);
+    padding-left: 0;
+    @include mQ(390px) {
+      @include flexCenter;
+      flex-direction: column;
+    }
+    li {
+      @include flexCenter;
+      padding: 0.5rem;
+      font-size: $InfoFont;
+      color: $VDarkGray;
+      background: $VLightGray;
+      border: 1px solid $LightGray;
+      border-radius: 3px;
+      opacity: 1;
+      cursor: pointer;
+      i {
+        margin-left: 1rem;
+      }
+      @include mQ(390px) {
+        width: 90%;
+      }
+    }
+  }
+  .selected {
+    color: $BlueGlobal;
+    background: #e6efff;
+    border: 1px solid $BlueGlobal;
+  }
+  select {
+    margin-bottom: 3rem;
+  }
+}
+
+.car {
+  width: 45%;
+  @include mQ(1230px) {
+    width: 60%;
+  }
+  @include mQ(991.9px) {
+    width: 80%;
+  }
+  @include mQ(475px) {
+    width: 90%;
   }
 }

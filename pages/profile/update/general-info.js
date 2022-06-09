@@ -16,25 +16,26 @@ export const getStaticProps = async () => {
   const countries = await res.json();
 
   return {
-    props: { countries: countries },
+    props: { countries },
   };
 };
 
-const GeneralInfo = (countries) => {
+const GeneralInfo = ({ countries }) => {
   //state
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [phone_number, setPhone_number] = useState("");
+  const [description, setDescription] = useState();
   const [cities, setCities] = useState([]);
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
-  const [submitting, setSubsubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
 
   // variables
-  const country_list = countries.countries;
+  const country_list = countries;
   //helper Fun
   const changeCities = async (country) => {
     const res = await fetch(baseUrl + "location/cities?country=" + country);
@@ -82,10 +83,93 @@ const GeneralInfo = (countries) => {
         }
       })
       .catch((e) => {
-        console.log(e);
+        setError(e.toString());
       });
+
+    const user_id = user.id;
+    const resDes = await fetch(baseUrl + "seeker/details/view/" + user_id);
+    const { description } = await resDes.json();
+    setDescription(description);
   }, []);
 
+  const submit = async (e) => {
+    //prevent page from reloading
+    e.preventDefault();
+    // change the submit button state
+    setSubmitting(true);
+    if (
+      !fname ||
+      !lname ||
+      !country ||
+      !city ||
+      !phone_number ||
+      !description
+    ) {
+      setError("Fill the required fields!");
+      setSubmitting(false);
+      return;
+    }
+    if (!validatePhone()) {
+      setError("Invalid phone");
+      return;
+    }
+    //customize state to be sent in body
+    setError("");
+
+    //waiting for api response
+    let response = await fetch(baseUrl + "seeker/profile/update", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + " " + auth,
+      },
+      body: JSON.stringify({
+        fname,
+        lname,
+        country,
+        city,
+        phone_number,
+      }),
+    })
+      // handle response's different status
+      .then(async (response) => {
+        if (response.ok) {
+          await fetch(baseUrl + "seeker/details/update", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer" + " " + auth,
+            },
+            body: JSON.stringify({
+              description,
+            }),
+          })
+            .then((res) => {
+              if (response.ok) {
+                setSubmitting(false);
+                router.push("/");
+              }
+            })
+            .catch((e) => {
+              setSubmitting(false);
+              setError(e.toString());
+            });
+        }
+        if (response.status === 400) {
+          // So, a server-side validation error occurred.
+          // Server side validation returns a string error message, so parse as text instead of json.
+          const error = response.text();
+          throw new Error(error);
+        }
+        if (response.status === 502) {
+          throw new Error("Network response was not ok.");
+        }
+      })
+      .catch((e) => {
+        setSubmitting(false);
+        setError(e.toString());
+      });
+  };
   return (
     <main className={` ${style.main}`}>
       <EditProfileSideBar />
@@ -203,6 +287,7 @@ const GeneralInfo = (countries) => {
                 </datalist>
               </div>
             </section>
+            <span className="invalid cancel--onb">{error}</span>
             <button className=" btn--global btn--blue  btn--onb" type="submit">
               {submitting ? "Saving..." : "Save Changes"}
             </button>
