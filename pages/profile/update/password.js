@@ -1,9 +1,14 @@
 import Layout from "../../../comps/layout";
 import EditProfileSideBar from "../../../comps/EditProfileSideBar";
+import carStyle from "../../../styles/pages/Career.module.scss";
 import style from "../../../styles/pages/EditProfile.module.scss";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 import { backgroundSelect } from "../../../functions/backgroundSelect";
+import { changeIcon } from "../../../functions/changePasswordIcon";
 const Password = () => {
+  //state
+  const [submitting, setSubmitting] = useState(false);
+
   useLayoutEffect(() => {
     backgroundSelect("passSide");
   }, []);
@@ -11,7 +16,66 @@ const Password = () => {
     <>
       <main className={` ${style.main}`}>
         <EditProfileSideBar />
-        <section className={style.info}></section>
+        <section className={style.info}>
+          <section>
+            <div className={carStyle.name}>
+              <label className="label--global" htmlFor="curpass">
+                Current Password
+              </label>
+              <div className={style.passContainer}>
+                <input
+                  className="txt text--big"
+                  type="password"
+                  name="curpass"
+                  value="lol"
+                  disabled
+                />
+                <i
+                  onClick={(e) => {
+                    changeIcon(e);
+                  }}
+                  className="fa-solid fa-eye-slash"
+                ></i>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div className={carStyle.name}>
+              <label className="label--global" htmlFor="npass">
+                New Password
+              </label>
+              <div className={style.passContainer}>
+                <input className="txt text--big" type="password" name="npass" />
+                <i
+                  onClick={(e) => {
+                    changeIcon(e);
+                  }}
+                  className="fa-solid fa-eye-slash"
+                ></i>
+              </div>
+            </div>
+            <div className={carStyle.name}>
+              <label className="label--global" htmlFor="cpass">
+                Confirm Password
+              </label>
+              <div className={style.passContainer}>
+                <input className="txt text--big" type="password" name="cpass" />
+                <i
+                  onClick={(e) => {
+                    changeIcon(e);
+                  }}
+                  className="fa-solid fa-eye-slash"
+                ></i>
+              </div>
+            </div>
+          </section>
+          <button
+            className={`btn--global btn--blue  btn--onb ${style.btnExp}`}
+            type="submit"
+          >
+            {submitting ? "Saving..." : "update password"}
+          </button>
+        </section>
       </main>
     </>
   );

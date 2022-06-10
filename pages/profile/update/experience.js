@@ -29,8 +29,6 @@ const Experience = ({ job }) => {
   const [submitting, setSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [uploadPercentage, setUploadPercentage] = useState(0);
-  const [uploaded, setUploaded] = useState(true);
 
   //hooks
   const { auth, user } = useContext(AuthContext);

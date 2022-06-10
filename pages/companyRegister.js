@@ -1,9 +1,8 @@
 import style from "../styles/pages/companyRegister.module.scss";
-import { BsEyeSlash } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import Head from "next/Head";
-
+import { changeIcon } from "../functions/changePasswordIcon";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import React from "react";
@@ -170,17 +169,10 @@ const CompanyRegister = () => {
                 />
                 <i
                   onClick={(e) => {
-                    const pass =
-                      e.target.parentElement.parentElement.firstChild;
-                    pass.type == "password"
-                      ? (pass.type = "text")
-                      : (pass.type = "password");
+                    changeIcon(e);
                   }}
-                  className={style.passwordIcon}
-                >
-                  {" "}
-                  <BsEyeSlash />
-                </i>
+                  className={`${style.passwordIcon} fa-solid fa-eye-slash`}
+                ></i>
               </div>
               <div className="invalid">
                 {errors.password ? errors.password : ""}
