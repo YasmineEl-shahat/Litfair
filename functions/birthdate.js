@@ -2,9 +2,9 @@ import $ from "jquery";
 
 var Days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // index => month [0-11]
 
-export const birth = () => {
+export const birth = (selectedYear, selectedMon, selectedDay) => {
   var option = '<option value="day">day</option>';
-  var selectedDay = "day";
+  if (!selectedDay) selectedDay = "day";
   for (var i = 1; i <= Days[0]; i++) {
     //add option days
     option += '<option value="' + i + '">' + i + "</option>";
@@ -13,24 +13,16 @@ export const birth = () => {
   $("#day").val(selectedDay);
 
   var option = '<option value="month">month</option>';
-  var selectedMon = "month";
+  if (!selectedMon) selectedMon = "month";
   for (var i = 1; i <= 12; i++) {
     option += '<option value="' + i + '">' + i + "</option>";
   }
   $("#month").append(option);
   $("#month").val(selectedMon);
 
-  var option = '<option value="month">month</option>';
-  var selectedMon = "month";
-  for (var i = 1; i <= 12; i++) {
-    option += '<option value="' + i + '">' + i + "</option>";
-  }
-  $("#month2").append(option);
-  $("#month2").val(selectedMon);
-
   var d = new Date();
   var option = '<option value="year">year</option>';
-  var selectedYear = "year";
+  if (!selectedYear) selectedYear = "year";
   for (var i = d.getFullYear() - 10; i >= 1930; i--) {
     // years start i
     option += '<option value="' + i + '">' + i + "</option>";

@@ -48,7 +48,7 @@ const PInfo = (job) => {
   const [date, setDate] = useState("");
   const [grade, setGrade] = useState("");
   const [skills, setSkills] = useState([]);
-  const [submitting, setSubsubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [uploaded, setUploaded] = useState(false);
@@ -132,7 +132,7 @@ const PInfo = (job) => {
     //prevent page from reloading
     e.preventDefault();
     // change the submit button state
-    setSubsubmitting(true);
+    setSubmitting(true);
     if (
       !experience_lvl ||
       !degree ||
@@ -143,7 +143,7 @@ const PInfo = (job) => {
       !skills.length
     ) {
       setError("Fill the required fields!");
-      setSubsubmitting(false);
+      setSubmitting(false);
     } else {
       setError("");
 
@@ -168,8 +168,8 @@ const PInfo = (job) => {
         .then(async (response) => {
           console.log(response);
           if (response.ok) {
-            setSubsubmitting(false);
-            router.push("/");
+            setSubmitting(false);
+            router.replace("/");
           }
           if (response.status === 400) {
             // So, a server-side validation error occurred.
@@ -182,7 +182,7 @@ const PInfo = (job) => {
           }
         })
         .catch((e) => {
-          setSubsubmitting(false);
+          setSubmitting(false);
           setError(e.toString());
         });
     }
@@ -352,14 +352,7 @@ const PInfo = (job) => {
             >
               back
             </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                router.push("/");
-              }}
-              className=" btn--global btn--blue  btn--onb"
-              type="submit"
-            >
+            <button className=" btn--global btn--blue  btn--onb" type="submit">
               {submitting ? "Saving..." : "Let's Start"}
             </button>
           </div>

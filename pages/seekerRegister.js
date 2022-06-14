@@ -1,17 +1,14 @@
 import style from "../styles/pages/companyRegister.module.scss";
-import { BsEyeSlash } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import Head from "next/Head";
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { useState } from "react";
-import cookieCutter from "cookie-cutter";
+
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
-
+import { changeIcon } from "../functions/changePasswordIcon";
 const baseUrl = process.env.API_URL;
 const SeekerRegister = () => {
   //extract context data
@@ -204,17 +201,10 @@ const SeekerRegister = () => {
                 </div>
                 <i
                   onClick={(e) => {
-                    const pass =
-                      e.target.parentElement.parentElement.firstChild;
-                    pass.type == "password"
-                      ? (pass.type = "text")
-                      : (pass.type = "password");
+                    changeIcon(e);
                   }}
-                  className={style.passwordIcon}
-                >
-                  {" "}
-                  <BsEyeSlash />
-                </i>
+                  className={`${style.passwordIcon} fa-solid fa-eye-slash`}
+                ></i>
               </div>
 
               <div className={style.textField}>
@@ -234,18 +224,11 @@ const SeekerRegister = () => {
                   {errors.confirmPassword?.message}
                 </div>
                 <i
-                  className={style.passwordIcon}
                   onClick={(e) => {
-                    const pass =
-                      e.target.parentElement.parentElement.firstChild;
-                    pass.type == "password"
-                      ? (pass.type = "text")
-                      : (pass.type = "password");
+                    changeIcon(e);
                   }}
-                >
-                  {" "}
-                  <BsEyeSlash />
-                </i>
+                  className={`${style.passwordIcon} fa-solid fa-eye-slash`}
+                ></i>
               </div>
 
               <div className={style.forget}>

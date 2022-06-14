@@ -9,7 +9,7 @@ const CV = () => {
   }, []);
   return (
     <>
-      <main className="container">
+      <main className={` ${style.main}`}>
         <EditProfileSideBar />
         <section className={style.info}></section>
       </main>

@@ -18,10 +18,11 @@ const LiveInterview = () => {
 
   //variables
   const questions = [
-    "introduce your self",
-    "Tell me about a time when you demonstrated leadership",
-    "Tell me about a time when you were working with a team and faced a challenge. How did you overcome the problem?",
+    "Introduce your self",
+    "Talk about a time when you demonstrated leadership",
+    "Talk about a time when you were working with a team and faced a challenge. How did you overcome the problem?",
     "What is one of your weaknesses and how do you plan to overcome it?",
+    "Why do you think you worth hiring?",
   ];
 
   //convert blob stream to video to be sent to the server

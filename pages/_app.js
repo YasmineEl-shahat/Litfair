@@ -6,6 +6,8 @@ import "../styles/Layout/SeekerNavbar.scss";
 
 import "../styles/components/label.scss";
 import "../styles/components/textInput.scss";
+import "../styles/components/spinner.scss";
+
 import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
