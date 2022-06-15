@@ -1,14 +1,15 @@
 import AuthContext from "../context/AuthContext";
 import { useContext, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+
 import Spinner from "../comps/Spinner";
 import Jobs from "../comps/jobs";
+import SurePop from "../comps/SurePop";
 const baseUrl = process.env.API_URL;
 
 const SeekerHome = () => {
   //state
   const { auth } = useContext(AuthContext);
-  const router = useRouter();
+
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
 
@@ -27,6 +28,22 @@ const SeekerHome = () => {
   useEffect(() => {
     getData();
   }, []);
-  return <>{loading ? <Spinner /> : <Jobs posts={posts} />}</>;
+
+  return (
+    <>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <Jobs posts={posts} />
+          <SurePop
+            header="Apply for job"
+            content="Are you sure you want to apply to this job?"
+            submit="Apply"
+          />
+        </>
+      )}
+    </>
+  );
 };
 export default SeekerHome;

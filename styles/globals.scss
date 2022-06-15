@@ -2,7 +2,14 @@
 @import "./abstracts/variables.scss";
 @import "./abstracts/mixins.scss";
 @import "./components/video.scss";
-
+@import "./components/popups.scss";
+@import "./components/label.scss";
+@import "./components/textInput.scss";
+@import "./components/spinner.scss";
+@import "./Layout/Navbar.scss";
+@import "./Layout/Footer.scss";
+@import "./Layout/EditProfileSide.scss";
+@import "./Layout/SeekerNavbar.scss";
 * {
   box-sizing: border-box;
   text-decoration: none;
@@ -107,6 +114,44 @@ html {
         background-color: $BlueGlobal;
         color: $WhiteGlobal;
       }
+    }
+
+    .invisible {
+      display: none;
+    }
+    .cvFile {
+      @include mQ(1900px, 550px) {
+        max-width: 30rem;
+      }
+      max-width: 19rem;
+      max-height: 3.5rem;
+      overflow: hidden;
+      position: relative;
+      top: 1.4rem;
+      padding: 1rem;
+      padding-right: 3rem;
+      background: #c6c6c633;
+      display: inline-block;
+      cursor: pointer;
+      @include mQ(318px) {
+        max-width: 15rem;
+        padding-right: 0rem;
+      }
+      i {
+        font-size: $InfoFont;
+        margin-right: 0.5rem;
+        color: $BlueGlobal;
+        vertical-align: middle;
+      }
+    }
+    .cvFile + i {
+      color: $vidGray;
+      vertical-align: middle;
+      background: #c6c6c633;
+      padding: 1rem;
+      font-size: $InfoFont;
+      cursor: pointer;
+      margin-right: 2rem;
     }
   }
 }
