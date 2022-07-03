@@ -1,7 +1,7 @@
 import { hideElement } from "../../functions/hideElement";
 const SurePop = ({ content, submit, handler, header }) => {
   return (
-    <div id="sure" className="popOverlay ">
+    <div id="sure" className="popOverlay invisible">
       <div className="pop popApply">
         <h4>{header}</h4>
         <hr />

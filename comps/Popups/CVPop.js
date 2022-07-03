@@ -25,11 +25,11 @@ const CVPop = ({ header, name, submit, handler, uploadCV, link }) => {
         {name ? (
           <div>
             <div onClick={ToCV} className="cvFile">
-              <i className="fa-solid fa-file-lines"></i> {name}.pdf
+              <i className="fa-solid fa-file-lines"></i> {name}
             </div>
 
             <input type="file" id="cv" onChange={uploadCV} />
-            <label htmlFor="cv">
+            <label htmlFor="cv" id="cvl">
               <i className="fa-solid fa-arrow-up-from-bracket"></i>Upload
               another File
             </label>
@@ -37,16 +37,16 @@ const CVPop = ({ header, name, submit, handler, uploadCV, link }) => {
         ) : (
           <>
             <input type="file" id="cv" onChange={uploadCV} />
-            <label htmlFor="cv">
+            <label htmlFor="cv" id="cvl">
               <i className="fa-solid fa-arrow-up-from-bracket"></i>Upload CV
             </label>
           </>
         )}
         <div className="btn--popWrap">
           <button
-            onClick={async (e) => await handler(e, "apply_btn", "sure")}
+            onClick={async (e) => await handler(e, "cv_btn", "CVpop")}
             className="btn--global btn--blue btn--detail"
-            id="apply_btn"
+            id="cv_btn"
             type="submit"
           >
             {submit}
