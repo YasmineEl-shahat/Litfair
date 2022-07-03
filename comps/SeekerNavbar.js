@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import {VscMenu} from 'react-icons/vsc';
+
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-const baseUrl = process.env.API_URL + "/jobTitle/search";
+const baseUrl = process.env.API_URL + "jobTitle/search";
 
 const SeekerNavbar = () => {
   const [search, setSearch] = useState("");

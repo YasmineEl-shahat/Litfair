@@ -4,14 +4,11 @@ import { useRouter } from "next/router";
 import { useEffect, useState, useContext } from "react";
 import { AsyncPaginate } from "react-select-async-paginate";
 
-import axios from "axios";
-import $ from "jquery";
-
 import style from "../../styles/pages/Career.module.scss";
-import { ProgressBar } from "react-bootstrap";
 
 import { loadSkills } from "../../functions/Api/loadOptions";
 import AuthContext from "../../context/AuthContext";
+import CVComp from "../../comps/CV";
 
 const baseUrl = process.env.API_URL;
 export const getStaticProps = async () => {
@@ -50,8 +47,7 @@ const PInfo = (job) => {
   const [skills, setSkills] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const [uploadPercentage, setUploadPercentage] = useState(0);
-  const [uploaded, setUploaded] = useState(false);
+
   //fill graduation year
   for (let i = dateNow.getFullYear() + 7; i >= 1950; i--) {
     // years start i
@@ -78,55 +74,6 @@ const PInfo = (job) => {
   }, []);
 
   //submittion
-
-  const uploadCV = ({ target: { files } }) => {
-    let data = new FormData();
-    data.append("cv", files[0]);
-    const options = {
-      headers: {
-        Authorization: "Bearer" + " " + auth,
-        "Content-Type": "multipart/form-data",
-      },
-      onUploadProgress: (progressEvent) => {
-        const { loaded, total } = progressEvent;
-
-        let percent = Math.floor((loaded * 100) / total);
-
-        if (percent < 100) {
-          setUploadPercentage(percent);
-        }
-      },
-    };
-
-    axios
-      .post(baseUrl + "seeker/details/CV", data, options)
-      .then((res) => {
-        // setTimeout(() => {
-        setUploadPercentage(100);
-
-        setTimeout(() => {
-          setUploadPercentage(0);
-          setUploaded(true);
-        }, 1000);
-        // }, 1000);
-      })
-      .catch((err) => {
-        setUploadPercentage(0);
-      });
-  };
-
-  const deleteCV = () => {
-    const options = { headers: { Authorization: "Bearer" + " " + auth } };
-    axios
-      .delete(baseUrl + "seeker/details/CV/delete/", options)
-      .then((res) => {
-        setUploaded(false);
-        document.getElementById("cv").value = "";
-      })
-      .catch((err) => {
-        setUploaded(true);
-      });
-  };
 
   const submit = async (e) => {
     //prevent page from reloading
@@ -313,32 +260,7 @@ const PInfo = (job) => {
           </article>
           <article className={style.content}>
             <span>Upload Your CV </span>
-            {uploaded ? (
-              <div className={style.uploadedCV}>
-                <p>
-                  <i className="fa-solid fa-file"></i> Uploaded
-                </p>
-                <div>
-                  <p className="btn">Review</p>
-                  <p onClick={deleteCV} className="btn">
-                    Delete
-                  </p>
-                </div>
-              </div>
-            ) : uploadPercentage > 0 ? (
-              <ProgressBar
-                now={uploadPercentage}
-                striped={true}
-                label={`${uploadPercentage}%`}
-              />
-            ) : (
-              <>
-                <input type="file" id="cv" onChange={uploadCV} />
-                <label htmlFor="cv">
-                  <i className="fa-solid fa-arrow-up-from-bracket"></i>Upload CV
-                </label>
-              </>
-            )}
+            <CVComp isOnboarding={true} />
           </article>
           <span className="invalid cancel--onb">{error}</span>
 

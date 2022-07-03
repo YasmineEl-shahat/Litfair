@@ -17,7 +17,7 @@
 }
 .info {
   @include cardBorder;
-  padding: 1rem;
+  padding: 1.5rem 3rem;
   color: $VDarkGray;
   margin-left: 2rem;
   margin-bottom: 10rem;
@@ -28,10 +28,14 @@
     margin-bottom: 10rem;
   }
   @include mQ(645px) {
+    padding: 0.5rem;
     flex-shrink: 1;
     input {
       width: 100%;
     }
+  }
+  @include mQ(529px) {
+    width: 90%;
   }
   .form-select {
     color: $VDarkGray;
@@ -55,6 +59,13 @@
   }
   span {
     margin-left: 1.5rem;
+  }
+  input[type="file"] + label {
+    font-weight: 100;
+    display: inline-block;
+    width: fit-content;
+    padding: 0.6rem 2rem;
+    margin-top: 1rem;
   }
   button {
     margin-right: 1rem;
@@ -144,5 +155,8 @@
   height: 50rem;
   @include mQ(2000px, 530px) {
     width: 50rem;
+  }
+  @include mQ(529px) {
+    width: 100%;
   }
 }
