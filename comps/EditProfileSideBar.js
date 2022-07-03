@@ -39,7 +39,7 @@ const EditProfileSideBar = () => {
             <div className={"icon"}>
               <i className="fa-solid fa-chart-column"></i>
             </div>
-            Career Inerestes
+            Career Inerests
           </div>
         </Link>
         <Link href="/profile/update/experience" passHref>

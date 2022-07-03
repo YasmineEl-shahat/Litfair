@@ -4,6 +4,7 @@ import { useState, useContext, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import style from "../styles/pages/Career.module.scss";
 const baseUrl = process.env.API_URL;
+
 const CVComp = ({ isOnboarding }) => {
   //state
   const [uploadPercentage, setUploadPercentage] = useState(0);
@@ -17,7 +18,7 @@ const CVComp = ({ isOnboarding }) => {
 
   const getData = async () => {
     const user_id = user.id;
-    //waiting for api response
+    // waiting for api response
     const res = await fetch(baseUrl + "seeker/details/view/" + user_id);
     const { CV } = await res.json();
     if (CV) {

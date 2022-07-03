@@ -64,6 +64,7 @@ const Jobs = ({ posts }) => {
                 <i className={style.bookmark}>
                   <BsBookmark />
                 </i>
+
                 <button
                   className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
                   type="submit"
