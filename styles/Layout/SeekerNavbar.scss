@@ -64,14 +64,88 @@
   margin: 0 1rem;
   border-radius: 50%;
   position: absolute;
-  border: 1.5px solid $VLightGray;
+  border: 1.5px solid $BlueGlobal;
+  overflow: hidden;
   @include mQ(991.9px) {
     margin-top: 1rem;
   }
+  
 }
-.menu {
-  width: 35px;
-  height: 5px;
-  background-color: black;
-  margin: 6px 0;
+.menuIcon {
+  vertical-align: middle;
+  width: 2rem;
+  height: 2rem;
+ // margin: 0 1rem;
+ background-color: $VLightGray;
+ top:2rem;
+ right:-4rem;
+  border-radius: 50%;
+  position: absolute;
+  border: 1.5px solid $VLightGray;
+  cursor: pointer;
+ 
+ 
+
+  
+ 
 }
+.action{
+  
+ // position: fixed;
+ // top: 20px;
+ // right: 30px;
+ // color: #fff;
+ 
+  // overflow : hidden;
+  // max-height: 0rem;
+  // &:hover {
+  // overflow: visible;
+  // max-height: 5rem;
+ 
+  // }
+ 
+}
+.action .photo{
+ // position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.action .menu{
+ 
+  position: absolute;
+  width: 200px;
+  box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+  border-radius: 15px;
+  transition: 0.5s;
+  &::before{
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 28px;
+    width: 20px;
+    height: 20px;
+    background: aqua;
+    transform: rotate(45deg);
+  }
+}
+.menu ul li{
+  list-style: none;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  @include flexCenter;
+
+}
+.action .menu .active{
+  visibility: visible;
+  opacity: 1;
+}
+.menu  {
+
+  box-shadow: 0px 0px 3px  rgba(0,0,0,0.25);
+ //display: flex;
+ position: absolute;
+ background-color: aqua;
+ top : 47px;
+ right: -25px;
+
+}
+
