@@ -74,7 +74,7 @@ const SeekerNavbar = () => {
           alt="pic"
         ></img>
         <i className="menuIcon"  > <VscMenu/> </i>
-        {/*<div className="menu" >
+       {/* <div className="menu" >
           <ul  >
             <li><i></i><Link href="/EditProfileSideBar">Edit Profile</Link></li>
             <li><i></i><Link href="">Help Center</Link></li>
@@ -85,7 +85,9 @@ const SeekerNavbar = () => {
             <li><i></i><Link href="">Log Out</Link></li>
           </ul>
 
-  </div>*/}
+  </div>
+
+  */}
         </div>
       </li>
     </ul>
