@@ -34,7 +34,7 @@ const SeekerHome = () => {
     });
     const { msg } = await res.json();
 
-    setPosts(msg);
+    setPosts(msg[0].current_data);
 
     setLoading(false);
   };
@@ -51,6 +51,12 @@ const SeekerHome = () => {
     btn.disabled = true;
   };
 
+  const EnableBtn = (id) => {
+    const btn = document.getElementById(id);
+    btn.style.background = "#5c46f9";
+    btn.style.cursor = "pointer";
+    btn.disabled = true;
+  };
   const ApplyHandler = async (e, btn_id, id) => {
     e.preventDefault();
     disableBtn(btn_id);
@@ -60,7 +66,7 @@ const SeekerHome = () => {
     const res = await fetch(baseUrl + "seeker/details/view/" + user_id);
     const { CV } = await res.json();
     if (CV) {
-      setCVName(CV.fileName.split("$")[0]);
+      setCVName(CV.fileName.split("$")[0] + ".pdf");
       setCv_url(CV.fileUrl);
     }
     hideElement(id);
@@ -69,6 +75,7 @@ const SeekerHome = () => {
 
   //  job details submittion
   const uploadCV = ({ target: { files } }) => {
+    disableBtn("cvl");
     let data = new FormData();
     data.append("file", files[0]);
     const options = {
@@ -81,10 +88,10 @@ const SeekerHome = () => {
     axios
       .post(baseUrl + "upload-file", data, options)
       .then((res) => {
-        const { msg } = res;
-        // setCVName(msg.fileName);
-        setCv_url(msg.fileUrl);
-        console.log(cv_url);
+        const { data } = res;
+        setCVName(data.msg.original_name);
+        setCv_url(data.msg.file_url);
+        EnableBtn("cvl");
       })
       .catch((err) => {
         console.log(err);
