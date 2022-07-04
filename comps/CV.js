@@ -12,6 +12,7 @@ const CVComp = ({ isOnboarding }) => {
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [link, setLink] = useState("");
+  const [error, setError] = useState("");
 
   //hooks
   const { auth, user } = useContext(AuthContext);
@@ -40,6 +41,11 @@ const CVComp = ({ isOnboarding }) => {
 
   //submittion
   const uploadCV = ({ target: { files } }) => {
+    const extension = files[0].name.split(".")[1];
+    if (extension !== "pdf") {
+      setError("Only pdf files are allowed!");
+      return;
+    }
     setUploaded(false);
 
     let data = new FormData();
@@ -64,7 +70,7 @@ const CVComp = ({ isOnboarding }) => {
       .post(baseUrl + "seeker/details/CV", data, options)
       .then((res) => {
         setUploadPercentage(100);
-
+        setError("");
         setTimeout(() => {
           setUploadPercentage(0);
           getData();
@@ -92,6 +98,7 @@ const CVComp = ({ isOnboarding }) => {
 
   return (
     <>
+      <h5 className="invalid ">{error}</h5>
       {uploaded ? (
         isOnboarding ? (
           <div className={style.uploadedCV}>

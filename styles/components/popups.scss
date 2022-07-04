@@ -39,8 +39,20 @@
         border: 1px solid $BlueGlobal;
       }
     }
+    .trackbtn {
+      padding: 0.2rem 1rem;
+    }
   }
-
+  .customCheck {
+    border: 5px solid #b4aff7;
+    width: 7rem;
+    margin: 2rem 0;
+  }
+  .successPar {
+    margin-bottom: -1rem;
+    color: black;
+    font-weight: 500;
+  }
   @include mQ(900px) {
     width: 70%;
   }
@@ -72,16 +84,19 @@
     width: 30%;
   }
 }
-
+.popSuc,
 .popScreen {
-  text-align: start;
-  padding: 1rem 2rem;
   @include mQ(1900px, 1250px) {
     width: 40%;
   }
   @include mQ(1249px, 900px) {
     width: 50%;
   }
+}
+.popScreen {
+  text-align: start;
+  padding: 1rem 2rem;
+
   i {
     cursor: pointer;
   }
@@ -98,6 +113,9 @@
       width: 50%;
       background-color: $BlueGlobal;
     }
+    .ProgressScreen {
+      width: 100%;
+    }
   }
   h6 {
     margin: 1rem 0;
@@ -107,10 +125,14 @@
     }
   }
   .btn--popWrap {
-    float: right;
     margin-right: 1rem;
     position: relative;
+    justify-content: end;
     bottom: 1rem;
+    flex-wrap: wrap-reverse;
+    .btn--cancel {
+      margin-right: 1rem;
+    }
   }
   .cvFile {
     font-size: 1rem;
@@ -122,5 +144,20 @@
     width: fit-content;
     padding: 1rem;
     margin-top: 2rem;
+  }
+  .questionSec {
+    display: block;
+    margin-bottom: 4rem;
+    margin-top: 2rem;
+    div {
+      width: 100%;
+      label {
+        font-weight: 100;
+        font-size: 1rem;
+      }
+      input {
+        width: 100%;
+      }
+    }
   }
 }

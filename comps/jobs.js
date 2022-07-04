@@ -3,6 +3,7 @@ import { BsBookmark } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import { SiMaterialdesignicons } from "react-icons/si";
 import style from "../styles/pages/SeekerHome.module.scss";
+import Link from "next/link";
 
 const Jobs = ({ posts }) => {
   return (
@@ -65,12 +66,14 @@ const Jobs = ({ posts }) => {
                   <BsBookmark />
                 </i>
 
-                <button
-                  className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
-                  type="submit"
-                >
-                  Details
-                </button>
+                <Link href={`/jobs/${post._id}`}>
+                  <button
+                    className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
+                    type="submit"
+                  >
+                    Details
+                  </button>
+                </Link>
               </div>
             </div>
           ))}

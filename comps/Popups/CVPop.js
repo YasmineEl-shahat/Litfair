@@ -1,6 +1,6 @@
 import { hideElement } from "../../functions/hideElement";
 
-const CVPop = ({ header, name, submit, handler, uploadCV, link }) => {
+const CVPop = ({ header, name, submit, handler, uploadCV, link, error }) => {
   //functions
   const ToCV = () => {
     window.open(link, "_blank");
@@ -22,6 +22,8 @@ const CVPop = ({ header, name, submit, handler, uploadCV, link }) => {
         </div>
         <h6>Resume</h6>
         <h6>Be sure to include an updated resume*</h6>
+        <h6 className="invalid ">{error}</h6>
+
         {name ? (
           <div>
             <div onClick={ToCV} className="cvFile">
