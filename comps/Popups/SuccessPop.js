@@ -1,8 +1,9 @@
 import { hideElement } from "../../functions/hideElement";
 import style from "../../styles/pages/login.module.scss";
+import Link from "next/link";
 import { BsCheck2 } from "react-icons/bs";
 
-const SuccessPop = ({ header, content, submit }) => {
+const SuccessPop = ({ header, content, submit, application_id }) => {
   return (
     <div id="successPop" className="popOverlay invisible">
       <div className="pop popSuc">
@@ -18,12 +19,14 @@ const SuccessPop = ({ header, content, submit }) => {
         <p className="successPar">{content}</p>
         {submit && (
           <div className="btn--popWrap">
-            <button
-              onClick={() => hideElement("successPop")}
-              className="btn--global btn--blue btn--detail trackbtn"
-            >
-              {submit}
-            </button>
+            <Link href={`/applications/${application_id}/`} passHref>
+              <button
+                onClick={() => hideElement("successPop")}
+                className="btn--global btn--blue btn--detail trackbtn"
+              >
+                {submit}
+              </button>
+            </Link>
           </div>
         )}
       </div>

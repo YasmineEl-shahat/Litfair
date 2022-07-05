@@ -210,6 +210,7 @@ const SeekerHome = () => {
           <SuccessPop
             content="Your application was sent to LitFair!"
             submit="Track Application"
+            application_id={application_id}
           />
         </>
       )}

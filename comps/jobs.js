@@ -2,10 +2,24 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { BsBookmark } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import { SiMaterialdesignicons } from "react-icons/si";
-import style from "../styles/pages/SeekerHome.module.scss";
+import { useEffect, useContext, useState } from "react";
 import Link from "next/link";
+import style from "../styles/pages/SeekerHome.module.scss";
+import AuthContext from "../context/AuthContext";
+
+const baseUrl = process.env.API_URL;
 
 const Jobs = ({ posts }) => {
+  const [appliedJobs, setAppliedJobs] = useState([]);
+  //hooks
+  const { user } = useContext(AuthContext);
+  useEffect(async () => {
+    const user_id = user.id;
+    //waiting for api response
+    const res = await fetch(baseUrl + "seeker/details/view/" + user_id);
+    const { appliedJobs } = await res.json();
+    setAppliedJobs(appliedJobs);
+  }, []);
   return (
     <>
       <div className={style.box}>
@@ -66,7 +80,13 @@ const Jobs = ({ posts }) => {
                   <BsBookmark />
                 </i>
 
-                <Link href={`/jobs/${post._id}`}>
+                <Link
+                  href={
+                    appliedJobs.includes(post._id)
+                      ? `/applications/62c36cfc9a87853f9499c2d2`
+                      : `/jobs/${post._id}`
+                  }
+                >
                   <button
                     className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
                     type="submit"
