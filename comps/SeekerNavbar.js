@@ -1,30 +1,13 @@
 import Link from "next/link";
 
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import AuthContext from "../context/AuthContext";
 const baseUrl = process.env.API_URL + "jobTitle/search";
 
 const SeekerNavbar = () => {
   //state
   const [search, setSearch] = useState("");
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
-  const [jobs, setJobs] = useState([]);
-
-  const getData = async () => {
-    const res = await fetch(baseUrl);
-    const { data } = await res.json();
-    setJobs(data);
-    setLoading(false);
-  };
-
-  //hooks
-  const { logoutUser } = useContext(AuthContext);
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   const searchChangeHandler = (e) => {
     setSearch(e.target.value);
@@ -38,18 +21,24 @@ const SeekerNavbar = () => {
   return (
     <ul className="navbar-nav ms-auto">
       <li className="nav-item">
-        <Link className="nav-link" href="" passHref>
-          <a className="bar ">Job Browser</a>
+        <Link className="nav-link" href="/" passHref>
+          <a className="bar " id="bar1">
+            Job Browser
+          </a>
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" href="" passHref>
-          <a className="bar">Saved</a>
+        <Link className="nav-link" href="/saved/" passHref>
+          <a className="bar" id="bar2">
+            Saved
+          </a>
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" href="" passHref>
-          <a className="bar">Applications</a>
+        <Link className="nav-link" href="/applications/" passHref>
+          <a className="bar" id="bar3">
+            Applications
+          </a>
         </Link>
       </li>
       <li className="nav-item searchParent">

@@ -11,6 +11,7 @@ import { showElement } from "../functions/showElement";
 import axios from "axios";
 import ScreenPop from "../comps/Popups/ScreenPop";
 import SuccessPop from "../comps/Popups/SuccessPop";
+import { ActivateBar } from "../functions/ActivateBar";
 
 const baseUrl = process.env.API_URL;
 
@@ -48,6 +49,7 @@ const SeekerHome = () => {
 
   useEffect(() => {
     getData();
+    ActivateBar("bar1");
   }, []);
 
   //  job details handlers
@@ -137,13 +139,16 @@ const SeekerHome = () => {
           hideElement(id);
           showElement("successPop");
         } else {
-          throw new Error("failed");
+          const res = await response.json();
+          const { msg } = await res;
+          setScreenError(msg);
+          EnableBtn(btn_id);
+          throw new Error(msg);
         }
       })
 
       .catch((e) => {
-        setScreenError("Submittion Failed!");
-        EnableBtn(btn_id);
+        console.log(e);
       });
   };
   //  job details submittion

@@ -31,6 +31,16 @@ body {
     }
   }
 
+  .barActive {
+    color: $BlueGlobal;
+    &::after {
+      width: 50%;
+      border-radius: 3px;
+      background: $BlueGlobal;
+      transition: 0.5s;
+    }
+  }
+
   .searching {
     display: inline-block;
     width: 30rem;

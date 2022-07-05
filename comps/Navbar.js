@@ -14,7 +14,7 @@ import {
   mdiForumOutline,
 } from "@mdi/js";
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logoutUser } = useContext(AuthContext);
 
   return (
     <>
