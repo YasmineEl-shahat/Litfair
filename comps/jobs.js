@@ -12,13 +12,17 @@ const baseUrl = process.env.API_URL;
 const Jobs = ({ posts }) => {
   const [appliedJobs, setAppliedJobs] = useState([]);
   //hooks
-  const { user } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
   useEffect(async () => {
-    const user_id = user.id;
     //waiting for api response
-    const res = await fetch(baseUrl + "seeker/details/view/" + user_id);
-    const { appliedJobs } = await res.json();
-    setAppliedJobs(appliedJobs);
+    const res = await fetch(baseUrl + "applications/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + " " + auth,
+      },
+    });
+    const { msg } = await res.json();
+    setAppliedJobs(msg);
   }, []);
   return (
     <>
@@ -82,8 +86,12 @@ const Jobs = ({ posts }) => {
 
                 <Link
                   href={
-                    appliedJobs.includes(post._id)
-                      ? `/applications/62c36cfc9a87853f9499c2d2`
+                    appliedJobs.find((job) => job.job_post[0]._id === post._id)
+                      ? `/applications/${
+                          appliedJobs.find(
+                            (job) => job.job_post[0]._id === post._id
+                          )._id
+                        }/`
                       : `/jobs/${post._id}`
                   }
                 >
