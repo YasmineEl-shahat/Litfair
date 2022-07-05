@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
     setAuth(null);
     setUser(null);
     if (typeof window !== "undefined") {
-      cookieCutter.set("auth", "", { expires: new Date(0) });
+      cookieCutter.set("auth", "", { expires: "01 Jan 1970 00:00:00 UTC" });
     }
 
     if (router.asPath !== "/") router.replace("/");

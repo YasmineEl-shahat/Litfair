@@ -38,8 +38,9 @@
   background-color: $AliceBlue;
   @include cardBorder;
   @include flexBet;
-  @include mQ(460px) {
+  @include mQ(470px) {
     margin: 8rem 0;
+    padding: 2rem;
   }
   align-items: center;
   overflow: auto;
@@ -125,6 +126,12 @@
   color: $BlueGlobal;
   font-size: $MediumFont;
   font-weight: 600;
+  @include mQ(1900px, 1380px) {
+    margin-left: 10rem;
+  }
+  @include mQ(1379px, 1200px) {
+    margin-left: 8rem;
+  }
   .firstWord {
     font-size: $HeadFont;
     text-transform: capitalize;
@@ -142,6 +149,12 @@
     }
   }
   article {
+    @include mQ(1900px, 1400px) {
+      margin-left: 6rem;
+    }
+    @include mQ(1399px, 1200px) {
+      margin-left: 3rem;
+    }
     .hidNum {
       text-align: left;
       display: none;

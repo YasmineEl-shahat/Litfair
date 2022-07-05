@@ -1,12 +1,16 @@
 import { hideElement } from "../../functions/hideElement";
 import style from "../../styles/pages/login.module.scss";
+import { BsCheck2 } from "react-icons/bs";
+
 const SuccessPop = ({ header, content, submit }) => {
   return (
     <div id="successPop" className="popOverlay invisible">
       <div className="pop popSuc">
         <div className={style.checkWrap}>
           <div className={`${style.checkCont} customCheck`}>
-            <i className="fa-solid fa-check"></i>
+            <i>
+              <BsCheck2 />
+            </i>
           </div>
         </div>
         <h3>{header}</h3>

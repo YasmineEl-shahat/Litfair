@@ -1,151 +1,156 @@
 @import "../abstracts/variables.scss";
 @import "../abstracts/mixins.scss";
 
-.bar {
-  font-size: $SHeadFont;
-  font-weight: 600;
-  padding: 0.5rem;
-  margin: 1rem;
-  color: $VDarkGray;
-  @include mQ(1055px) {
-    font-size: $InfoFont;
-  }
-  &::after {
-    content: " ";
-    display: block;
-    background: transparent;
-    margin: auto;
-    width: 0rem;
-    height: 3px;
-    transition: width 0.5 ease, background 0.5 ease;
-  }
-  &:hover {
-    color: $BlueGlobal;
+body {
+  .bar {
+    font-size: $SHeadFont;
+    font-weight: 600;
+    padding: 0.5rem;
+    margin: 1rem;
+    color: $VDarkGray;
+    @include mQ(1055px) {
+      font-size: $InfoFont;
+    }
     &::after {
-      width: 50%;
-      border-radius: 3px;
-      background: $BlueGlobal;
-      transition: 0.5s;
+      content: " ";
+      display: block;
+      background: transparent;
+      margin: auto;
+      width: 0rem;
+      height: 3px;
+      transition: width 0.5 ease, background 0.5 ease;
+    }
+    &:hover {
+      color: $BlueGlobal;
+      &::after {
+        width: 50%;
+        border-radius: 3px;
+        background: $BlueGlobal;
+        transition: 0.5s;
+      }
     }
   }
-}
 
-.searching {
-  display: inline-block;
-  width: 30rem;
-  height: 3rem;
-  font-size: 1.5rem;
-  border: 1.5px solid $VLightGray;
-  border-radius: 3px;
-  color: $DarkGray;
-  padding-left: 1rem;
-  @include placeholder-color($VLightGray);
-  @include mQ(421px) {
-    width: 25rem;
-    font-size: 1rem;
+  .searching {
+    display: inline-block;
+    width: 30rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    border: 1.5px solid $VLightGray;
+    border-radius: 3px;
+    color: $DarkGray;
+    padding-left: 1rem;
+    @include placeholder-color($VLightGray);
+    @include mQ(421px) {
+      width: 25rem;
+      font-size: 1rem;
+    }
+    @include mQ(358px) {
+      width: 20rem;
+    }
   }
-  @include mQ(358px) {
-    width: 20rem;
+  .searchParent {
+    @include mQ(2000px, 1200px) {
+      margin-left: 10rem;
+    }
   }
-}
-.searchParent {
-  @include mQ(2000px, 1200px) {
-    margin-left: 10rem;
+  .searchIcon {
+    position: relative;
+    right: 2rem;
   }
-}
-.searchIcon {
-  position: relative;
-  right: 2rem;
-}
-.photo {
-  vertical-align: middle;
-  width: 3rem;
-  height: 3rem;
-  margin: 0 1rem;
-  border-radius: 50%;
-  position: absolute;
-  border: 1.5px solid $BlueGlobal;
-  overflow: hidden;
-  @include mQ(991.9px) {
-    margin-top: 1rem;
-  }
-  
-}
-.menuIcon {
-  vertical-align: middle;
-  width: 2rem;
-  height: 2rem;
- // margin: 0 1rem;
- background-color: $VLightGray;
- top:2rem;
- right:-4rem;
-  border-radius: 50%;
-  position: absolute;
-  border: 1.5px solid $VLightGray;
-  cursor: pointer;
- 
- 
-
-  
- 
-}
-.action{
-  
- // position: fixed;
- // top: 20px;
- // right: 30px;
- // color: #fff;
- 
-  // overflow : hidden;
-  // max-height: 0rem;
-  // &:hover {
-  // overflow: visible;
-  // max-height: 5rem;
- 
-  // }
- 
-}
-.action .photo{
- // position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-.action .menu{
- 
-  position: absolute;
-  width: 200px;
-  box-sizing: 0 5px 25px rgba(0,0,0,0.1);
-  border-radius: 15px;
-  transition: 0.5s;
-  &::before{
-    content: '';
+  .photo {
+    vertical-align: middle;
+    width: 3rem;
+    height: 3rem;
+    margin: 0 1rem;
     position: absolute;
-    top: -5px;
-    right: 28px;
-    width: 20px;
-    height: 20px;
-    background: aqua;
-    transform: rotate(45deg);
+    top: 0.5rem;
+    border-radius: 50%;
+    z-index: 3;
+    @include mQ(991.9px) {
+      margin-top: 1rem;
+      right: -4rem;
+    }
+    @include mQ(767.9px, 715px) {
+      right: -4rem;
+    }
+    @include mQ(375px) {
+      right: -3rem;
+    }
+    @include mQ(304px) {
+      right: -2rem;
+    }
+  }
+  .photoActive {
+    border: 1.5px solid $BlueGlobal;
+  }
+  .action {
+    cursor: pointer;
+  }
+  .menuIcon {
+    width: 2rem;
+    text-align: center;
+    height: 1.8rem;
+    background-color: $VLightGray;
+    top: 2.5rem;
+    right: -4rem;
+    border-radius: 50%;
+    position: absolute;
+    border: 1.5px solid $VLightGray;
+    cursor: pointer;
+    z-index: 4;
+    @include mQ(375px) {
+      right: -3rem;
+    }
+    @include mQ(304px) {
+      right: -2rem;
+    }
+  }
+  .menu {
+    z-index: 2;
+    background-color: #fff;
+    overflow: hidden;
+    max-height: 0rem;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 0.2rem;
+    position: absolute;
+    right: -3.5rem;
+    top: 4rem;
+    @include mQ(991.9px) {
+      top: 5rem;
+    }
+    @include mQ(415.9px) {
+      right: -3rem;
+    }
+    @include mQ(375px) {
+      right: -2rem;
+    }
+    @include mQ(304px) {
+      right: -1rem;
+    }
+    ul {
+      padding-left: 0;
+      color: $VDarkGray;
+      margin-bottom: 0;
+      li {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        text-align: start;
+        padding: 0.8rem 8rem 0.8rem 0.8rem;
+
+        &:hover {
+          background: $VLightGray;
+        }
+        i {
+          margin-right: 0.2rem;
+          color: $BlueGlobal;
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+  .menu.active {
+    max-height: 30rem;
+    opacity: 1;
+    overflow-y: auto;
   }
 }
-.menu ul li{
-  list-style: none;
-  border-top: 1px solid rgba(0,0,0,0.05);
-  @include flexCenter;
-
-}
-.action .menu .active{
-  visibility: visible;
-  opacity: 1;
-}
-.menu  {
-
-  box-shadow: 0px 0px 3px  rgba(0,0,0,0.25);
- //display: flex;
- position: absolute;
- background-color: aqua;
- top : 47px;
- right: -25px;
-
-}
-

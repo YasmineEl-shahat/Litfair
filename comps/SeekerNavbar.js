@@ -1,17 +1,16 @@
 import Link from "next/link";
-import Image from "next/image";
-import {VscMenu} from 'react-icons/vsc';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
+import AuthContext from "../context/AuthContext";
 const baseUrl = process.env.API_URL + "jobTitle/search";
 
 const SeekerNavbar = () => {
+  //state
   const [search, setSearch] = useState("");
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [jobs, setJobs] = useState([]);
- 
 
   const getData = async () => {
     const res = await fetch(baseUrl);
@@ -19,6 +18,9 @@ const SeekerNavbar = () => {
     setJobs(data);
     setLoading(false);
   };
+
+  //hooks
+  const { logoutUser } = useContext(AuthContext);
 
   useEffect(() => {
     getData();
@@ -32,7 +34,6 @@ const SeekerNavbar = () => {
     if (document.getElementById("search").value !== "")
       router.push(`/jobTitle/search?jobTitle=${search}`);
   };
- 
 
   return (
     <ul className="navbar-nav ms-auto">
@@ -65,28 +66,6 @@ const SeekerNavbar = () => {
             <i class="fas fa-search searchIcon"></i>
           </button>
         </form>
-      </li>
-      <li className="nav-item">
-        <div className="action">
-        <img
-          src="/assets/profile/blank-profile-picture.png"
-          className="photo"
-          alt="pic"
-        ></img>
-        <i className="menuIcon"  > <VscMenu/> </i>
-        {/*<div className="menu" >
-          <ul  >
-            <li><i></i><Link href="/EditProfileSideBar">Edit Profile</Link></li>
-            <li><i></i><Link href="">Help Center</Link></li>
-            <li><i></i><Link href="">About Us</Link></li>
-            <li><i></i><Link href="">Become A Partner</Link></li>
-            <li><i></i><Link href="">Contact Us</Link></li>
-            <li><i></i><Link href="">Account Setting</Link></li>
-            <li><i></i><Link href="">Log Out</Link></li>
-          </ul>
-
-  </div>*/}
-        </div>
       </li>
     </ul>
   );

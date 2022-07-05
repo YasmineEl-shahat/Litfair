@@ -62,7 +62,7 @@ const Footer = () => {
             </section>
             <hr className="d-none d-sm-block d-md-none" />
 
-            <section className="col-sm-3">
+            <section className="col-sm-3" id="contact">
               <span className="heading connect">stay connected</span>
               <br />
               <a onClick={ToFace} passHref>
