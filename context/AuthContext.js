@@ -96,6 +96,46 @@ export const AuthProvider = ({ children }) => {
     else return true;
   };
 
+  //company validation
+  const validateEmail = () => {
+    const re =
+      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    return re.test(email);
+  };
+  const validatePass = () => {
+    const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    return re.test(password);
+  };
+  const validateCompany = () => {
+    //step1 -- copy state
+    // debugger;
+
+    let newErrors = { ...errors };
+    if (email === "") {
+      // step2 -- edit state
+      newErrors.email = "Email is required";
+    } else if (!validateEmail()) {
+      newErrors.email = "Email is invalid";
+    } else {
+      delete newErrors.email;
+    }
+
+    //pass validate
+    if (password === "") {
+      // step2 -- edit state
+      newErrors.password = "password is required";
+    } else if (!validatePass()) {
+      newErrors.password =
+        "password must be at least 8 small& capital letters, digits";
+    } else {
+      delete newErrors.password;
+    }
+    // step3 set state
+    setErrors(newErrors);
+
+    if (JSON.stringify(newErrors) !== "{}") return false;
+    else return true;
+  };
   //seekerRegister
   async function onSubmit(data) {
     // display form data on success
@@ -123,7 +163,7 @@ export const AuthProvider = ({ children }) => {
 
           cookieCutter.set("auth", TokenObject);
 
-          router.push("/registeredSuccessfully");
+          router.replace("/registeredSuccessfully");
         }
         if (response.status === 400) {
           // So, a server-side validation error occurred.
@@ -134,17 +174,59 @@ export const AuthProvider = ({ children }) => {
             setBackError("Email taken");
             throw new Error("Email taken");
           }
-          // const error = response.text();
-          // throw new Error(error);
         }
         if (response.status === 502) {
+          setBackError("Network response was not ok.");
           throw new Error("Network response was not ok.");
         }
       })
       .catch((e) => {
-        // setBackError(e.text());
+        console.log(e);
       });
   }
+
+  // Company Register
+  const companyRegister = async (e) => {
+    e.preventDefault();
+    if (validateCompany()) {
+      //waiting for api response
+      let response = await fetch(baseUrl + "adduser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+          role: "Company",
+        }),
+      })
+        .then(async (response) => {
+          if (response.ok) {
+            const res = await response.json();
+            const { TokenObject } = res;
+            setAuth(TokenObject);
+            setUser(jwt_decode(TokenObject));
+
+            cookieCutter.set("auth", TokenObject);
+            router.replace("/registeredSuccessfully");
+          } else {
+            const res = await response.json();
+            const { msg } = res;
+            if (msg === "Validation error") {
+              setBackError("Email taken");
+              throw new Error("Email taken");
+            } else {
+              setBackError(msg);
+              throw new Error(msg);
+            }
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  };
 
   //login
   const login = async (e) => {
@@ -245,6 +327,7 @@ export const AuthProvider = ({ children }) => {
     googleLogin,
     handleGoogleFailure,
     onSubmit,
+    companyRegister,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

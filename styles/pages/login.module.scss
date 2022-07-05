@@ -119,10 +119,19 @@
   flex-direction: column;
 }
 .checkCont {
-  border: 10px solid #b4aff7;
   border-radius: 50%;
-  width: 10rem;
   text-align: center;
   color: $VLightBlue;
   font-size: $HeadFont;
+  border: 7px solid #b4aff7;
+  width: 10rem;
+  height: 10rem;
+  margin: 2rem 0;
+
+  i {
+    svg {
+      width: 8rem;
+      height: 10rem;
+    }
+  }
 }

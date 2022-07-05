@@ -134,7 +134,9 @@ const CareerInterests = ({ job }) => {
       <main className={` ${style.main}`}>
         <EditProfileSideBar />
         {loading ? (
-          <Spinner />
+          <div>
+            <Spinner />
+          </div>
         ) : (
           <section className={`${style.info} ${style.car}`}>
             <form onSubmit={(e) => submit(e)}>
