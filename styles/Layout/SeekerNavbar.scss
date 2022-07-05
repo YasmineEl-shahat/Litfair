@@ -143,12 +143,17 @@ body {
       color: $VDarkGray;
       margin-bottom: 0;
       li {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        &:first-of-type {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        &:last-of-type {
+          border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
         text-align: start;
         padding: 0.8rem 8rem 0.8rem 0.8rem;
 
         &:hover {
-          background: $VLightGray;
+          background: #e3e3e3;
         }
         i {
           margin-right: 0.2rem;
