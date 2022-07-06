@@ -3,12 +3,14 @@ import { GoLocation } from "react-icons/go";
 import { SiMaterialdesignicons } from "react-icons/si";
 
 import { useRouter } from "next/router";
+
+
 import style from "../styles/pages/SeekerHome.module.scss";
 
-const JobDetails = ({ details }) => {
+const JobDetails = ({ details, posts }) => {
     
-    const router = useRouter();
-    console.log(router.asPath);
+   // const router = useRouter();
+  //  console.log(router.asPath);
     
      return (
 
@@ -72,20 +74,24 @@ const JobDetails = ({ details }) => {
                      Save
                    </button>
                  </div>
-                 <div>
+                
                  <button
                      className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
                      type="submit"
                    >
                      Apply
                    </button>
-                 </div>
+                   <p>helooooooo</p>
                </div>
-          
+               <p>helooooooo</p>
            </span>
          </div>
+
+         <p>helooooooo</p>
        </>  
      );
    };
+
+ 
    export default JobDetails;
    
