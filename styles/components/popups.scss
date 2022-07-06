@@ -6,7 +6,7 @@
   top: 8%;
   left: 50%;
   transform: translate(-50%, 0);
-  z-index: 3;
+  z-index: 7;
   padding: 2.5rem 5rem;
   background-color: $WhiteGlobal;
   text-align: center;
@@ -39,8 +39,29 @@
         border: 1px solid $BlueGlobal;
       }
     }
+    .trackbtn {
+      padding: 0.2rem 1rem;
+    }
   }
+  .customCheck {
+    width: 8rem;
+    height: 8rem;
+    border: 5px solid #b4aff7;
 
+    i {
+      position: relative;
+      top: 0.5rem;
+      svg {
+        width: 7rem;
+        height: 6rem;
+      }
+    }
+  }
+  .successPar {
+    margin-bottom: -1rem;
+    color: black;
+    font-weight: 500;
+  }
   @include mQ(900px) {
     width: 70%;
   }
@@ -64,7 +85,7 @@
   width: 100%;
   height: 100%;
   background: rgba(6, 5, 5, 0.388);
-  z-index: 2;
+  z-index: 5;
 }
 
 .popApply {
@@ -72,16 +93,19 @@
     width: 30%;
   }
 }
-
+.popSuc,
 .popScreen {
-  text-align: start;
-  padding: 1rem 2rem;
   @include mQ(1900px, 1250px) {
     width: 40%;
   }
   @include mQ(1249px, 900px) {
     width: 50%;
   }
+}
+.popScreen {
+  text-align: start;
+  padding: 1rem 2rem;
+
   i {
     cursor: pointer;
   }
@@ -98,6 +122,9 @@
       width: 50%;
       background-color: $BlueGlobal;
     }
+    .ProgressScreen {
+      width: 100%;
+    }
   }
   h6 {
     margin: 1rem 0;
@@ -107,10 +134,14 @@
     }
   }
   .btn--popWrap {
-    float: right;
     margin-right: 1rem;
     position: relative;
+    justify-content: end;
     bottom: 1rem;
+    flex-wrap: wrap-reverse;
+    .btn--cancel {
+      margin-right: 1rem;
+    }
   }
   .cvFile {
     font-size: 1rem;
@@ -122,5 +153,20 @@
     width: fit-content;
     padding: 1rem;
     margin-top: 2rem;
+  }
+  .questionSec {
+    display: block;
+    margin-bottom: 4rem;
+    margin-top: 2rem;
+    div {
+      width: 100%;
+      label {
+        font-weight: 100;
+        font-size: 1rem;
+      }
+      input {
+        width: 100%;
+      }
+    }
   }
 }

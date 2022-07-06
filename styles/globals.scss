@@ -96,6 +96,10 @@ html {
     a {
       cursor: pointer;
       text-decoration: none;
+      color: inherit;
+      &:hover {
+        color: inherit;
+      }
     }
 
     .circlebef {

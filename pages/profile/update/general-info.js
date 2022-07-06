@@ -174,7 +174,9 @@ const GeneralInfo = ({ countries }) => {
     <main className={` ${style.main}`}>
       <EditProfileSideBar />
       {loading ? (
-        <Spinner />
+        <div>
+          <Spinner />
+        </div>
       ) : (
         <section className={style.info}>
           <h3 className="circlebef">Basic Info</h3>

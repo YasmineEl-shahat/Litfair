@@ -2,14 +2,19 @@ import style from "../styles/pages/login.module.scss";
 
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-const baseUrl = process.env.API_URL;
+import AuthContext from "../context/AuthContext";
+import { useContext, useEffect } from "react";
+import { BsCheck2 } from "react-icons/bs";
+
 const Registered = () => {
   const router = useRouter();
 
+  const { user } = useContext(AuthContext);
+
   useEffect(() => {
     setTimeout(() => {
-      router.replace("/setup/career-interests/");
+      if (user.role === "Company") router.replace("/companyOnb");
+      else router.replace("/setup/career-interests/");
     }, 3000);
   }, [router]);
   return (
@@ -21,7 +26,9 @@ const Registered = () => {
       <div className={style.mainDev}>
         <div className={style.checkWrap}>
           <div className={style.checkCont}>
-            <i className="fa-solid fa-check"></i>
+            <i>
+              <BsCheck2 />
+            </i>
           </div>
           <h2>Registered Succesfully!</h2>
         </div>

@@ -4,9 +4,17 @@ import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import SeekerNavbar from "./SeekerNavbar";
 import CompanyNavbar from "./CompanyNavbar";
+import { VscMenu } from "react-icons/vsc";
+import Icon from "@mdi/react";
 
+import {
+  mdiPencilOutline,
+  mdiInformationOutline,
+  mdiHandshakeOutline,
+  mdiForumOutline,
+} from "@mdi/js";
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logoutUser } = useContext(AuthContext);
 
   return (
     <>
@@ -35,12 +43,80 @@ const Navbar = () => {
           </button>
           {user ? (
             user.role === "Seeker" ? (
-              <div
-                className="navbar-collapse collapse"
-                id="navbarSupportedContent"
-              >
-                <SeekerNavbar />
-              </div>
+              <>
+                <div
+                  className="navbar-collapse collapse"
+                  id="navbarSupportedContent"
+                >
+                  <SeekerNavbar />
+                </div>
+
+                <div
+                  className="action"
+                  onClick={() => {
+                    const menu = document.querySelector(".menu");
+                    const photo = document.querySelector(".photo");
+                    menu.classList.toggle("active");
+                    photo.classList.toggle("photoActive");
+                  }}
+                >
+                  <img
+                    src="/assets/profile/blank-profile-picture.png"
+                    className="photo"
+                    alt="pic"
+                  ></img>
+                  <i className="menuIcon">
+                    <VscMenu />
+                  </i>
+                  <div className="menu">
+                    <ul>
+                      <Link href="/profile/update/general-info/">
+                        <li>
+                          <i>
+                            <Icon path={mdiPencilOutline} size={1} />
+                          </i>
+                          Edit Profile
+                        </li>
+                      </Link>
+                      <Link href="/help" passHref>
+                        <li>
+                          <i class="fa-regular fa-circle-question"></i>
+                          Help Center
+                        </li>
+                      </Link>
+                      <Link href="/about" passHref>
+                        <li>
+                          <i>
+                            <Icon path={mdiInformationOutline} size={1} />
+                          </i>
+                          About Us
+                        </li>
+                      </Link>
+                      <Link href="/partner" passHref>
+                        <li>
+                          <i>
+                            <Icon path={mdiHandshakeOutline} size={1} />
+                          </i>
+                          Become A Partner
+                        </li>
+                      </Link>
+                      <Link href="#contact" passHref>
+                        <li>
+                          <i>
+                            <Icon path={mdiForumOutline} size={1} />
+                          </i>
+                          Contact Us
+                        </li>
+                      </Link>
+
+                      <li onClick={() => logoutUser()}>
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Log Out
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </>
             ) : (
               <div
                 className="navbar-collapse collapse"

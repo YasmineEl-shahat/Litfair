@@ -2,11 +2,33 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { BsBookmark } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import { SiMaterialdesignicons } from "react-icons/si";
+import { useEffect, useContext, useState } from "react";
+import Link from "next/link";
 import style from "../styles/pages/SeekerHome.module.scss";
+<<<<<<< HEAD
 import Link from "next/link";
 
+=======
+import AuthContext from "../context/AuthContext";
+
+const baseUrl = process.env.API_URL;
+>>>>>>> 70db6afddad5693fe5697f6e43c6533a9286f899
 
 const Jobs = ({ posts }) => {
+  const [appliedJobs, setAppliedJobs] = useState([]);
+  //hooks
+  const { auth } = useContext(AuthContext);
+  useEffect(async () => {
+    //waiting for api response
+    const res = await fetch(baseUrl + "applications/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + " " + auth,
+      },
+    });
+    const { msg } = await res.json();
+    setAppliedJobs(msg);
+  }, []);
   return (
     <>
       <div className={style.box}>
@@ -66,14 +88,24 @@ const Jobs = ({ posts }) => {
                 <i className={style.bookmark}>
                   <BsBookmark />
                 </i>
-                  <Link href="">
-                <button
-                  className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
-                  type="submit"
 
+                <Link
+                  href={
+                    appliedJobs.find((job) => job.job_post[0]._id === post._id)
+                      ? `/applications/${
+                          appliedJobs.find(
+                            (job) => job.job_post[0]._id === post._id
+                          )._id
+                        }/`
+                      : `/jobs/${post._id}`
+                  }
                 >
-                  Details
-                </button>
+                  <button
+                    className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
+                    type="submit"
+                  >
+                    Details
+                  </button>
                 </Link>
               </div>
             </div>
