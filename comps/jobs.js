@@ -5,14 +5,9 @@ import { SiMaterialdesignicons } from "react-icons/si";
 import { useEffect, useContext, useState } from "react";
 import Link from "next/link";
 import style from "../styles/pages/SeekerHome.module.scss";
-<<<<<<< HEAD
-import Link from "next/link";
-
-=======
 import AuthContext from "../context/AuthContext";
 
 const baseUrl = process.env.API_URL;
->>>>>>> 70db6afddad5693fe5697f6e43c6533a9286f899
 
 const Jobs = ({ posts }) => {
   const [appliedJobs, setAppliedJobs] = useState([]);
