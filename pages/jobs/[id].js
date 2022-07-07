@@ -181,7 +181,7 @@ const JobDetails = () => {
         <span className={style.right}>
           <div></div>
 
-          <div className={style.boxDetails}>
+          <div className={`${style.boxDetails} ${style.detailTop}`}>
             <div className={style.jobImgContainer}>
               <img
                 className={style.jobImg}
@@ -251,9 +251,11 @@ const JobDetails = () => {
                 <h3 className="circlebef"> Job Requirments</h3>
               </div>
             </div>
-            <div>
-              <pre>{detail.requirements}</pre>
-            </div>
+            <ul>
+              {detail.requirements.map((req) => (
+                <li>{req}</li>
+              ))}
+            </ul>
           </div>
         </span>
       </div>
