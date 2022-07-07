@@ -255,6 +255,17 @@ const jobDetails = () => {
             <div>
               <pre>{detail.requirements}</pre>
             </div>
+
+          </div>
+
+          <div className={style.boxDetails}>
+            <div className="">
+              <div>
+                <h3 className="circlebef">  Skills</h3>
+              </div>
+            </div>
+
+            <pre>{detail.skills_tools}</pre>
           </div>
         </span>
       </div>
