@@ -163,3 +163,21 @@
   margin-bottom: 1rem;
   margin-right: 1rem;
 }
+.btnSave{
+
+ position: absolute;
+  bottom: 0;
+  margin-bottom: 1rem;
+  margin-left: -6rem;
+  
+  
+}
+.boxDetails{
+  box-shadow: 2px 3px 12px #00000029;
+  position: relative;
+ // border: 1.5px solid $VLightGray;
+  border-radius: 3px;
+  margin: 2rem;
+  display: flex;
+  flex-direction: row;
+}
