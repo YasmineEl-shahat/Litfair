@@ -19,6 +19,7 @@
   }
 }
 .profileSide {
+  z-index: 20;
   transition: 0.3s;
   font-size: $InfoFont;
   box-shadow: $shadowGlob;

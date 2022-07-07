@@ -211,7 +211,7 @@ const GeneralInfo = ({ countries }) => {
             <section>
               <div className={carStyle.name}>
                 <label className="label--global" htmlFor="email">
-                  Email Address<span>(read only ya Negm)</span>
+                  Email Address<span>(read only)</span>
                 </label>
                 <input
                   className="txt text--big"
