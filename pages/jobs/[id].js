@@ -4,21 +4,87 @@ import { SiMaterialdesignicons } from "react-icons/si";
 
 import { useRouter } from "next/router";
 
-import Layout from "../../comps/layout";
+import { useEffect, useContext, useState } from "react";
 
+import Layout from "../../comps/layout";
+import AuthContext from "../../context/AuthContext";
 import style from "../../styles/pages/SeekerHome.module.scss";
+import Spinner from "../../comps/Spinner";
 //import JobDetails from "../../comps/JobDetails";
 
 
 const baseUrl = process.env.API_URL;
 
-const id = ({details }) => {
+
+
+{/*export const  getStaticPaths = async() => 
+{
+ 
+ const res = await fetch( baseUrl + "/jobs" );
+ const data = await res.json();
+ 
+ const paths =   Object.keys(data).map(details => {
+  
+  return{
+    params: { id: details.id.toString() }
+
+  }
+ })
+ return{
+  paths,
+  fallback: false
+
+ }
+}
+ export const getStaticProps = async(context) => {
+  const id = context.params.id;
+  const res = await fetch( baseUrl + "/jobs" +id );
+  const data = await res.json();
+  return{
+    props: {details: data}
+  }
+ 
+
+ }
+*/}
+
+
+const jobDetails = () => {
     
- const router = useRouter();
- console.log(router.asPath);
+  const { auth } = useContext(AuthContext);
+  const router = useRouter();
+  const [detail, setDetail] = useState({});
+  const [loading, setLoading] = useState(true);
+  
+  
+  
+  const getDetails = async () => {
+  
+   const path =  router.asPath.substring(1);
+  
+    const res = await fetch(baseUrl + path, {
+      headers: {
+        Authorization: "Bearer" + " " + auth,
+      },
+    });
+    const {msg} = await res.json();
+  console.log(msg);
+  
+  
+    setDetail(msg);
+  
+    setLoading(false);
+  };
+  useEffect(() => {
+    getDetails();
+  }, [router]);
+
+ 
  
   return (
- 
+    loading ? (
+      <Spinner />
+    ) : (
    <>
  {/*  <JobDetails details={ids}/>*/}
 
@@ -29,7 +95,7 @@ const id = ({details }) => {
    
              </div>
            
-               <div className={style.job} >
+               <div className={style.boxDetails} >
                  <div className={style.jobImgContainer}>
                    <img
                      className={style.jobImg}
@@ -40,13 +106,13 @@ const id = ({details }) => {
    
                  <div className={style.informations}>
                   
-                     <div className={style.postTitle}> {details.title} </div>
+                     <div className={style.postTitle}> {detail.title} </div>
                    
-                     <div className={style.postTitle}> {details["job title"]} </div>
+                     <div className={style.postTitle}> {detail["job title"]} </div>
                   
    
                    
-                     <div className={style.job_type}> {details.job_type} </div>
+                     <div className={style.job_type}> {detail.job_type} </div>
                    
    
                   
@@ -56,67 +122,75 @@ const id = ({details }) => {
                          <i className={style.expIcon}>
                            <SiMaterialdesignicons />
                          </i>
-                         {details.experience}{" "}
+                         {detail.experience}{" "}
                        </div>
                        <div className={style.location}>
                          {" "}
                          <i className={style.locationIcon}>
                            <GoLocation />
                          </i>
-                         {details.location}{" "}
+                         {detail.location}{" "}
                        </div>
                      </div>
                    
                  </div>
-                 <div className={style.lastSection}>
-                   <i className={style.bookmark}>
-                     <BsBookmark />
-                   </i>
-   
-                   <button
-                     className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
+                
+                 <div >
+                 <button
+                     className={` btn--global btn--detail btn--save ${style.btnSave}`}
                      type="submit"
                    >
                      Save
                    </button>
-                 </div>
                 
                  <button
                      className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
                      type="submit"
                    >
-                     Apply
+                    Apply
                    </button>
-                   <p>helooooooo</p>
+                   </div>
+              
                </div>
-               <p>helooooooo</p>
+              
+               <div className={style.boxDetails} >
+               <div className="">
+               <div>
+               <h3 className="circlebef"> Job Discription</h3> 
+               </div>
+          </div>
+          
+          <pre>{detail.description }</pre>
+          
+               </div>
+               
+               <div className={style.boxDetails} >
+               <div className="">
+               <div>
+               <h3 className="circlebef"> Job Requirments</h3> 
+               </div>
+          </div>
+          <div>
+          <pre>{detail.requirements }</pre>
+          </div>
+               </div>
            </span>
          </div>
 
-         <p>helooooooo</p>
+      
 
     
-    </>  
-  );
-};
+    </>  )
+    
+      );
+
+    }
 
 
-export async function getServerSideProps  () 
-{
- 
- const res = await fetch( baseUrl + "/jobs/:id" );
- const data = await res.json();
- console.log(data);
- 
- return{
-
-    props:{details: data}
- }
-};
-id.getLayout = function getLayout(page) {
+jobDetails.getLayout = function getLayout(page) {
     return <Layout title="Job Details">{page}</Layout>;
   };
-export default id;
+export default jobDetails;
 
 
 // arr = ["women", "kids", "men"]
