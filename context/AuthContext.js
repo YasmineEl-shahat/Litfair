@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 
-    router.push("/");
+    router.replace("/");
   };
 
   //handle Expired tokens
