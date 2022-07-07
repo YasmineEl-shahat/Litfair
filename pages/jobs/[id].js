@@ -17,7 +17,6 @@ import ScreenPop from "../../comps/Popups/ScreenPop";
 import SuccessPop from "../../comps/Popups/SuccessPop";
 import { hideElement } from "../../functions/hideElement";
 import { showElement } from "../../functions/showElement";
-import { ActivateBar } from "../../functions/ActivateBar";
 
 const baseUrl = process.env.API_URL;
 
@@ -48,7 +47,6 @@ const jobDetails = () => {
     const { msg } = await res.json();
 
     setDetail(msg);
-    // setText_questions(msg.application.text_questions);
 
     setLoading(false);
   };
@@ -96,17 +94,7 @@ const jobDetails = () => {
     setCVError("");
     disableBtn(btn_id);
 
-    // waiting for api response - will be removed in job details
-    //
-    const res = await fetch(baseUrl + "jobs/62a8bc6bd20159963aec17ca", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer" + " " + auth,
-      },
-    });
-    const { msg } = await res.json();
-    setText_questions(msg.application.text_questions);
-    //
+    setText_questions(detail.application.text_questions);
     hideElement(id);
     EnableBtn(btn_id);
     showElement("ScreenPop");

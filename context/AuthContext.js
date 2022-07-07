@@ -32,11 +32,9 @@ export const AuthProvider = ({ children }) => {
   const logoutUser = () => {
     setAuth(null);
     setUser(null);
-    if (typeof window !== "undefined") {
-      cookieCutter.set("auth", "", { expires: "01 Jan 1970 00:00:00 UTC" });
-    }
+    document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 
-    if (router.asPath !== "/") router.replace("/");
+    router.push("/");
   };
 
   //handle Expired tokens

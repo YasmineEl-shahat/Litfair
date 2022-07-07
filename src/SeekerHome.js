@@ -2,6 +2,7 @@ import AuthContext from "../context/AuthContext";
 import { useContext, useEffect, useState } from "react";
 import Spinner from "../comps/Spinner";
 import Jobs from "../comps/jobs";
+import { ActivateBar } from "../functions/ActivateBar";
 
 const baseUrl = process.env.API_URL;
 

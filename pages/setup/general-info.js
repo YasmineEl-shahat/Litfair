@@ -47,43 +47,28 @@ const GInfo = (countries) => {
       headers: {
         Authorization: "Bearer" + " " + auth,
       },
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          const res = await response.json();
+    });
+    const res = await response.json();
+    if (res) {
+      setFname(res.fname);
+      setLname(res.lname);
+      setPhone_number(res.phone_number);
+      setCountry(res.country);
+      setCity(res.city);
+      setNationality(res.nationality);
+      setGender(res.gender);
 
-          setFname(res.fname);
-          setLname(res.lname);
-          setPhone_number(res.phone_number);
-          setCountry(res.country);
-          setCity(res.city);
-          setNationality(res.nationality);
-          setGender(res.gender);
-
-          setLoading(false);
-          if (res.date_of_birth) {
-            const y = res.date_of_birth.slice(0, 4);
-            setYear(y);
-            const m = res.date_of_birth.slice(5, 7);
-            setMonth(m);
-            const d = res.date_of_birth.slice(8, 10);
-            setDay(d);
-            birth(y, Number(m), Number(d));
-          } else birth();
-        }
-        if (response.status === 400) {
-          // So, a server-side validation error occurred.
-          // Server side validation returns a string error message, so parse as text instead of json.
-          const error = response.text();
-          throw new Error(error);
-        }
-        if (response.status === 502) {
-          throw new Error("Network response was not ok.");
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+      setLoading(false);
+      if (res.date_of_birth) {
+        const y = res.date_of_birth.slice(0, 4);
+        setYear(y);
+        const m = res.date_of_birth.slice(5, 7);
+        setMonth(m);
+        const d = res.date_of_birth.slice(8, 10);
+        setDay(d);
+        birth(y, Number(m), Number(d));
+      } else birth();
+    }
   }, []);
 
   //helper Fun
