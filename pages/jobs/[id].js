@@ -20,7 +20,7 @@ import { showElement } from "../../functions/showElement";
 
 const baseUrl = process.env.API_URL;
 
-const jobDetails = () => {
+const JobDetails = () => {
   const { auth, user } = useContext(AuthContext);
   const router = useRouter();
 
@@ -31,14 +31,12 @@ const jobDetails = () => {
   const [cv_url, setCv_url] = useState("");
   const [cvError, setCVError] = useState("");
   const [screenError, setScreenError] = useState("");
-  //
   const [text_questions, setText_questions] = useState([]);
   const [text_answers, setText_answers] = useState([]);
   const [application_id, setApplication_id] = useState("");
 
   const getDetails = async () => {
     const path = router.asPath.substring(1);
-
     const res = await fetch(baseUrl + path, {
       headers: {
         Authorization: "Bearer" + " " + auth,
@@ -125,7 +123,8 @@ const jobDetails = () => {
           setScreenError("");
           const res = await response.json();
           const { msg } = await res;
-          setApplication_id(msg._id);
+          console.log(msg);
+          setApplication_id(msg.applicatoin._id);
           EnableBtn(btn_id);
           hideElement(id);
           showElement("successPop");
@@ -291,10 +290,10 @@ const jobDetails = () => {
   );
 };
 
-jobDetails.getLayout = function getLayout(page) {
+JobDetails.getLayout = function getLayout(page) {
   return <Layout title="Job Details">{page}</Layout>;
 };
-export default jobDetails;
+export default JobDetails;
 
 // arr = ["women", "kids", "men"]
 

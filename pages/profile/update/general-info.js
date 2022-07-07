@@ -217,7 +217,7 @@ const GeneralInfo = ({ countries }) => {
                   className="txt text--big"
                   type="text"
                   name="email"
-                  readonly="readonly"
+                  readOnly="readonly"
                   value={email}
                 />
               </div>
