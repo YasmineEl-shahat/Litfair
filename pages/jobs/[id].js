@@ -257,6 +257,18 @@ const JobDetails = () => {
               ))}
             </ul>
           </div>
+          <div className={style.boxDetails}>
+            <div className="">
+              <div>
+                <h3 className="circlebef"> Skills</h3>
+              </div>
+            </div>
+            <ul>
+              {detail.skills_tools.map((req) => (
+                <li>{req}</li>
+              ))}
+            </ul>
+          </div>
         </span>
       </div>
       {/* job details popups */}

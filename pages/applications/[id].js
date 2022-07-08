@@ -1,23 +1,23 @@
 import { GoLocation } from "react-icons/go";
 import { SiMaterialdesignicons } from "react-icons/si";
+import { BsCheck2 } from "react-icons/bs";
 
-import { useRouter } from "next/router";
-import axios from "axios";
 import { useEffect, useContext, useState } from "react";
 
 import Layout from "../../comps/layout";
 import AuthContext from "../../context/AuthContext";
 import style from "../../styles/pages/SeekerHome.module.scss";
+import styleProg from "../../styles/pages/Progress.module.scss";
 import Spinner from "../../comps/Spinner";
 
 const baseUrl = process.env.API_URL;
 
 const JobProgress = () => {
   const { auth } = useContext(AuthContext);
-  const router = useRouter();
 
   //state
   const [detail, setDetail] = useState({});
+  const [progress, setProgress] = useState({});
   const [loading, setLoading] = useState(true);
 
   const getDetails = async () => {
@@ -29,7 +29,9 @@ const JobProgress = () => {
       },
     });
     const { msg } = await res.json();
+
     setDetail(msg[0].job_post);
+    setProgress(msg[0].progress);
     setLoading(false);
   };
   useEffect(async () => {
@@ -44,7 +46,7 @@ const JobProgress = () => {
         <span className={style.right}>
           <div></div>
 
-          <div className={style.boxDetails}>
+          <div className={`${style.boxDetails} ${style.detailTop}`}>
             <div className={style.jobImgContainer}>
               <img
                 className={style.jobImg}
@@ -78,6 +80,33 @@ const JobProgress = () => {
               </div>
             </div>
           </div>
+          <div className={style.boxDetails}>
+            <h3 className="circlebef"> Track Application</h3>
+            <section className={styleProg.progress}>
+              {Object.keys(progress).map((key) =>
+                progress[key] ? (
+                  <div>
+                    <p className={styleProg.complete}>
+                      <BsCheck2 />
+                    </p>
+                    <h5>{key}</h5>
+                  </div>
+                ) : (
+                  <article>
+                    <p></p>
+                    <h5>{key}</h5>
+                  </article>
+                )
+              )}
+            </section>
+            {progress.Cv_scanned && !progress.Live_inter && (
+              <button
+                className={`btn--global btn--blue btn--detail ${styleProg.btn}`}
+              >
+                Go To Interview
+              </button>
+            )}
+          </div>
 
           <div className={style.boxDetails}>
             <div className="">
@@ -95,9 +124,23 @@ const JobProgress = () => {
                 <h3 className="circlebef"> Job Requirments</h3>
               </div>
             </div>
-            <div>
-              <pre>{detail.requirements}</pre>
+            <ul>
+              {detail.requirements.map((req) => (
+                <li>{req}</li>
+              ))}
+            </ul>
+          </div>
+          <div className={style.boxDetails}>
+            <div className="">
+              <div>
+                <h3 className="circlebef"> Skills</h3>
+              </div>
             </div>
+            <ul>
+              {detail.skills_tools.map((req) => (
+                <li>{req}</li>
+              ))}
+            </ul>
           </div>
         </span>
       </div>

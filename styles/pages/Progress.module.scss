@@ -1,0 +1,99 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+.progress {
+  @include flexCenter;
+  color: $VDarkGray;
+
+  p {
+    @include flexCenter;
+    text-align: center;
+    border: 1px solid $BlueGlobal;
+    background-color: white;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    svg {
+      width: 2rem;
+      height: 1.3rem;
+    }
+  }
+  div,
+  article {
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+    text-transform: capitalize;
+    @include flexCenter;
+    flex-direction: column;
+    z-index: 0;
+  }
+  div {
+    &:not(:nth-child(6)) {
+      &::after {
+        content: " ";
+        height: 1px;
+        width: 10rem;
+        position: relative;
+        left: 4em;
+        top: -4rem;
+        display: inline-block;
+        background: $BlueGlobal;
+        z-index: -1;
+        @include mQ(700px) {
+          width: 9rem;
+        }
+      }
+    }
+  }
+  article {
+    &:not(:nth-child(6)) {
+      &::after {
+        content: "";
+        height: 0px;
+        border-bottom: 1px dotted $BlueGlobal;
+        width: 10rem;
+        position: relative;
+        left: 4em;
+        top: -4rem;
+        display: inline-block;
+        z-index: -1;
+        @include mQ(700px) {
+          width: 9rem;
+        }
+      }
+    }
+    &:first-of-type {
+      p {
+        box-shadow: 0px 1px 6px #5c46f999;
+      }
+    }
+  }
+  .complete {
+    color: $WhiteGlobal;
+    background-color: $BlueGlobal;
+  }
+
+  @include mQ(700px) {
+    overflow-x: scroll;
+    @include flexBet;
+    &::-webkit-scrollbar {
+      height: 0.5rem;
+      bottom: 1rem;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: $VLightGray;
+      border-radius: 10px;
+      display: none;
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+      display: block;
+    }
+  }
+}
+.btn {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  margin: 1rem;
+}
