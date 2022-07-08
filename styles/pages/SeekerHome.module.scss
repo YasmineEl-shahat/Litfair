@@ -101,6 +101,8 @@
 .informations {
   flex-direction: column;
   margin: 1rem;
+  display: inline;
+  position: relative;
 }
 .postTitle {
   display: inline;
@@ -131,6 +133,7 @@
 }
 .experience,
 .location {
+  color: $VDarkGray;
   font-size: $InfoFont;
   margin-right: 3rem;
   @include mQ(399px) {
@@ -166,21 +169,33 @@
 .btnSave {
   position: absolute;
   bottom: 0;
+  right: 9rem;
   margin-bottom: 1rem;
-  margin-left: -6rem;
+  
+  
 }
 .boxDetails {
   box-shadow: 2px 3px 12px #00000029;
   position: relative;
   border-radius: 3px;
   margin: 2rem;
-  padding: 1rem;
+  padding: 2rem;
 
   ul {
-    list-style: circle;
+    list-style: disc;
   }
 }
 .detailTop {
   display: flex;
   flex-direction: row;
+}
+.detailcontent{
+  color: $vidGray;
+  font-size: $InfoFont;
+}
+.btns{
+  display: inline;
+  width: 15rem;
+  height: 25%;
+
 }
