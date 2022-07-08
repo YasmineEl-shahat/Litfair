@@ -36,7 +36,9 @@ const JobDetails = () => {
   const [application_id, setApplication_id] = useState("");
 
   const getDetails = async () => {
-    const path = router.asPath.substring(1);
+    // const path = router.asPath.substring(1);
+    const path = history.state.as.substring(1);
+
     const res = await fetch(baseUrl + path, {
       headers: {
         Authorization: "Bearer" + " " + auth,
@@ -257,11 +259,10 @@ const JobDetails = () => {
               ))}
             </ul>
           </div>
-
           <div className={style.boxDetails}>
             <div className="">
               <div>
-                <h3 className="circlebef"> Job Requirments</h3>
+                <h3 className="circlebef"> Skills</h3>
               </div>
             </div>
             <ul>
