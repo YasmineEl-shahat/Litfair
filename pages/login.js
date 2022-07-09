@@ -136,10 +136,7 @@ const Login = () => {
             </div>
 
             <div>
-              <button
-                className="btn btn--global btn--big btn--blue "
-                type="submit"
-              >
+              <button className="btn--global btn--big btn--blue " type="submit">
                 {submitting ? "Logging..." : "Log In"}
               </button>
             </div>

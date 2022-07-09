@@ -152,6 +152,24 @@
       font-size: $InfoFont;
     }
   }
+  //post job
+  .postSp {
+    margin-bottom: 0.6rem;
+    margin-top: 2rem;
+    font-weight: 599;
+  }
+  .addRem {
+    margin: 1rem 0;
+    input {
+      @include mQ(650px) {
+        width: 90%;
+      }
+      @include mQ(470px) {
+        width: 80%;
+      }
+    }
+  }
+
   ul {
     @include grid(0.5rem, 18em, 5em);
     padding-left: 0;

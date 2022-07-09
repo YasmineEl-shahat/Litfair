@@ -22,12 +22,12 @@ const GInfo = (countries) => {
   const country_list = countries.countries;
 
   //state
-  const [cities, setCities] = useState([]);
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
+  const [cities, setCities] = useState([]);
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [nationality, setNationality] = useState("");
@@ -133,6 +133,7 @@ const GInfo = (countries) => {
       // handle response's different status
       .then(async (response) => {
         if (response.ok) {
+          setError("");
           setSubmitting(false);
           router.push("/setup/professional-info");
         }

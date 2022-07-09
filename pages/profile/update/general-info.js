@@ -26,7 +26,7 @@ const GeneralInfo = ({ countries }) => {
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [phone_number, setPhone_number] = useState("");
-  const [description, setDescription] = useState();
+  const [description, setDescription] = useState("");
   const [cities, setCities] = useState([]);
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");

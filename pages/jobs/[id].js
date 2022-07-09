@@ -250,12 +250,12 @@ const JobDetails = () => {
           <div className={style.boxDetails}>
             <div className="">
               <div>
-                <h3 className="circlebef"> Job Requirments</h3>
+                <h3 className="circlebef"> Job Requirements</h3>
               </div>
             </div>
             <ul>
               {detail.requirements.map((req) => (
-                <li>{req}</li>
+                <li key={req}>{req}</li>
               ))}
             </ul>
           </div>
@@ -267,7 +267,7 @@ const JobDetails = () => {
             </div>
             <ul>
               {detail.skills_tools.map((req) => (
-                <li>{req}</li>
+                <li key={req}>{req}</li>
               ))}
             </ul>
           </div>

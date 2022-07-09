@@ -125,6 +125,7 @@ const Career = (job) => {
         // handle response's different status
         .then(async (response) => {
           if (response.ok) {
+            setError("");
             setSubsubmitting(false);
             router.push("/setup/general-info");
           }
