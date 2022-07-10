@@ -22,7 +22,7 @@
   @include mQ(749px) {
     width: 90%;
   }
- 
+
   margin-bottom: 5rem;
 }
 .left {
@@ -106,6 +106,7 @@
   position: relative;
 }
 .postTitle {
+  cursor: pointer;
   display: inline;
   color: $BlackGlobal;
   font-size: $SHeadFont;
@@ -116,7 +117,7 @@
 }
 
 .job_type {
-  display: inline;
+  display: inline-block;
   color: $BlueGlobal;
   font-size: 1.2rem;
   font-weight: bold;
@@ -124,11 +125,11 @@
   background-color: #cbb0f3;
 }
 .subInfo {
-  @include flexCenter;
+  display: flex;
   flex-wrap: wrap;
 
   margin-top: 0.5rem;
- 
+
   @include mQ(574px) {
     display: inline-block;
   }
@@ -173,8 +174,6 @@
   bottom: 0;
   right: 9rem;
   margin-bottom: 1rem;
-  
-  
 }
 .boxDetails {
   box-shadow: 2px 3px 12px #00000029;
@@ -191,16 +190,15 @@
   display: flex;
   flex-direction: row;
 }
-.detailcontent{
+.detailcontent {
   color: $vidGray;
   font-size: $InfoFont;
   @include mQ(750px) {
     font-size: 1.3rem;
   }
 }
-.btns{
+.btns {
   display: inline;
   width: 15rem;
   height: 25%;
-
 }

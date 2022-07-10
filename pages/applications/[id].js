@@ -13,6 +13,7 @@ import SurePop from "../../comps/Popups/SurePop";
 import { disableBtn, EnableBtn } from "../../functions/ButtonsFun";
 import { hideElement } from "../../functions/hideElement";
 import { showElement } from "../../functions/showElement";
+import Link from "next/link";
 
 const baseUrl = process.env.API_URL;
 
@@ -21,6 +22,7 @@ const JobProgress = () => {
   const [detail, setDetail] = useState({});
   const [progress, setProgress] = useState({});
   const [loading, setLoading] = useState(true);
+  const [id, setId] = useState("");
 
   //variables
   const getDetails = async () => {
@@ -34,6 +36,7 @@ const JobProgress = () => {
 
     setDetail(msg[0].job_post);
     setProgress(msg[0].progress);
+    setId(msg[0]._id);
     setLoading(false);
   };
   // hooks
@@ -138,6 +141,19 @@ const JobProgress = () => {
                 <button className={`btn--global btn--blue btn--detail `}>
                   Go To Interview
                 </button>
+              )}
+              {progress.feedback_1 && (
+                <Link
+                  href={{
+                    pathname: "/feed",
+                    query: { id },
+                  }}
+                  passHref
+                >
+                  <button className={`btn--global btn--blue btn--detail `}>
+                    View FeedBack1
+                  </button>
+                </Link>
               )}
             </div>
           </div>

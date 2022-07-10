@@ -10,6 +10,20 @@
     }
   }
 }
+.back {
+  article {
+    margin-bottom: 0;
+    box-shadow: none;
+  }
+}
+.btn {
+  color: $vidGray;
+  font-size: $InfoFont;
+  i {
+    margin-right: 0.5rem;
+  }
+}
+
 .feedSec {
   border-bottom: 1px solid $editLightGray;
   span {
