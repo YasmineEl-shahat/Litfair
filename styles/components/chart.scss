@@ -1,0 +1,21 @@
+.chart {
+  display: inline-block;
+  width: 9rem;
+  height: 9rem;
+  margin: 2rem 3rem;
+  position: relative;
+  .doughnut-inner {
+    position: absolute;
+    top: 3.5rem;
+    left: 3.2rem;
+    color: $BlueGlobal;
+    h5 {
+      font-size: $SHeadFont;
+      font-weight: 800;
+    }
+  }
+  h4 {
+    text-align: center;
+    margin-top: 1rem;
+  }
+}

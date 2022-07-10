@@ -17,6 +17,7 @@ import ScreenPop from "../../comps/Popups/ScreenPop";
 import SuccessPop from "../../comps/Popups/SuccessPop";
 import { hideElement } from "../../functions/hideElement";
 import { showElement } from "../../functions/showElement";
+import { disableBtn, EnableBtn } from "../../functions/ButtonsFun";
 
 const baseUrl = process.env.API_URL;
 
@@ -55,19 +56,7 @@ const JobDetails = () => {
   }, [router]);
 
   //handlers;
-  const disableBtn = (id) => {
-    const btn = document.getElementById(id);
-    btn.style.background = "#9C93F8";
-    btn.style.cursor = "auto";
-    btn.disabled = true;
-  };
 
-  const EnableBtn = (id) => {
-    const btn = document.getElementById(id);
-    btn.style.background = "#5c46f9";
-    btn.style.cursor = "pointer";
-    btn.disabled = false;
-  };
   const ApplyHandler = async (e, btn_id, id) => {
     e.preventDefault();
     disableBtn(btn_id);

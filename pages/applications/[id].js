@@ -1,28 +1,30 @@
 import { GoLocation } from "react-icons/go";
 import { SiMaterialdesignicons } from "react-icons/si";
 import { BsCheck2 } from "react-icons/bs";
-
 import { useEffect, useContext, useState } from "react";
-
+import { useRouter } from "next/router";
+import axios from "axios";
 import Layout from "../../comps/layout";
 import AuthContext from "../../context/AuthContext";
 import style from "../../styles/pages/SeekerHome.module.scss";
 import styleProg from "../../styles/pages/Progress.module.scss";
 import Spinner from "../../comps/Spinner";
+import SurePop from "../../comps/Popups/SurePop";
+import { disableBtn, EnableBtn } from "../../functions/ButtonsFun";
+import { hideElement } from "../../functions/hideElement";
+import { showElement } from "../../functions/showElement";
 
 const baseUrl = process.env.API_URL;
 
 const JobProgress = () => {
-  const { auth } = useContext(AuthContext);
-
   //state
   const [detail, setDetail] = useState({});
   const [progress, setProgress] = useState({});
   const [loading, setLoading] = useState(true);
 
+  //variables
   const getDetails = async () => {
     const path = history.state.as.substring(1);
-
     const res = await fetch(baseUrl + path, {
       headers: {
         Authorization: "Bearer" + " " + auth,
@@ -34,10 +36,30 @@ const JobProgress = () => {
     setProgress(msg[0].progress);
     setLoading(false);
   };
+  // hooks
+  const { auth } = useContext(AuthContext);
+  const router = useRouter();
+
   useEffect(async () => {
     getDetails();
   }, []);
 
+  // helper fun
+  const DeleteApp = async (e, btn_id, id) => {
+    e.preventDefault();
+    disableBtn(btn_id);
+
+    const path = history.state.as.substring(1);
+
+    // waiting for api response
+    const options = { headers: { Authorization: "Bearer" + " " + auth } };
+
+    axios.delete(baseUrl + path, options).then((res) => {
+      hideElement(id);
+      EnableBtn(btn_id);
+      router.replace("/");
+    });
+  };
   return loading ? (
     <Spinner />
   ) : (
@@ -99,13 +121,25 @@ const JobProgress = () => {
                 )
               )}
             </section>
-            {progress.Cv_scanned && !progress.Live_inter && (
-              <button
-                className={`btn--global btn--blue btn--detail ${styleProg.btn}`}
-              >
-                Go To Interview
-              </button>
-            )}
+            <div className={styleProg.btn}>
+              {!progress.Live_inter && (
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    showElement("sure");
+                  }}
+                  className="btn--cancel btn--remove"
+                >
+                  Decline
+                </button>
+              )}
+
+              {progress.Cv_scanned && !progress.Live_inter && (
+                <button className={`btn--global btn--blue btn--detail `}>
+                  Go To Interview
+                </button>
+              )}
+            </div>
           </div>
 
           <div className={style.boxDetails}>
@@ -144,6 +178,12 @@ const JobProgress = () => {
           </div>
         </span>
       </div>
+      <SurePop
+        header="Delete your application"
+        content="Are you sure you want to delete your application to this job?"
+        submit="Delete"
+        handler={DeleteApp}
+      />
     </>
   );
 };
