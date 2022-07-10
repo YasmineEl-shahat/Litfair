@@ -22,6 +22,7 @@
   @include mQ(749px) {
     width: 90%;
   }
+ 
   margin-bottom: 5rem;
 }
 .left {
@@ -127,7 +128,8 @@
   flex-wrap: wrap;
 
   margin-top: 0.5rem;
-  @include mQ(563px) {
+ 
+  @include mQ(574px) {
     display: inline-block;
   }
 }
@@ -192,6 +194,9 @@
 .detailcontent{
   color: $vidGray;
   font-size: $InfoFont;
+  @include mQ(750px) {
+    font-size: 1.3rem;
+  }
 }
 .btns{
   display: inline;
