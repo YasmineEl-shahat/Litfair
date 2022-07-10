@@ -33,7 +33,7 @@ const LiveInterview = () => {
     return videoConverted;
   };
 
-  //change Slide
+  //helper function for sliding to next question after uploading complete
   const changeSlide = () => {
     if (current !== questions.length) {
       setCurrent(current + 1);
@@ -41,6 +41,7 @@ const LiveInterview = () => {
     }
   };
 
+  // send video to the server to be sent to the model
   const uploadVideo = (videoBlob) => {
     let data = new FormData();
     data.append("video", convertBlobToVideo(videoBlob));
@@ -144,7 +145,7 @@ const LiveInterview = () => {
                             // if (startRec) startRec.appendChild(cam);
                           }}
                           onRecordingComplete={(videoBlob) => {
-                            // Do something with the video...
+                            // Sending the video to the server...
                             setSending(true);
                             uploadVideo(videoBlob);
                           }}

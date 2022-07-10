@@ -3,6 +3,9 @@
   width: 9rem;
   height: 9rem;
   margin: 2rem 3rem;
+  @include mQ(320px) {
+    margin: 2rem 1rem;
+  }
   position: relative;
   .doughnut-inner {
     position: absolute;
