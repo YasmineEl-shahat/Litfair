@@ -206,7 +206,7 @@ const JobDetails = () => {
               </div>
             </div>
 
-            <div>
+            
               <button
                 className={` btn--global btn--detail btn--save ${style.btnSave}`}
                 type="submit"
@@ -223,17 +223,17 @@ const JobDetails = () => {
               >
                 Apply
               </button>
-            </div>
+           
           </div>
 
           <div className={style.boxDetails}>
             <div className="">
               <div>
-                <h3 className="circlebef"> Job Discription</h3>
+                <h3 className="circlebef" > Job Discription</h3>
               </div>
             </div>
 
-            <pre>{detail.description}</pre>
+            <pre className={style.detailcontent}>{detail.description}</pre>
           </div>
 
           <div className={style.boxDetails}>
@@ -242,7 +242,7 @@ const JobDetails = () => {
                 <h3 className="circlebef"> Job Requirements</h3>
               </div>
             </div>
-            <ul>
+            <ul className={style.detailcontent}>
               {detail.requirements.map((req) => (
                 <li key={req}>{req}</li>
               ))}
@@ -254,7 +254,7 @@ const JobDetails = () => {
                 <h3 className="circlebef"> Skills</h3>
               </div>
             </div>
-            <ul>
+            <ul className={style.detailcontent}>
               {detail.skills_tools.map((req) => (
                 <li key={req}>{req}</li>
               ))}

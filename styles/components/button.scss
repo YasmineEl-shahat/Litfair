@@ -76,8 +76,14 @@ body {
   .btn--save {
     background-color: $WhiteGlobal;
     color: $BlueGlobal;
-
     font-size: $InfoFont;
+    @include mQ(399px) {
+      font-size: 1rem;
+      right: 7rem;
+    }
+    @include mQ(399px) {
+      font-size: 1rem;
+    }
   }
   .btn--remove {
     border: none;
