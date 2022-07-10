@@ -5,8 +5,8 @@
 }
 .right {
   background-color: $WhiteGlobal;
-
   flex-direction: column;
+  position: relative;
   @include cardBorder;
   width: 50%;
   height: 100%;
@@ -20,7 +20,7 @@
     width: 80%;
   }
   @include mQ(749px) {
-    width: 90%;
+    width: 95%;
   }
 
   margin-bottom: 5rem;
@@ -132,6 +132,7 @@
 
   @include mQ(574px) {
     display: inline-block;
+    margin-bottom: 3rem;
   }
 }
 .experience,
@@ -139,6 +140,9 @@
   color: $VDarkGray;
   font-size: $InfoFont;
   margin-right: 3rem;
+  @include mQ(450px) {
+    margin-right: 0;
+  }
   @include mQ(399px) {
     font-size: 1rem;
   }
@@ -168,6 +172,7 @@
   right: 0;
   margin-bottom: 1rem;
   margin-right: 1rem;
+  margin: 1rem;
 }
 .btnSave {
   position: absolute;
@@ -181,7 +186,10 @@
   border-radius: 3px;
   margin: 2rem;
   padding: 2rem;
-
+  @include mQ(749px) {
+    margin: 1rem;
+    padding: 1rem;
+  }
   ul {
     list-style: disc;
   }
