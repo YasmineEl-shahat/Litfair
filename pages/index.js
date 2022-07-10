@@ -5,8 +5,6 @@ import Landing from "../src/LandingPage";
 import SeekerHome from "../src/SeekerHome";
 import CompanyHome from "../src/CompanyHome";
 
-const baseUrl = process.env.API_URL;
-
 const Home = () => {
   const { user } = useContext(AuthContext);
 

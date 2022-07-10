@@ -26,7 +26,7 @@ body {
   }
   .btn--onb {
     float: right;
-    padding: 1rem;
+    padding: 0.6rem 3rem;
     margin-bottom: 2rem;
     margin-right: 1rem;
     font-size: $InfoFont;
@@ -59,7 +59,6 @@ body {
   }
   .btn--white {
     border-radius: 2px;
-
     background-color: $WhiteGlobal;
     color: $BlueGlobal;
     border: 0.1rem solid;
@@ -79,5 +78,14 @@ body {
     color: $BlueGlobal;
 
     font-size: $InfoFont;
+  }
+  .btn--remove {
+    border: none;
+  }
+  .btn--add {
+    border: 1px solid $BlueGlobal;
+    padding: 0.5rem;
+    font-size: $InfoFont;
+    color: $BlueGlobal;
   }
 }
