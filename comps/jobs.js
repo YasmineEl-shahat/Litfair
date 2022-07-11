@@ -12,9 +12,9 @@ const baseUrl = process.env.API_URL;
 const Jobs = ({ posts }) => {
   const [appliedJobs, setAppliedJobs] = useState([]);
   const [savedJobs, setSavedJobs] = useState([]);
-  const saved = localStorage.getItem("saved")
-    ? JSON.parse(localStorage.getItem("saved"))
-    : [];
+  // const saved = localStorage.getItem("saved")
+  //   ? JSON.parse(localStorage.getItem("saved"))
+  //   : [];
   //hooks
   const { auth } = useContext(AuthContext);
   useEffect(async () => {
@@ -28,7 +28,7 @@ const Jobs = ({ posts }) => {
     const { msg } = await res.json();
     setAppliedJobs(msg);
 
-    setSavedJobs(saved);
+    //setSavedJobs(saved);
   }, []);
   return (
     <>
@@ -110,7 +110,7 @@ const Jobs = ({ posts }) => {
                   }}
                   className={style.bookmark}
                 >
-                  {saved.includes(post) || savedJobs.includes(post) ? (
+                  { posts.includes(post) ? (
                     <BsBookmarkFill />
                   ) : (
                     <BsBookmark />
