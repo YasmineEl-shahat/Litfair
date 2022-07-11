@@ -44,7 +44,7 @@ const FeedBack1 = ({ appId }) => {
             passHref
           >
             <button className={style.btn}>
-              <i class="fa-solid fa-arrow-left"></i>Back
+              <i className="fa-solid fa-arrow-left"></i>Back
             </button>
           </Link>
         </article>

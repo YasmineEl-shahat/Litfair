@@ -306,7 +306,7 @@ const PostJob = ({ jobConfig, jobTitles, countries, jobId }) => {
                         }
                         className="btn--global  btn--cancel btn--remove"
                       >
-                        <i class="fa-solid fa-trash-can"></i>
+                        <i className="fa-solid fa-trash-can"></i>
                       </button>
                     )}
                   </div>
@@ -349,7 +349,7 @@ const PostJob = ({ jobConfig, jobTitles, countries, jobId }) => {
                         }
                         className="btn--global  btn--cancel btn--remove"
                       >
-                        <i class="fa-solid fa-trash-can"></i>
+                        <i className="fa-solid fa-trash-can"></i>
                       </button>
                     )}
                   </div>
@@ -389,7 +389,7 @@ const PostJob = ({ jobConfig, jobTitles, countries, jobId }) => {
                         }
                         className="btn--global  btn--cancel btn--remove"
                       >
-                        <i class="fa-solid fa-trash-can"></i>
+                        <i className="fa-solid fa-trash-can"></i>
                       </button>
                     )}
                   </div>

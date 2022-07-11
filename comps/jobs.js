@@ -10,6 +10,7 @@ import AuthContext from "../context/AuthContext";
 const baseUrl = process.env.API_URL;
 
 const Jobs = ({ posts }) => {
+  console.log(posts);
   const [appliedJobs, setAppliedJobs] = useState([]);
   //hooks
   const { auth } = useContext(AuthContext);
