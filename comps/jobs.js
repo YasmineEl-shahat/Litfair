@@ -12,9 +12,7 @@ const baseUrl = process.env.API_URL;
 const Jobs = ({ posts }) => {
   const [appliedJobs, setAppliedJobs] = useState([]);
   const [savedJobs, setSavedJobs] = useState([]);
-  // const saved = localStorage.getItem("saved")
-  //   ? JSON.parse(localStorage.getItem("saved"))
-  //   : [];
+
   //hooks
   const { auth } = useContext(AuthContext);
   useEffect(async () => {
@@ -28,7 +26,14 @@ const Jobs = ({ posts }) => {
     const { msg } = await res.json();
     setAppliedJobs(msg);
 
-    //setSavedJobs(saved);
+    const resp = await fetch(baseUrl + "seeker/saved-jobs", {
+      headers: {
+        Authorization: "Bearer" + " " + auth,
+      },
+    });
+    const respJson = await resp.json();
+
+    setSavedJobs(respJson.msg);
   }, []);
   return (
     <>
@@ -98,19 +103,33 @@ const Jobs = ({ posts }) => {
               </div>
               <div className={style.lastSection}>
                 <i
-                  onClick={() => {
+                  onClick={async () => {
                     let newSaved = savedJobs;
-                    if (savedJobs.includes(post)) {
-                      newSaved = newSaved.filter((saved) => saved !== post);
+                    if (savedJobs.includes(post._id)) {
+                      newSaved = newSaved.filter((saved) => saved !== post._id);
+                      setSavedJobs(newSaved);
+                      await fetch(baseUrl + "seeker/saved-jobs/" + post._id, {
+                        method: "DELETE",
+                        headers: {
+                          "Content-Type": "application/json",
+                          Authorization: "Bearer" + " " + auth,
+                        },
+                      });
                     } else {
-                      newSaved = [...newSaved, post];
+                      newSaved = [...newSaved, post._id];
+                      setSavedJobs(newSaved);
+                      await fetch(baseUrl + "seeker/saved-jobs/" + post._id, {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                          Authorization: "Bearer" + " " + auth,
+                        },
+                      });
                     }
-                    setSavedJobs(newSaved);
-                    localStorage.setItem("saved", JSON.stringify(newSaved));
                   }}
                   className={style.bookmark}
                 >
-                  { posts.includes(post) ? (
+                  {savedJobs.includes(post._id) ? (
                     <BsBookmarkFill />
                   ) : (
                     <BsBookmark />

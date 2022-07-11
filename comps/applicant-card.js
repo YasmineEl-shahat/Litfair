@@ -11,7 +11,7 @@ export const Card = ({
 }) => {
   return (
     <>
-      <div className="card">
+      <div className="Card">
         <img src={imgSrc} className="photo" alt="pic"></img>
         <h4>{name}</h4>
         <p>Rate:{rate}</p>
