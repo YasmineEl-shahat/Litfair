@@ -5,8 +5,8 @@
 }
 .right {
   background-color: $WhiteGlobal;
-
   flex-direction: column;
+  position: relative;
   @include cardBorder;
   width: 50%;
   height: 100%;
@@ -20,9 +20,9 @@
     width: 80%;
   }
   @include mQ(749px) {
-    width: 90%;
+    width: 95%;
   }
- 
+
   margin-bottom: 5rem;
 }
 .left {
@@ -106,6 +106,7 @@
   position: relative;
 }
 .postTitle {
+  cursor: pointer;
   display: inline;
   color: $BlackGlobal;
   font-size: $SHeadFont;
@@ -116,7 +117,7 @@
 }
 
 .job_type {
-  display: inline;
+  display: inline-block;
   color: $BlueGlobal;
   font-size: 1.2rem;
   font-weight: bold;
@@ -124,13 +125,14 @@
   background-color: #cbb0f3;
 }
 .subInfo {
-  @include flexCenter;
+  display: flex;
   flex-wrap: wrap;
 
   margin-top: 0.5rem;
- 
+
   @include mQ(574px) {
     display: inline-block;
+    margin-bottom: 3rem;
   }
 }
 .experience,
@@ -138,6 +140,9 @@
   color: $VDarkGray;
   font-size: $InfoFont;
   margin-right: 3rem;
+  @include mQ(450px) {
+    margin-right: 0;
+  }
   @include mQ(399px) {
     font-size: 1rem;
   }
@@ -167,14 +172,13 @@
   right: 0;
   margin-bottom: 1rem;
   margin-right: 1rem;
+  margin: 1rem;
 }
 .btnSave {
   position: absolute;
   bottom: 0;
   right: 9rem;
   margin-bottom: 1rem;
-  
-  
 }
 .boxDetails {
   box-shadow: 2px 3px 12px #00000029;
@@ -182,7 +186,10 @@
   border-radius: 3px;
   margin: 2rem;
   padding: 2rem;
-
+  @include mQ(749px) {
+    margin: 1rem;
+    padding: 1rem;
+  }
   ul {
     list-style: disc;
   }
@@ -191,16 +198,15 @@
   display: flex;
   flex-direction: row;
 }
-.detailcontent{
+.detailcontent {
   color: $vidGray;
   font-size: $InfoFont;
   @include mQ(750px) {
     font-size: 1.3rem;
   }
 }
-.btns{
+.btns {
   display: inline;
   width: 15rem;
   height: 25%;
-
 }

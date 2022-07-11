@@ -17,6 +17,7 @@ import ScreenPop from "../../comps/Popups/ScreenPop";
 import SuccessPop from "../../comps/Popups/SuccessPop";
 import { hideElement } from "../../functions/hideElement";
 import { showElement } from "../../functions/showElement";
+import { disableBtn, EnableBtn } from "../../functions/ButtonsFun";
 
 const baseUrl = process.env.API_URL;
 
@@ -55,19 +56,7 @@ const JobDetails = () => {
   }, [router]);
 
   //handlers;
-  const disableBtn = (id) => {
-    const btn = document.getElementById(id);
-    btn.style.background = "#9C93F8";
-    btn.style.cursor = "auto";
-    btn.disabled = true;
-  };
 
-  const EnableBtn = (id) => {
-    const btn = document.getElementById(id);
-    btn.style.background = "#5c46f9";
-    btn.style.cursor = "pointer";
-    btn.disabled = false;
-  };
   const ApplyHandler = async (e, btn_id, id) => {
     e.preventDefault();
     disableBtn(btn_id);
@@ -194,11 +183,10 @@ const JobDetails = () => {
 
             <div className={style.informations}>
               <div className={style.postTitle}> {detail.title} </div>
-
               <div className={style.postTitle}> {detail["job title"]} </div>
-
-              <div className={style.job_type}> {detail.job_type} </div>
-
+              {detail.job_type && (
+                <div className={style.job_type}> {detail.job_type} </div>
+              )}
               <div className={style.subInfo}>
                 <div className={style.experience}>
                   {" "}
@@ -217,30 +205,28 @@ const JobDetails = () => {
               </div>
             </div>
 
-            
-              <button
-                className={` btn--global btn--detail btn--save ${style.btnSave}`}
-                type="submit"
-              >
-                Save
-              </button>
+            <button
+              className={` btn--global btn--detail btn--save ${style.btnSave}`}
+              type="submit"
+            >
+              Save
+            </button>
 
-              <button
-                className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  showElement("sure");
-                }}
-              >
-                Apply
-              </button>
-           
+            <button
+              className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
+              onClick={(e) => {
+                e.preventDefault();
+                showElement("sure");
+              }}
+            >
+              Apply
+            </button>
           </div>
 
           <div className={style.boxDetails}>
             <div className="">
               <div>
-                <h3 className="circlebef" > Job Discription</h3>
+                <h3 className="circlebef"> Job Discription</h3>
               </div>
             </div>
 
@@ -310,15 +296,3 @@ JobDetails.getLayout = function getLayout(page) {
   return <Layout title="Job Details">{page}</Layout>;
 };
 export default JobDetails;
-
-// arr = ["women", "kids", "men"]
-
-// arr.map((ele, indx) => {console.log(indx);})
-// 0
-// 1
-// 2
-
-// [html, css, js]
-
-// html - css - js.
-// arr.map((ele, indx) => {<p>{indx === arr.length - 1 ? ele - : ele .}</p>})

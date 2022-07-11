@@ -1,0 +1,140 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+.mainCont {
+  article {
+    height: fit-content;
+    padding: 0;
+    h3 {
+      margin: 4rem;
+    }
+  }
+}
+.back {
+  article {
+    margin-bottom: 0;
+    box-shadow: none;
+  }
+}
+.btn {
+  color: $vidGray;
+  font-size: $InfoFont;
+  i {
+    margin-right: 0.5rem;
+  }
+}
+
+.feedSec {
+  border-bottom: 1px solid $editLightGray;
+  span {
+    display: block;
+    margin: 2rem 4rem 0rem 4rem;
+    font-size: $InfoFont;
+    line-height: $InfoLineSpacing;
+    font-weight: 900;
+    color: $VDarkGray;
+    @include mQ(700px) {
+      font-size: 1.3rem;
+    }
+  }
+  .chartCont {
+    @include flexCenter;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+  }
+}
+.recSec {
+  @include flexCenter;
+  div,
+  article {
+    margin: 2rem;
+    text-transform: capitalize;
+    @include flexCenter;
+    flex-direction: column;
+    z-index: 0;
+    border-radius: 50%;
+    height: 3rem;
+    width: 3rem;
+    background: white;
+    vertical-align: middle;
+    position: relative;
+
+    p {
+      height: 2rem;
+      width: 2rem;
+      margin-bottom: 0;
+      border-radius: 50%;
+      color: white;
+      @include flexCenter;
+      vertical-align: middle;
+      z-index: 0;
+    }
+  }
+  div {
+    border: 1px solid $BlueGlobal;
+    @include flexCenter;
+    p {
+      border: 1px solid $BlueGlobal;
+      background: $BlueGlobal;
+    }
+    &:not(:nth-child(10)) {
+      &::after {
+        content: " ";
+        height: 0px;
+        border-bottom: 0.5rem solid $BlueGlobal;
+        border-radius: 5rem;
+        width: 11rem;
+        position: absolute;
+        left: -1em;
+        display: inline-block;
+        background: $BlueGlobal;
+        z-index: -1;
+        @include mQ(700px) {
+          width: 9rem;
+        }
+      }
+    }
+  }
+  article {
+    border: 1px solid $editLightGray;
+    @include flexCenter;
+    p {
+      border: 1px solid $editLightGray;
+      background: $VDarkGray;
+    }
+    &:not(:nth-child(10)) {
+      &::after {
+        content: " ";
+        height: 0px;
+        border-bottom: 0.5rem solid $editLightGray;
+        border-radius: 5rem;
+        width: 11rem;
+        position: absolute;
+        left: 1em;
+        display: inline-block;
+        background: $editLightGray;
+        z-index: -1;
+        @include mQ(700px) {
+          width: 9rem;
+        }
+      }
+    }
+  }
+  @include mQ(1200px) {
+    overflow-x: scroll;
+    @include flexBet;
+    &::-webkit-scrollbar {
+      height: 0.5rem;
+      bottom: 1rem;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: $VLightGray;
+      border-radius: 10px;
+      display: none;
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+      display: block;
+    }
+  }
+}

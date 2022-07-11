@@ -10,6 +10,7 @@ import AuthContext from "../context/AuthContext";
 const baseUrl = process.env.API_URL;
 
 const Jobs = ({ posts }) => {
+  console.log(posts);
   const [appliedJobs, setAppliedJobs] = useState([]);
   //hooks
   const { auth } = useContext(AuthContext);
@@ -50,12 +51,23 @@ const Jobs = ({ posts }) => {
               </div>
 
               <div className={style.informations}>
-                {post.title ? (
-                  <div className={style.postTitle}> {post.title} </div>
-                ) : (
-                  <div className={style.postTitle}> {post["job title"]} </div>
-                )}
-
+                <Link
+                  href={
+                    appliedJobs.find((job) => job.job_post[0]._id === post._id)
+                      ? `/applications/${
+                          appliedJobs.find(
+                            (job) => job.job_post[0]._id === post._id
+                          )._id
+                        }/`
+                      : `/jobs/${post._id}`
+                  }
+                >
+                  {post.title ? (
+                    <div className={style.postTitle}> {post.title} </div>
+                  ) : (
+                    <div className={style.postTitle}> {post["job title"]} </div>
+                  )}
+                </Link>
                 {post.job_type && (
                   <div className={style.job_type}> {post.job_type} </div>
                 )}

@@ -60,8 +60,8 @@ const PostJob = ({ jobConfig, jobTitles, countries, jobId }) => {
         value: index,
       }));
       setJobCategories(jobCategory_);
-      setCountry(msg.location.split(" ")[0]);
-      setCity(msg.location.split(" ")[1]);
+      setCountry(msg.location.split(",")[0]);
+      setCity(msg.location.split(",")[1]);
       setExperience_lvl(msg.experience);
       setDescription(msg.description);
       setRequirements(msg.requirements);
@@ -118,7 +118,7 @@ const PostJob = ({ jobConfig, jobTitles, countries, jobId }) => {
       setError("");
 
       // customize state to be sent in body
-      const location = city + " " + country;
+      const location = city + "," + country;
       const jobCategory = jobCategories.map((cat) => cat.label);
       //waiting for api response
       let response = await fetch(baseUrl + "jobs/" + `${jobId && jobId}   `, {
@@ -137,6 +137,7 @@ const PostJob = ({ jobConfig, jobTitles, countries, jobId }) => {
           skills_tools: skills,
           description,
           app_title: "Application Title",
+          app_text_questions: questions,
           app_description: "Application description",
           app_video_questions: ["question1", "question2", "question3"],
         }),
@@ -305,7 +306,7 @@ const PostJob = ({ jobConfig, jobTitles, countries, jobId }) => {
                         }
                         className="btn--global  btn--cancel btn--remove"
                       >
-                        <i class="fa-solid fa-trash-can"></i>
+                        <i className="fa-solid fa-trash-can"></i>
                       </button>
                     )}
                   </div>
@@ -348,7 +349,7 @@ const PostJob = ({ jobConfig, jobTitles, countries, jobId }) => {
                         }
                         className="btn--global  btn--cancel btn--remove"
                       >
-                        <i class="fa-solid fa-trash-can"></i>
+                        <i className="fa-solid fa-trash-can"></i>
                       </button>
                     )}
                   </div>
@@ -388,7 +389,7 @@ const PostJob = ({ jobConfig, jobTitles, countries, jobId }) => {
                         }
                         className="btn--global  btn--cancel btn--remove"
                       >
-                        <i class="fa-solid fa-trash-can"></i>
+                        <i className="fa-solid fa-trash-can"></i>
                       </button>
                     )}
                   </div>
