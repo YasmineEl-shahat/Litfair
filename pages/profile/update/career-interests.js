@@ -49,21 +49,24 @@ const CareerInterests = ({ job }) => {
     const user_id = user.id;
     //waiting for api response
     const res = await fetch(baseUrl + "seeker/details/view/" + user_id);
-    const { career_lvl, jobType, jobCategory, jobTitle, currentState } =
-      await res.json();
-    const jobCategory_ = jobCategory.map((cat) => ({
-      label: cat.jobCategories,
-      value: cat._id,
-    }));
-    const jobTitle_ = jobTitle.map((title) => ({
-      label: title["job title"],
-      value: title._id,
-    }));
-    setCareer_lvl(career_lvl);
-    setJobType(jobType);
-    setJobTitles(jobTitle_);
-    setJobCategories(jobCategory_);
-    setCurrentState(currentState);
+    const resp = await res.json();
+    if (!resp.msg) {
+      const { career_lvl, jobType, jobCategory, jobTitle, currentState } = resp;
+      const jobCategory_ = jobCategory.map((cat) => ({
+        label: cat.jobCategories,
+        value: cat._id,
+      }));
+      const jobTitle_ = jobTitle.map((title) => ({
+        label: title["job title"],
+        value: title._id,
+      }));
+      setCareer_lvl(career_lvl);
+      setJobType(jobType);
+      setJobTitles(jobTitle_);
+      setJobCategories(jobCategory_);
+      setCurrentState(currentState);
+    }
+
     if (loading) setLoading(false);
   }, []);
 

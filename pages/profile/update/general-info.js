@@ -60,31 +60,17 @@ const GeneralInfo = ({ countries }) => {
       headers: {
         Authorization: "Bearer" + " " + auth,
       },
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          const res = await response.json();
-          setFname(res.fname);
-          setLname(res.lname);
-          setEmail(res.email);
-          setPhone_number(res.phone_number);
-          setCountry(res.country);
-          setCity(res.city);
-          setLoading(false);
-        }
-        if (response.status === 400) {
-          // So, a server-side validation error occurred.
-          // Server side validation returns a string error message, so parse as text instead of json.
-          const error = response.text();
-          throw new Error(error);
-        }
-        if (response.status === 502) {
-          throw new Error("Network response was not ok.");
-        }
-      })
-      .catch((e) => {
-        setError(e.toString());
-      });
+    });
+    const res = await response.json();
+    if (res) {
+      setFname(res.fname);
+      setLname(res.lname);
+      setEmail(res.email);
+      setPhone_number(res.phone_number);
+      setCountry(res.country);
+      setCity(res.city);
+      setLoading(false);
+    }
 
     const user_id = user.id;
     const resDes = await fetch(baseUrl + "seeker/details/view/" + user_id);

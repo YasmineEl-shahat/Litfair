@@ -1,5 +1,5 @@
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { BsBookmark } from "react-icons/bs";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import { SiMaterialdesignicons } from "react-icons/si";
 import { useEffect, useContext, useState } from "react";
@@ -10,8 +10,11 @@ import AuthContext from "../context/AuthContext";
 const baseUrl = process.env.API_URL;
 
 const Jobs = ({ posts }) => {
-  console.log(posts);
   const [appliedJobs, setAppliedJobs] = useState([]);
+  const [savedJobs, setSavedJobs] = useState([]);
+  const saved = localStorage.getItem("saved")
+    ? JSON.parse(localStorage.getItem("saved"))
+    : [];
   //hooks
   const { auth } = useContext(AuthContext);
   useEffect(async () => {
@@ -24,6 +27,8 @@ const Jobs = ({ posts }) => {
     });
     const { msg } = await res.json();
     setAppliedJobs(msg);
+
+    setSavedJobs(saved);
   }, []);
   return (
     <>
@@ -92,8 +97,24 @@ const Jobs = ({ posts }) => {
                 )}
               </div>
               <div className={style.lastSection}>
-                <i className={style.bookmark}>
-                  <BsBookmark />
+                <i
+                  onClick={() => {
+                    let newSaved = savedJobs;
+                    if (savedJobs.includes(post)) {
+                      newSaved = newSaved.filter((saved) => saved !== post);
+                    } else {
+                      newSaved = [...newSaved, post];
+                    }
+                    setSavedJobs(newSaved);
+                    localStorage.setItem("saved", JSON.stringify(newSaved));
+                  }}
+                  className={style.bookmark}
+                >
+                  {saved.includes(post) || savedJobs.includes(post) ? (
+                    <BsBookmarkFill />
+                  ) : (
+                    <BsBookmark />
+                  )}
                 </i>
 
                 <Link
