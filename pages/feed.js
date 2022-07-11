@@ -10,19 +10,24 @@ const baseUrl = process.env.API_URL;
 
 export const getServerSideProps = async ({ query }) => {
   const appId = query.id || "";
+  const name = query.name || "";
   return {
-    props: { appId },
+    props: { appId, name },
   };
 };
-const FeedBack1 = ({ appId }) => {
+const FeedBack1 = ({ appId, name }) => {
   // variables
   const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   // state
   const [feedback, setFeedback] = useState({});
+  const [jobId, setJobId] = useState({});
+  const [role, setRole] = useState("");
 
   //hooks
-  const { auth } = useContext(AuthContext);
+  const { auth, user } = useContext(AuthContext);
   useEffect(async () => {
+    setRole(user.role);
+
     const res = await fetch(baseUrl + "applications/" + appId, {
       headers: {
         Authorization: "Bearer" + " " + auth,
@@ -30,6 +35,7 @@ const FeedBack1 = ({ appId }) => {
     });
     const { msg } = await res.json();
     setFeedback(msg[0].feedback_1);
+    setJobId(msg[0].job_post._id);
   }, []);
   return (
     <>
@@ -39,7 +45,10 @@ const FeedBack1 = ({ appId }) => {
         <article className={styleVid.questionCarCont}>
           <Link
             href={{
-              pathname: "/applications/" + appId + "/",
+              pathname:
+                role === "Seeker"
+                  ? "/applications/" + appId + "/"
+                  : "/companies/jobs/" + jobId + "/",
             }}
             passHref
           >
@@ -49,8 +58,10 @@ const FeedBack1 = ({ appId }) => {
           </Link>
         </article>
       </div>
+
       <main className={`container ${styleVid.mainCont} ${style.mainCont} `}>
         <article className={styleVid.questionCarCont}>
+          {role !== "Seeker" && <h3 className="circlebef">{name}</h3>}
           <h3 className="circlebef">Feedback Live Interview</h3>
           <section className={`${style.feedSec} `}>
             <span>Recommend Hiring</span>
