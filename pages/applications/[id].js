@@ -24,7 +24,10 @@ const JobProgress = () => {
   const [loading, setLoading] = useState(true);
   const [id, setId] = useState("");
 
-  //variables
+  // hooks
+  const { auth } = useContext(AuthContext);
+  const router = useRouter();
+
   const getDetails = async () => {
     const path = history.state.as.substring(1);
     const res = await fetch(baseUrl + path, {
@@ -39,9 +42,6 @@ const JobProgress = () => {
     setId(msg[0]._id);
     setLoading(false);
   };
-  // hooks
-  const { auth } = useContext(AuthContext);
-  const router = useRouter();
 
   useEffect(async () => {
     getDetails();

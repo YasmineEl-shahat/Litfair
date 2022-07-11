@@ -12,7 +12,6 @@
   text-align: center;
   color: $VDarkGray;
   font-size: $SHeadFont;
-
   font-weight: 600;
   border-radius: 1.5rem;
   hr {
@@ -78,16 +77,25 @@
   }
 }
 
+.feedpopOverlay,
 .popOverlay {
-  position: fixed;
+  background: rgba(6, 5, 5, 0.388);
+  z-index: 5;
   top: 0;
   right: 0;
   width: 100%;
-  height: 100%;
-  background: rgba(6, 5, 5, 0.388);
-  z-index: 5;
 }
-
+.popOverlay {
+  position: fixed;
+  height: 100%;
+}
+.feedpopOverlay {
+  position: absolute;
+}
+.feedpop {
+  background-color: $WhiteGlobal;
+  padding: 2.5rem 5rem;
+}
 .popApply {
   @include mQ(1900px, 1250px) {
     width: 30%;
