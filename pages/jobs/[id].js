@@ -37,7 +37,9 @@ const JobDetails = () => {
   const [application_id, setApplication_id] = useState("");
   const [isSaved, setIsSaved] = useState(false);
 
-  const getDetails = async () => {
+  const getDetails = async ( ) => {
+   
+
     // const path = router.asPath.substring(1);
     const path = history.state.as.substring(1);
 
@@ -49,9 +51,14 @@ const JobDetails = () => {
     const { msg } = await res.json();
 
     setDetail(msg);
+    console.log(msg);
 
+
+
+    if(user.role === "Seeker" ){
     await getSaved(auth);
     if (savedArray.includes(msg._id)) setIsSaved(true);
+    }
     setLoading(false);
   };
   useEffect(async () => {
@@ -214,6 +221,10 @@ const JobDetails = () => {
                 Saved
               </div>
             ) : (
+              <>
+              {user.role === "Seeker" ?  (
+
+             
               <button
                 className={` btn--global btn--detail btn--save ${style.btnSave}`}
                 onClick={() => {
@@ -223,7 +234,20 @@ const JobDetails = () => {
               >
                 Save
               </button>
-            )}
+           
+           
+               ) : ( 
+               
+                <button  className= {style.btnEdit}
+                href="">
+                  Edit Job
+                </button>  
+                
+                )  } 
+               </>
+               
+               )   }
+{user.role === "Seeker" ?  (
 
             <button
               className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
@@ -234,6 +258,7 @@ const JobDetails = () => {
             >
               Apply
             </button>
+):( <button  className={` btn--global btn--detail btn--blue ${style.btnDetails}`}>Top Candidates</button>)}
           </div>
 
           <div className={style.boxDetails}>
