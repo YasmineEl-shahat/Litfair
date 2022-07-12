@@ -67,7 +67,7 @@ body {
     padding: 0.21rem;
   }
   .btn--detail {
-    padding: 0.2rem 1.5rem;
+    padding: 0.5rem 2rem;
     font-size: $InfoFont;
     @include mQ(399px) {
       font-size: 1rem;
