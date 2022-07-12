@@ -4,7 +4,6 @@ import Spinner from "../comps/Spinner";
 import Jobs from "../comps/jobs";
 import { ActivateBar } from "../functions/ActivateBar";
 import Layout from "../comps/layout";
-import style from "../styles/pages/empty.module.scss";
 import Empty from "../comps/empty";
 
 const baseUrl = process.env.API_URL;
@@ -43,16 +42,18 @@ const Applications = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <>{posts.length ? <Jobs posts={posts} /> : 
-        <Empty 
-        txt1={<p className={style.content1}>Start exploring jobs now and find your next opportunity</p>}
-        txt2={<p className={style.content2}>Start exploring jobs now and find your next opportunity</p>}
-        btn={<button  className={`${style.btnEmpty}  btn--blue `}>Explore</button>}
-        
-        
-        
-        /> 
-        }</>
+        <>
+          {posts.length ? (
+            <Jobs posts={posts} />
+          ) : (
+            <Empty
+              txt1="Start exploring jobs now and find your next opportunity"
+              txt2="Start exploring jobs now and find your next opportunity"
+              btn="Explore"
+              path="/"
+            />
+          )}
+        </>
       )}
     </>
   );

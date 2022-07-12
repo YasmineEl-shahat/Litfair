@@ -1,4 +1,3 @@
-import { BsBookmark } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import { SiMaterialdesignicons } from "react-icons/si";
 
@@ -18,6 +17,7 @@ import SuccessPop from "../../comps/Popups/SuccessPop";
 import { hideElement } from "../../functions/hideElement";
 import { showElement } from "../../functions/showElement";
 import { disableBtn, EnableBtn } from "../../functions/ButtonsFun";
+import { getSaved, savedArray, SaveJob } from "../../functions/Api/Savedjobs";
 
 const baseUrl = process.env.API_URL;
 
@@ -35,6 +35,7 @@ const JobDetails = () => {
   const [text_questions, setText_questions] = useState([]);
   const [text_answers, setText_answers] = useState([]);
   const [application_id, setApplication_id] = useState("");
+  const [isSaved, setIsSaved] = useState(false);
 
   const getDetails = async () => {
     // const path = router.asPath.substring(1);
@@ -48,11 +49,13 @@ const JobDetails = () => {
     const { msg } = await res.json();
 
     setDetail(msg);
-
+    console.log(msg);
+    await getSaved(auth);
+    if (savedArray.includes(msg._id)) setIsSaved(true);
     setLoading(false);
   };
-  useEffect(() => {
-    getDetails();
+  useEffect(async () => {
+    await getDetails();
   }, [router]);
 
   //handlers;
@@ -204,13 +207,23 @@ const JobDetails = () => {
                 </div>
               </div>
             </div>
-
-            <button
-              className={` btn--global btn--detail btn--save ${style.btnSave}`}
-              type="submit"
-            >
-              Save
-            </button>
+            {isSaved ? (
+              <div
+                className={` btn--global btn--detail btn--save ${style.btnSave}`}
+              >
+                Saved
+              </div>
+            ) : (
+              <button
+                className={` btn--global btn--detail btn--save ${style.btnSave}`}
+                onClick={() => {
+                  setIsSaved(true);
+                  SaveJob(auth, detail.id);
+                }}
+              >
+                Save
+              </button>
+            )}
 
             <button
               className={` btn--global btn--detail btn--blue ${style.btnDetails}`}

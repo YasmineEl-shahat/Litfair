@@ -1,33 +1,38 @@
 @import "../abstracts/variables.scss";
 @import "../abstracts/mixins.scss";
 
-.wrap{
-    @include flexCenter;
-    flex-direction: column;
-    margin-bottom: 10rem;
+.wrap {
+  @include flexCenter;
+  flex-direction: column;
+  margin-bottom: 10rem;
+  text-align: center;
 }
-.emptyVector{
-    width: 30rem;
-    height: 15rem;
-    //@include flexCenter;
+.emptyVector {
+  width: 30rem;
+  height: 15rem;
 }
-.content1{
-
-    color: $VDarkGray;
-   font-size: $InfoFont;
-   font-weight: bold;
-   margin: 1rem;
+.content1 {
+  color: $VDarkGray;
+  font-size: $InfoFont;
+  font-weight: bold;
+  margin: 1rem;
 }
-.content2{
-    color: $vidGray;
-   font-size: 1rem;
-   
+.content2 {
+  color: $vidGray;
+  font-size: 1rem;
 }
-.btnEmpty{
-    
-    font-size: $InfoFont;
-    width: 10rem;
-    border-radius: 2px;
-    color: $WhiteGlobal;
-    margin: 1rem;
+@include mQ(320px) {
+  .content1 {
+    font-size: 1.3rem;
+  }
+  .content2 {
+    font-size: 0.8rem;
+  }
+}
+.btnEmpty {
+  font-size: $InfoFont;
+  width: 10rem;
+  border-radius: 2px;
+  color: $WhiteGlobal;
+  margin: 1rem;
 }

@@ -6,10 +6,16 @@ import { useEffect, useContext, useState } from "react";
 import Link from "next/link";
 import style from "../styles/pages/SeekerHome.module.scss";
 import AuthContext from "../context/AuthContext";
+import {
+  getSaved,
+  savedArray,
+  SaveJob,
+  DeleteSaved,
+} from "../functions/Api/Savedjobs";
 
 const baseUrl = process.env.API_URL;
 
-const Jobs = ({ posts }) => {
+const Jobs = ({ posts, isCompany }) => {
   const [appliedJobs, setAppliedJobs] = useState([]);
   const [savedJobs, setSavedJobs] = useState([]);
 
@@ -17,23 +23,18 @@ const Jobs = ({ posts }) => {
   const { auth } = useContext(AuthContext);
   useEffect(async () => {
     //waiting for api response
-    const res = await fetch(baseUrl + "applications/", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer" + " " + auth,
-      },
-    });
-    const { msg } = await res.json();
-    setAppliedJobs(msg);
-
-    const resp = await fetch(baseUrl + "seeker/saved-jobs", {
-      headers: {
-        Authorization: "Bearer" + " " + auth,
-      },
-    });
-    const respJson = await resp.json();
-
-    setSavedJobs(respJson.msg);
+    if (!isCompany) {
+      const res = await fetch(baseUrl + "applications/", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer" + " " + auth,
+        },
+      });
+      const { msg } = await res.json();
+      setAppliedJobs(msg);
+      await getSaved(auth);
+      setSavedJobs(savedArray);
+    }
   }, []);
   return (
     <>
@@ -102,39 +103,24 @@ const Jobs = ({ posts }) => {
                 )}
               </div>
               <div className={style.lastSection}>
-                <i
-                  onClick={async () => {
-                    let newSaved = savedJobs;
-                    if (savedJobs.includes(post._id)) {
-                      newSaved = newSaved.filter((saved) => saved !== post._id);
-                      setSavedJobs(newSaved);
-                      await fetch(baseUrl + "seeker/saved-jobs/" + post._id, {
-                        method: "DELETE",
-                        headers: {
-                          "Content-Type": "application/json",
-                          Authorization: "Bearer" + " " + auth,
-                        },
-                      });
-                    } else {
-                      newSaved = [...newSaved, post._id];
-                      setSavedJobs(newSaved);
-                      await fetch(baseUrl + "seeker/saved-jobs/" + post._id, {
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/json",
-                          Authorization: "Bearer" + " " + auth,
-                        },
-                      });
-                    }
-                  }}
-                  className={style.bookmark}
-                >
-                  {savedJobs.includes(post._id) ? (
-                    <BsBookmarkFill />
-                  ) : (
-                    <BsBookmark />
-                  )}
-                </i>
+                {!isCompany && (
+                  <i
+                    onClick={async () => {
+                      if (savedJobs.includes(post._id)) {
+                        DeleteSaved(auth, post._id, setSavedJobs);
+                      } else {
+                        SaveJob(auth, post._id, setSavedJobs);
+                      }
+                    }}
+                    className={style.bookmark}
+                  >
+                    {savedJobs.includes(post._id) ? (
+                      <BsBookmarkFill />
+                    ) : (
+                      <BsBookmark />
+                    )}
+                  </i>
+                )}
 
                 <Link
                   href={
