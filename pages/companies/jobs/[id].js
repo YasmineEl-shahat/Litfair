@@ -15,9 +15,9 @@ const baseUrl = process.env.API_URL;
 const TopApplicants = () => {
   //state
   const [applicants, setApplicants] = useState([]);
-  const [job_title, setJob_title] = useState({});
-  const [job_type, setJob_type] = useState({});
-  const [job_location, setJob_location] = useState({});
+  const [job_title, setJob_title] = useState("");
+  const [job_type, setJob_type] = useState("");
+  const [job_location, setJob_location] = useState("");
   const [feedbackPop, setFeedbackPop] = useState({});
   const [namePop, setNamePop] = useState("");
   const [select, setSelect] = useState([]);
