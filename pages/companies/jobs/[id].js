@@ -58,7 +58,7 @@ const TopApplicants = () => {
                 <GoLocation /> {job_location}
               </h6>
               <h6>
-                <i class="fa-regular fa-clock"></i> {job_type}
+                <i className="fa-regular fa-clock"></i> {job_type}
               </h6>
             </div>
           </section>
