@@ -83,8 +83,8 @@ const Jobs = ({ posts, isCompany }) => {
                   <div className={style.job_type}> {post.job_type} </div>
                 )}
 
-                {post.experience && (
-                  <div className={style.subInfo}>
+                <div className={style.subInfo}>
+                  {post.experience && (
                     <div className={style.experience}>
                       {" "}
                       <i className={style.expIcon}>
@@ -92,15 +92,16 @@ const Jobs = ({ posts, isCompany }) => {
                       </i>
                       {post.experience}{" "}
                     </div>
-                    <div className={style.location}>
-                      {" "}
-                      <i className={style.locationIcon}>
-                        <GoLocation />
-                      </i>
-                      {post.location}{" "}
-                    </div>
+                  )}
+
+                  <div className={style.location}>
+                    {" "}
+                    <i className={style.locationIcon}>
+                      <GoLocation />
+                    </i>
+                    {post.location}{" "}
                   </div>
-                )}
+                </div>
               </div>
               <div className={style.lastSection}>
                 {!isCompany && (

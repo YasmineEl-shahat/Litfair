@@ -18,6 +18,7 @@ import { hideElement } from "../../functions/hideElement";
 import { showElement } from "../../functions/showElement";
 import { disableBtn, EnableBtn } from "../../functions/ButtonsFun";
 import { getSaved, savedArray, SaveJob } from "../../functions/Api/Savedjobs";
+import Link from "next/link";
 
 const baseUrl = process.env.API_URL;
 
@@ -37,9 +38,7 @@ const JobDetails = () => {
   const [application_id, setApplication_id] = useState("");
   const [isSaved, setIsSaved] = useState(false);
 
-  const getDetails = async ( ) => {
-   
-
+  const getDetails = async () => {
     // const path = router.asPath.substring(1);
     const path = history.state.as.substring(1);
 
@@ -53,11 +52,9 @@ const JobDetails = () => {
     setDetail(msg);
     console.log(msg);
 
-
-
-    if(user.role === "Seeker" ){
-    await getSaved(auth);
-    if (savedArray.includes(msg._id)) setIsSaved(true);
+    if (user.role === "Seeker") {
+      await getSaved(auth);
+      if (savedArray.includes(msg._id)) setIsSaved(true);
     }
     setLoading(false);
   };
@@ -222,44 +219,49 @@ const JobDetails = () => {
               </div>
             ) : (
               <>
-              {user.role === "Seeker" ?  (
-
-             
+                {user.role === "Seeker" ? (
+                  <button
+                    className={` btn--global btn--detail btn--save ${style.btnSave}`}
+                    onClick={() => {
+                      setIsSaved(true);
+                      SaveJob(auth, detail._id);
+                    }}
+                  >
+                    Save
+                  </button>
+                ) : (
+                  <Link
+                    href={{
+                      pathname: "/post-job",
+                      query: { id: detail._id },
+                    }}
+                  >
+                    <button className={`btn--detail ${style.btnEdit}`} href="">
+                      Edit Job
+                    </button>
+                  </Link>
+                )}
+              </>
+            )}
+            {user.role === "Seeker" ? (
               <button
-                className={` btn--global btn--detail btn--save ${style.btnSave}`}
-                onClick={() => {
-                  setIsSaved(true);
-                  SaveJob(auth, detail.id);
+                className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  showElement("sure");
                 }}
               >
-                Save
+                Apply
               </button>
-           
-           
-               ) : ( 
-               
-                <button  className= {`btn--detail ${style.btnEdit}`}
-                href="">
-                  Edit Job
-                </button>  
-                
-                )  } 
-               </>
-               
-               )   }
-{user.role === "Seeker" ?  (
-
-            <button
-              className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
-              onClick={(e) => {
-                e.preventDefault();
-                showElement("sure");
-              }}
-            >
-              Apply
-            </button>
-):( <button  className={` btn--global btn--detail btn--blue ${style.btnDetails}`}>
-  Top Candidates</button>)}
+            ) : (
+              <Link href={`/companies/jobs/${detail._id}`}>
+                <button
+                  className={` btn--global btn--detail btn--blue ${style.btnDetails}`}
+                >
+                  Top Candidates
+                </button>
+              </Link>
+            )}
           </div>
 
           <div className={style.boxDetails}>
