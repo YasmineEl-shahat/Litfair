@@ -49,7 +49,7 @@ const JobDetails = () => {
     const { msg } = await res.json();
 
     setDetail(msg);
-    console.log(msg);
+
     await getSaved(auth);
     if (savedArray.includes(msg._id)) setIsSaved(true);
     setLoading(false);

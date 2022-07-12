@@ -61,7 +61,8 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const path = ["/login", "/seekerRegister", "/companyRegister"];
     if (!path.includes(router.asPath) && auth) checkToken();
-    else if (!path.includes(router.asPath)) router.replace("/");
+    else if (!path.includes(router.asPath) && router.asPath !== "/")
+      router.replace("/");
     let hour = 1000 * 60 * 60;
     let interval = setInterval(function () {
       if (!path.includes(router.asPath) && auth) checkToken();

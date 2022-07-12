@@ -1,0 +1,24 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+.header {
+  @include flexBet;
+  flex-wrap: wrap;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  h4 {
+    color: $VDarkGray;
+    font-size: $SHeadFont;
+    align-self: center;
+    margin-bottom: 0;
+  }
+}
+.content,
+.header {
+  box-shadow: $lightShadow;
+}
+
+.content {
+  border-radius: 20px;
+}
