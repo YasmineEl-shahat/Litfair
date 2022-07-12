@@ -37,7 +37,11 @@ html {
       background: linear-gradient($BlueGlobal, transparent);
       border-radius: 6px;
     }
-
+    .container {
+      @include mQ(991.9px) {
+        max-width: 900px;
+      }
+    }
     pre {
       font-size: $InfoFont;
       font-family: "Inter", sans-serif;

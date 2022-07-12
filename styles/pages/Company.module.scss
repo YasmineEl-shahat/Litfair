@@ -1,0 +1,50 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+.header {
+  @include flexBet;
+  flex-wrap: wrap;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+
+  h4 {
+    color: $VDarkGray;
+    font-size: $SHeadFont;
+    align-self: center;
+    margin-bottom: 0;
+  }
+}
+.content,
+.header {
+  box-shadow: $lightShadow;
+}
+
+.content {
+  border-radius: 20px;
+  min-height: 60rem;
+  margin-bottom: 2rem;
+}
+
+.ContentWrap {
+  @include flexBet;
+  flex-wrap: wrap;
+  margin-bottom: 10rem;
+  section {
+    &:nth-child(1) {
+      min-width: 72%;
+      padding-top: 10rem;
+    }
+    &:nth-child(2) {
+      min-width: 26%;
+    }
+    @include mQ(850px) {
+      &:nth-child(1) {
+        min-width: 100%;
+      }
+      &:nth-child(2) {
+        min-width: 100%;
+      }
+    }
+  }
+}
