@@ -1,0 +1,110 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+.mainCont {
+  article {
+    border-radius: 20px;
+    height: fit-content;
+    margin-bottom: 2rem;
+  }
+  @include mQ(991.9px) {
+    max-width: 980px;
+  }
+  button {
+    padding: 0.8rem 1.5rem;
+    margin-top: 1rem;
+  }
+  .apply {
+    padding: 0.8rem 5rem;
+    margin-top: 4rem;
+  }
+}
+.Head,
+.Top {
+  text-align: center;
+
+  h4 {
+    font-size: 2.5rem;
+  }
+  h5 {
+    font-size: $SHeadFont;
+    color: $BlueGlobal;
+    font-weight: 700;
+  }
+  @include mQ(425px) {
+    h4 {
+      font-size: $SHeadFont;
+    }
+    h5 {
+      font-size: $InfoFont;
+    }
+  }
+  article {
+    position: relative;
+    margin: 2rem 0;
+    .selectAll {
+      h5 {
+        text-align: end;
+        position: relative;
+        right: 3rem;
+      }
+      div {
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+}
+
+.Top {
+  color: white;
+  background-color: $BlueGlobal;
+  margin: 0 -6rem;
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+
+  @include mQ(1286px) {
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
+  @include mQ(767.9px) {
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+  @include mQ(447px) {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+  border-radius: 20px 20px 0 0;
+  padding: 4rem;
+  h2 {
+    color: white;
+    font-size: $HeadFont;
+    line-height: $HeadLineSpacing;
+  }
+  div {
+    @include flexCenter;
+    h6 {
+      font-size: $InfoFont;
+      line-height: $MediumLineSpacing;
+      margin: 0 2rem;
+    }
+  }
+  @include mQ(384px) {
+    h2 {
+      font-size: $MediumFont;
+      line-height: $MediumLineSpacing;
+    }
+    div {
+      @include flexBet;
+      h6 {
+        font-size: 1.2rem;
+        line-height: $InfoLineSpacing;
+        margin: 0rem;
+      }
+    }
+  }
+}
+.cardWrap {
+  @include grid(1.5rem, 20rem, 30rem);
+}

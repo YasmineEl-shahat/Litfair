@@ -31,15 +31,23 @@
   margin-bottom: 20rem;
   border-radius: 0.5rem;
 }
-@include mQ(991.9px) {
+@include mQ(1286px) {
   .questionCarCont {
     width: 100%;
     padding: 2rem;
   }
 }
-@include mQ(405px) {
+@include mQ(767.9px) {
+  .questionCarCont {
+    padding: 1rem;
+    margin: 0rem;
+    // width: 750px;
+  }
+}
+@include mQ(447px) {
   .questionCarCont {
     padding: 0.5rem;
+    margin: 0.5rem;
   }
   .questionCont {
     padding: 1rem;

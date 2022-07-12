@@ -1,0 +1,49 @@
+body {
+  .Card {
+    height: 30rem;
+    @include flexCenter;
+    flex-direction: column;
+    box-shadow: 0px 3px 6px $LightGray;
+    border-radius: 20px;
+    position: relative;
+
+    .card-photo {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+
+    h4 {
+      margin-bottom: 0;
+      font-size: $SHeadFont;
+      @include mQ(399px) {
+        font-size: $InfoFont;
+      }
+    }
+    p {
+      font-size: $InfoFont;
+    }
+  }
+  .selectbtn {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 3px solid $BlueGlobal;
+    border-radius: 5px;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    font-size: $SHeadFont;
+    @include flexCenter;
+    color: $BlueGlobal;
+  }
+  .starWrap {
+    margin: 1rem 0;
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin: 0 0.1rem;
+    }
+  }
+}

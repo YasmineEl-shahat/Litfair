@@ -123,6 +123,7 @@
   @include mQ(1200px) {
     overflow-x: scroll;
     @include flexBet;
+    margin: 0rem 1rem;
     &::-webkit-scrollbar {
       height: 0.5rem;
       bottom: 1rem;
