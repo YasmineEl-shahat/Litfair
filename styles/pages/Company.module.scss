@@ -11,6 +11,7 @@
   h4 {
     color: $VDarkGray;
     font-size: $SHeadFont;
+    font-weight: 900;
     align-self: center;
     margin-bottom: 0;
   }
@@ -24,6 +25,7 @@
   border-radius: 20px;
   min-height: 60rem;
   margin-bottom: 2rem;
+  padding: 2rem;
 }
 
 .ContentWrap {
@@ -33,7 +35,7 @@
   section {
     &:nth-child(1) {
       min-width: 72%;
-      padding-top: 10rem;
+      padding: 10rem 2rem;
     }
     &:nth-child(2) {
       min-width: 26%;
@@ -47,4 +49,46 @@
       }
     }
   }
+}
+
+.job {
+  padding: 1rem;
+  border: 1px solid $LigtBlue;
+  margin: 1rem;
+  position: relative;
+  .location {
+    color: $VDarkGray;
+    font-size: 1.3rem;
+  }
+  article {
+    display: flex;
+    flex-wrap: wrap;
+    h4 {
+      cursor: pointer;
+      font-weight: 900;
+      margin-right: 0.5rem;
+    }
+    .applicants {
+      background: $editLightGray;
+      padding: 0.1rem;
+    }
+  }
+  button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: $InfoFont;
+  }
+}
+
+.view {
+  background: $LightViolet;
+  display: block;
+  cursor: pointer;
+  text-align: center;
+  padding: 1rem;
+  margin: 1rem;
+  color: $BlueGlobal;
+  font-size: $InfoFont;
+  font-weight: 600;
 }
