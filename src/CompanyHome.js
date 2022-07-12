@@ -6,6 +6,8 @@ import { postArray, getPosts, DeletePost } from "../functions/Api/posts";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import Spinner from "../comps/Spinner";
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
 
 const baseUrl = process.env.API_URL;
 
@@ -16,6 +18,7 @@ const CompanyHome = () => {
   const [posts, setPosts] = useState([]);
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
+  // const [startDate, setStartDate] = useState(new Date());
 
   const getData = async () => {
     // Fetch data from external API
@@ -32,7 +35,6 @@ const CompanyHome = () => {
     setName(msg.profile.name);
     setLoading(false);
   };
-
   useEffect(() => {
     getData();
     ActivateBar("bar1");
@@ -42,6 +44,15 @@ const CompanyHome = () => {
     <Spinner />
   ) : (
     <main className={`container `}>
+      {/* <DatePicker
+        selected={startDate}
+        showTimeSelect
+        onChange={(date) => {
+          console.log(date);
+          setStartDate(date);
+        }}
+      /> */}
+
       <div className={style.header}>
         <h4>Hello {name}!</h4>
         <Link href="/post-job" passHref>
@@ -61,56 +72,58 @@ const CompanyHome = () => {
               isCompany={true}
             />
           ) : (
-            posts.map((post) => (
-              <div className={style.job}>
-                <article>
-                  <Link href={`/jobs/${post._id}`}>
-                    <h4>{post.title}</h4>
-                  </Link>
+            <>
+              {posts.map((post) => (
+                <div className={style.job}>
+                  <article>
+                    <Link href={`/jobs/${post._id}`}>
+                      <h4>{post.title}</h4>
+                    </Link>
 
-                  <p className={style.applicants}>
-                    {post.applications_count} applicant
-                    {post.applications_count <= 1 ? "" : "s"}
-                  </p>
-                </article>
+                    <p className={style.applicants}>
+                      {post.applications_count} applicant
+                      {post.applications_count <= 1 ? "" : "s"}
+                    </p>
+                  </article>
 
-                <p className={style.location}>{post.location}</p>
-                <button
-                  onClick={() => {
-                    const menu = document.getElementById(`drop${post._id}`);
-                    menu.classList.toggle("active");
-                  }}
-                >
-                  <i class="fa-solid fa-ellipsis-vertical"></i>
-                </button>
-                <div id={`drop${post._id}`} className="drop">
-                  <Link href={`/jobs/${post._id}`}>
-                    <h5>Preview</h5>
-                  </Link>
-                  <Link
-                    href={{
-                      pathname: "/post-job",
-                      query: { id: post._id },
-                    }}
-                  >
-                    <h5>Edit</h5>
-                  </Link>
-                  <h5
+                  <p className={style.location}>{post.location}</p>
+                  <button
                     onClick={() => {
                       const menu = document.getElementById(`drop${post._id}`);
                       menu.classList.toggle("active");
-                      DeletePost(post._id, posts, setPosts, auth);
                     }}
                   >
-                    Delete
-                  </h5>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+                  <div id={`drop${post._id}`} className="drop">
+                    <Link href={`/jobs/${post._id}`}>
+                      <h5>Preview</h5>
+                    </Link>
+                    <Link
+                      href={{
+                        pathname: "/post-job",
+                        query: { id: post._id },
+                      }}
+                    >
+                      <h5>Edit</h5>
+                    </Link>
+                    <h5
+                      onClick={() => {
+                        const menu = document.getElementById(`drop${post._id}`);
+                        menu.classList.toggle("active");
+                        DeletePost(post._id, posts, setPosts, auth);
+                      }}
+                    >
+                      Delete
+                    </h5>
+                  </div>
                 </div>
-              </div>
-            ))
+              ))}
+              <Link href="/companyPosts" passHref>
+                <div className={` ${style.view}`}>View All Posts</div>
+              </Link>
+            </>
           )}
-          <Link href="/companyPosts" passHref>
-            <div className={` ${style.view}`}>View All Posts</div>
-          </Link>
         </section>
         <section className={`${style.content} `}></section>
       </div>
