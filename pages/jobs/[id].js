@@ -238,7 +238,7 @@ const JobDetails = () => {
            
                ) : ( 
                
-                <button  className= {style.btnEdit}
+                <button  className= {`btn--detail ${style.btnEdit}`}
                 href="">
                   Edit Job
                 </button>  
@@ -258,7 +258,8 @@ const JobDetails = () => {
             >
               Apply
             </button>
-):( <button  className={` btn--global btn--detail btn--blue ${style.btnDetails}`}>Top Candidates</button>)}
+):( <button  className={` btn--global btn--detail btn--blue ${style.btnDetails}`}>
+  Top Candidates</button>)}
           </div>
 
           <div className={style.boxDetails}>
