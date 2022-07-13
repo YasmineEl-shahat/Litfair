@@ -138,9 +138,17 @@ const JobProgress = () => {
               )}
 
               {progress.Cv_scanned && !progress.Live_inter && (
-                <button className={`btn--global btn--blue btn--detail `}>
-                  Go To Interview
-                </button>
+                <Link
+                  href={{
+                    pathname: "/application/interview/",
+                    query: { id },
+                  }}
+                  passHref
+                >
+                  <button className={`btn--global btn--blue btn--detail `}>
+                    Go To Interview
+                  </button>
+                </Link>
               )}
               {progress.feedback_1 && (
                 <Link

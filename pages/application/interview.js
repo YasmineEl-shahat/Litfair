@@ -4,10 +4,22 @@ import VideoRecorder from "react-video-recorder";
 import style from "../../styles/pages/Interview.module.scss";
 import AuthContext from "../../context/AuthContext";
 import axios from "axios";
+import SuccessPop from "../../comps/Popups/SuccessPop";
+import { showElement } from "../../functions/showElement";
+import { useRouter } from "next/router";
 
 const baseUrl = process.env.API_URL;
 
-const LiveInterview = () => {
+export const getServerSideProps = async ({ query }) => {
+  const appId = query.id || "";
+
+  return {
+    props: { appId },
+  };
+};
+
+const LiveInterview = ({ appId }) => {
+  const router = useRouter();
   //state
   const [uploaded, setUploaded] = useState(false);
   const [sending, setSending] = useState(false);
@@ -27,8 +39,8 @@ const LiveInterview = () => {
 
   //convert blob stream to video to be sent to the server
   const convertBlobToVideo = (videoBlob) => {
-    const videoConverted = new File([videoBlob], "file.webm", {
-      type: "video/webm",
+    const videoConverted = new File([videoBlob], "file.avi", {
+      type: "video/x-msvideo",
     });
     return videoConverted;
   };
@@ -38,21 +50,28 @@ const LiveInterview = () => {
     if (current !== questions.length) {
       setCurrent(current + 1);
       setUploaded(false);
+    } else {
+      showElement("successPop");
+      setTimeout(() => {
+        router.replace("/applications/" + appId);
+      }, 3000);
     }
   };
 
   // send video to the server to be sent to the model
-  const uploadVideo = (videoBlob) => {
+  const uploadVideo = (videoBlob, question) => {
     let data = new FormData();
     data.append("video", convertBlobToVideo(videoBlob));
+    data.append("video_question", question);
     const options = {
       headers: {
         Authorization: "Bearer" + " " + auth,
+        "Content-Type": "multipart/form-data",
       },
     };
 
     axios
-      .post(baseUrl + "upload_video", data, options)
+      .post("http://40.83.32.70/submit-video/" + appId, data, options)
       .then((res) => {
         const { msg } = res.data;
         console.log(msg);
@@ -147,7 +166,7 @@ const LiveInterview = () => {
                           onRecordingComplete={(videoBlob) => {
                             // Sending the video to the server...
                             setSending(true);
-                            uploadVideo(videoBlob);
+                            uploadVideo(videoBlob, question);
                           }}
                         />
                       </div>
@@ -162,6 +181,10 @@ const LiveInterview = () => {
           </div>
         </div>
       </article>
+      <SuccessPop
+        header="Well done, your interview has been submitted successfully"
+        content="Our team will review your interview and will provide feedback as soon as possible."
+      />
     </main>
   );
 };
