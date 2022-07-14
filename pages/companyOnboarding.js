@@ -119,7 +119,7 @@ if(!name || !phone_number || !company_size || !description)
             <button 
             type="submit"
              className={`btn--global btn--blue btn--big ${style.btn}`}
-            >Create company account</button>
+            >Save And Continue</button>
             </div>
 
             </form>
