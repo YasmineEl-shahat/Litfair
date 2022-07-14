@@ -1,0 +1,40 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+.body{
+  
+    @include flexCenter;
+    
+}
+.box{
+  background-color: $WhiteGlobal;
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  box-shadow: 0.1rem 0.1rem 1.2rem  #0000005c;
+  border-radius: 2rem;
+  width: 35rem;
+  height: 40rem;
+  text-align: center;
+ // @include flexCenter;
+}
+.top{
+
+    background-color: #DBD9FF;
+    color: $BlueGlobal;
+    font-size: 1rem;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+}
+.form{
+
+padding: 2rem;
+text-align: left;
+margin: 1rem;
+}
+.btn{
+
+    margin-top: 2rem;
+}
