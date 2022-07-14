@@ -13,7 +13,7 @@ const Registered = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      if (user.role === "Company") router.replace("/companyOnb");
+      if (user.role === "Company") router.replace("/");
       else router.replace("/setup/career-interests/");
     }, 3000);
   }, [router]);

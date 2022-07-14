@@ -16,6 +16,8 @@ const CompanyHome = () => {
   const [posts, setPosts] = useState([]);
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
+  const [logoImage, setLogoImage] = useState({});
+  const [coverImage, setCoverImage] = useState({});
 
   const getData = async () => {
     // Fetch data from external API
