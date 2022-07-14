@@ -36,11 +36,54 @@
     &:nth-child(1) {
       min-width: 72%;
       padding: 10rem 2rem;
+      @include mQ(376px) {
+        padding: 10rem 0.5rem;
+      }
     }
     &:nth-child(2) {
       min-width: 26%;
+      padding: 0;
+      position: relative;
+      text-align: center;
+      label {
+        background: none;
+        color: $vidGray;
+        position: absolute;
+        &:first-of-type {
+          top: 9rem;
+          @include centerX;
+        }
+        &:last-of-type {
+          text-align: center;
+          @include flexCenter;
+          flex-direction: column;
+          svg {
+            display: block;
+          }
+          font-size: 1.2rem;
+          top: 17rem;
+          @include centerX;
+          @include mQ(340px) {
+            font-size: 1rem;
+          }
+        }
+      }
+      img {
+        &:last-of-type {
+          border: 1px solid $BlueGlobal;
+          border-radius: 50%;
+          position: absolute;
+          top: 15rem;
+          @include centerX;
+        }
+      }
+      h4 {
+        position: relative;
+        top: 5.5rem;
+        font-weight: 900;
+      }
     }
-    @include mQ(850px) {
+    @include mQ(1199px) {
       &:nth-child(1) {
         min-width: 100%;
       }
