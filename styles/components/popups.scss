@@ -173,3 +173,124 @@
     }
   }
 }
+
+.popSch {
+  padding: 2rem 1rem;
+  min-width: 50%;
+  @include mQ(1247px) {
+    width: 70%;
+  }
+  @include mQ(950px) {
+    width: 90%;
+  }
+  .btn-done {
+    height: 4rem;
+    width: 12rem;
+  }
+}
+.schedule-content {
+  @include flexCenter;
+  flex-direction: column;
+  background-color: #f8f8f8;
+  padding: 2rem 1rem;
+  margin: 2rem 1rem;
+  border: 1px solid $VLightGray;
+  border-radius: 10px;
+  h6 {
+    align-self: flex-start;
+    margin-top: 1rem;
+  }
+  textArea {
+    background-color: white;
+    width: 100%;
+  }
+  label {
+    align-self: flex-start;
+  }
+  .appointment {
+    width: 100%;
+    @include flexBet;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 1rem 0;
+    @include mQ(623px) {
+      @include flexAround;
+    }
+    button {
+      height: 4rem;
+      width: 12rem;
+      @include mQ(730px) {
+        height: 3rem;
+        width: 10rem;
+      }
+      @include mQ(433px) {
+        margin-top: 1rem;
+      }
+    }
+    .react-datepicker-wrapper {
+      width: fit-content;
+      @include mQ(329px) {
+        width: 20rem;
+      }
+    }
+    .react-datepicker__input-container {
+      width: 23rem;
+      vertical-align: middle;
+      font-size: 1.3rem;
+      padding: 0;
+
+      @include mQ(730px) {
+        font-size: 1.01rem;
+        width: 20rem;
+      }
+      @include mQ(329px) {
+        width: 15rem;
+      }
+    }
+    .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+      right: 3rem;
+    }
+    .react-datepicker__navigation--previous {
+      left: -5rem;
+    }
+    .react-datepicker__navigation--next {
+      right: -5rem;
+    }
+    article {
+      display: flex;
+      align-items: center;
+      min-width: 20rem;
+      max-width: 20rem;
+      img {
+        margin-right: 1rem;
+      }
+      p {
+        font-size: $InfoFont;
+        text-align: start;
+        margin-bottom: 0;
+        max-width: 20rem;
+        overflow: hidden;
+      }
+      @include mQ(730px) {
+        min-width: 17rem;
+        p {
+          font-size: 1.2rem;
+        }
+      }
+    }
+    .dateWrap {
+      height: 3.5rem;
+      padding-right: 1rem;
+      border: 1px solid $LightGray;
+      @include mQ(720px) {
+        height: 2.5rem;
+      }
+      border-radius: 5px;
+      i {
+        vertical-align: middle;
+
+        cursor: pointer;
+      }
+    }
+  }
+}
