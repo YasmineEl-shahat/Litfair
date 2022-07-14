@@ -9,6 +9,8 @@ import SurePop from "../../../comps/Popups/SurePop";
 import { showElement } from "../../../functions/showElement";
 import { EnableBtn, disableBtn } from "../../../functions/ButtonsFun";
 import { GoLocation } from "react-icons/go";
+import SchedulePop from "../../../comps/Popups/schedule";
+import { hideElement } from "../../../functions/hideElement";
 
 const baseUrl = process.env.API_URL;
 
@@ -21,6 +23,9 @@ const TopApplicants = () => {
   const [feedbackPop, setFeedbackPop] = useState({});
   const [namePop, setNamePop] = useState("");
   const [select, setSelect] = useState([]);
+  const [email_body, setEmail_body] = useState("");
+  const [startDate, setStartDate] = useState([]);
+
   // hooks
   const { auth } = useContext(AuthContext);
   const getDetails = async () => {
@@ -31,6 +36,7 @@ const TopApplicants = () => {
       },
     });
     const { msg } = await res.json();
+    console.log(msg);
     setApplicants(msg.applications);
     setJob_title(msg.job_title);
     setJob_type(msg.job_type);
@@ -42,6 +48,20 @@ const TopApplicants = () => {
     disableBtn("applybtn");
   }, []);
 
+  //handlers;
+  const SureHandler = async (e, btn_id, id) => {
+    e.preventDefault();
+    let newDate = startDate;
+    let i = 0;
+    while (i < select.length) {
+      newDate = [...newDate, new Date()];
+      i++;
+    }
+    console.log(newDate);
+    setStartDate(newDate);
+    hideElement(id);
+    showElement("SchedulePop");
+  };
   return (
     <>
       <main
@@ -125,6 +145,16 @@ const TopApplicants = () => {
         submit="let's go"
         header={`${select.length} job seekers was selected`}
         content="let's schedule your interview hours"
+        handler={SureHandler}
+      />
+      <SchedulePop
+        select={select}
+        startDate={startDate}
+        setStartDate={setStartDate}
+        email_body={email_body}
+        setEmail_body={setEmail_body}
+        job_title={job_title}
+        auth={auth}
       />
     </>
   );

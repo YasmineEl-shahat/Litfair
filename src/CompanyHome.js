@@ -6,8 +6,6 @@ import { postArray, getPosts, DeletePost } from "../functions/Api/posts";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import Spinner from "../comps/Spinner";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
 
 const baseUrl = process.env.API_URL;
 
@@ -18,13 +16,13 @@ const CompanyHome = () => {
   const [posts, setPosts] = useState([]);
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
-  // const [startDate, setStartDate] = useState(new Date());
 
   const getData = async () => {
     // Fetch data from external API
     await getPosts(auth);
 
-    setPosts(postArray.slice(0, 4));
+    const tempPost = postArray.slice(postArray.length - 4, postArray.length);
+    setPosts(tempPost.reverse());
 
     const res = await fetch(baseUrl + "companies/profile/" + user.id, {
       headers: {
@@ -44,15 +42,6 @@ const CompanyHome = () => {
     <Spinner />
   ) : (
     <main className={`container `}>
-      {/* <DatePicker
-        selected={startDate}
-        showTimeSelect
-        onChange={(date) => {
-          console.log(date);
-          setStartDate(date);
-        }}
-      /> */}
-
       <div className={style.header}>
         <h4>Hello {name}!</h4>
         <Link href="/post-job" passHref>

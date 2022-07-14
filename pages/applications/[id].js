@@ -39,6 +39,7 @@ const JobProgress = () => {
 
     setDetail(msg[0].job_post);
     setProgress(msg[0].progress);
+
     setId(msg[0]._id);
     setLoading(false);
   };

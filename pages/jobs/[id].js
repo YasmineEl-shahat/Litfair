@@ -63,7 +63,6 @@ const JobDetails = () => {
   }, [router]);
 
   //handlers;
-
   const ApplyHandler = async (e, btn_id, id) => {
     e.preventDefault();
     disableBtn(btn_id);

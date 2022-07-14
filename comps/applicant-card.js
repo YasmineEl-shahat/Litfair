@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { disableBtn, EnableBtn } from "../functions/ButtonsFun";
 import { showElement } from "../functions/showElement";
 
