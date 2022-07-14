@@ -208,7 +208,7 @@ export const AuthProvider = ({ children }) => {
             setUser(jwt_decode(TokenObject));
 
             cookieCutter.set("auth", TokenObject);
-            router.replace("/registeredSuccessfully");
+            router.replace("/companyOnboarding");
           } else {
             const res = await response.json();
             const { msg } = res;
