@@ -1,0 +1,36 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+
+.wrapMap{
+    @include flexCenter;
+    @include mQ(880px) {
+
+        @include flexCenter;
+      }
+}
+.map{
+
+    width: 45rem;
+    height: 30rem;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+  @include mQ(880px) {
+        
+   width: 35rem;
+  }
+ 
+}
+
+.content{
+
+ font-size: $InfoFont;
+color: $BlackGlobal;
+margin-bottom: 2rem;
+margin-top: 1rem;
+}
+.wrapCont{
+
+    margin-left: 3rem;
+    margin-right: 1rem;
+}
