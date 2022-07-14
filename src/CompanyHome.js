@@ -6,6 +6,10 @@ import { postArray, getPosts, DeletePost } from "../functions/Api/posts";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import Spinner from "../comps/Spinner";
+import { uploadImg } from "../functions/uploadImg";
+import Icon from "@mdi/react";
+import { mdiCameraPlusOutline } from "@mdi/js";
+import axios from "axios";
 
 const baseUrl = process.env.API_URL;
 
@@ -33,6 +37,8 @@ const CompanyHome = () => {
     });
     const { msg } = await res.json();
     setName(msg.profile.name);
+    setCoverImage({ src: msg.profile.cover, image: msg.profile.cover });
+    setLogoImage({ src: msg.profile.logo, image: msg.profile.logo });
     setLoading(false);
   };
   useEffect(() => {
@@ -40,6 +46,27 @@ const CompanyHome = () => {
     ActivateBar("bar1");
   }, []);
 
+  //submittion
+  const SubmitImg = (e, key, value) => {
+    e.preventDefault();
+    let data = new FormData();
+    data.append(key, value);
+    const options = {
+      headers: {
+        Authorization: "Bearer" + " " + auth,
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    axios
+      .put(baseUrl + "companies/profile/", data, options)
+      .then((res) => {
+        console.log("success");
+      })
+      .catch((err) => {
+        console.log("err");
+      });
+  };
   return loading ? (
     <Spinner />
   ) : (
@@ -116,7 +143,60 @@ const CompanyHome = () => {
             </>
           )}
         </section>
-        <section className={`${style.content} `}></section>
+        <section className={`${style.content} `}>
+          {/* cover photo */}
+          <img
+            src={
+              coverImage.src
+                ? coverImage.src
+                : `/assets/empty/empty-comp-cover.png`
+            }
+            width="100%"
+            height={200}
+            alt="cover"
+          />
+          <input
+            type="file"
+            id="cover"
+            accept="image/jpg, image/jpeg, image/png"
+            required
+            onChange={(e) => {
+              uploadImg(e, setCoverImage);
+              SubmitImg(e, "cover", coverImage.image);
+            }}
+          />
+          <label htmlFor="cover">
+            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            {coverImage.src ? "Upload another cover" : "Upload Cover"}
+          </label>
+
+          {/* logo image */}
+          <img
+            src={
+              logoImage.src
+                ? logoImage.src
+                : `/assets/empty/empty-comp-logo.png`
+            }
+            width="40%"
+            height={100}
+            alt="logo"
+          />
+          <input
+            type="file"
+            id="logo"
+            accept="image/jpg, image/jpeg, image/png"
+            required
+            onChange={(e) => {
+              uploadImg(e, setLogoImage);
+              SubmitImg(e, "logo", logoImage.image);
+            }}
+          />
+          <label htmlFor="logo">
+            <Icon path={mdiCameraPlusOutline} size={2} />
+            {logoImage.src ? "Upload another logo" : "Upload logo"}
+          </label>
+          <h4>{name}</h4>
+        </section>
       </div>
     </main>
   );
