@@ -92,7 +92,13 @@ const Navbar = () => {
                           About Us
                         </li>
                       </Link>
-                      <Link href="/partner" passHref>
+                      <Link
+                        href={{
+                          pathname: "/contact",
+                          query: { isPartner: true },
+                        }}
+                        passHref
+                      >
                         <li>
                           <i>
                             <Icon path={mdiHandshakeOutline} size={1} />
@@ -164,7 +170,13 @@ const Navbar = () => {
                           About Us
                         </li>
                       </Link>
-                      <Link href="/partner" passHref>
+                      <Link
+                        href={{
+                          pathname: "/contact",
+                          query: { isPartner: true },
+                        }}
+                        passHref
+                      >
                         <li>
                           <i>
                             <Icon path={mdiHandshakeOutline} size={1} />
