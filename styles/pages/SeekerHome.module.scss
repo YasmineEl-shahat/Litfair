@@ -10,10 +10,10 @@
   @include cardBorder;
   width: 50%;
   height: 100%;
-  @include mQ(1242px) {
+  @include mQ(1287px) {
     width: 60%;
   }
-  @include mQ(1021px) {
+  @include mQ(1151px) {
     width: 70%;
   }
   @include mQ(870px) {
@@ -141,6 +141,9 @@
   color: $VDarkGray;
   font-size: $InfoFont;
   margin-right: 3rem;
+  min-width: 16rem;
+  margin-bottom: 1rem;
+
   @include mQ(450px) {
     margin-right: 0;
   }

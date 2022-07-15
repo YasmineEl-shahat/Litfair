@@ -36,9 +36,10 @@ const CompanyHome = () => {
       },
     });
     const { msg } = await res.json();
+
     setName(msg.profile.name);
-    setCoverImage({ src: msg.profile.cover, image: msg.profile.cover });
-    setLogoImage({ src: msg.profile.logo, image: msg.profile.logo });
+    setCoverImage({ src: msg.info.cover, image: msg.info.cover });
+    setLogoImage({ src: msg.info.logo, image: msg.info.logo });
     setLoading(false);
   };
   useEffect(() => {
@@ -47,25 +48,37 @@ const CompanyHome = () => {
   }, []);
 
   //submittion
-  const SubmitImg = (e, key, value) => {
+  const SubmitImg = async (e, key, value) => {
     e.preventDefault();
     let data = new FormData();
-    data.append(key, value);
+    data.append("photo", value);
     const options = {
       headers: {
         Authorization: "Bearer" + " " + auth,
         "Content-Type": "multipart/form-data",
       },
     };
+    let photo_url = "";
+    const res = await axios.post(baseUrl + "upload-photo", data, options);
+    const { msg } = await res.data;
+    photo_url = msg.photo_url;
 
-    axios
-      .put(baseUrl + "companies/profile/", data, options)
-      .then((res) => {
-        console.log("success");
-      })
-      .catch((err) => {
-        console.log("err");
-      });
+    const response = await fetch(baseUrl + "companies/profile/", {
+      method: "PUT",
+
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + " " + auth,
+      },
+      body:
+        key === "logo"
+          ? JSON.stringify({
+              logo: photo_url,
+            })
+          : JSON.stringify({
+              cover: photo_url,
+            }),
+    });
   };
   return loading ? (
     <Spinner />
@@ -162,7 +175,7 @@ const CompanyHome = () => {
             required
             onChange={(e) => {
               uploadImg(e, setCoverImage);
-              SubmitImg(e, "cover", coverImage.image);
+              SubmitImg(e, "cover", e.target.files[0]);
             }}
           />
           <label htmlFor="cover">
@@ -188,7 +201,7 @@ const CompanyHome = () => {
             required
             onChange={(e) => {
               uploadImg(e, setLogoImage);
-              SubmitImg(e, "logo", logoImage.image);
+              SubmitImg(e, "logo", e.target.files[0]);
             }}
           />
           <label htmlFor="logo">

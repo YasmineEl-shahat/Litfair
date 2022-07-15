@@ -37,7 +37,7 @@ const CompanyNavbar = () => {
       <li className="nav-item">
         <Link className="nav-link" href="#" passHref>
           <a className="bar" id="bar3">
-            Applications
+            Applicants
           </a>
         </Link>
       </li>

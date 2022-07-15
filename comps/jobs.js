@@ -13,12 +13,15 @@ import {
   DeleteSaved,
 } from "../functions/Api/Savedjobs";
 
+import Icon from "@mdi/react";
+import { mdiDomain, mdiCheckDecagramOutline } from "@mdi/js";
+
 const baseUrl = process.env.API_URL;
 
 const Jobs = ({ posts, isCompany }) => {
   const [appliedJobs, setAppliedJobs] = useState([]);
   const [savedJobs, setSavedJobs] = useState([]);
-
+  console.log(posts);
   //hooks
   const { auth } = useContext(AuthContext);
   useEffect(async () => {
@@ -101,6 +104,22 @@ const Jobs = ({ posts, isCompany }) => {
                     </i>
                     {post.location}{" "}
                   </div>
+                  {post.company_name && (
+                    <div className={style.experience}>
+                      <i className={style.expIcon}>
+                        <Icon path={mdiDomain} size={1.5} />
+                      </i>
+                      {post.company_name}
+                    </div>
+                  )}
+                  {post.company_verified && (
+                    <div className={style.location}>
+                      <i className={style.locationIcon}>
+                        <Icon path={mdiCheckDecagramOutline} size={1.5} />
+                      </i>
+                      {post.company_verified}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className={style.lastSection}>
