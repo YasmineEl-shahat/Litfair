@@ -18,21 +18,36 @@
   width: 35rem;
   height: 40rem;
   text-align: center;
- // @include flexCenter;
+  @include mQ(355px) {
+    width: 33rem;
+  }
+  @include mQ(340px) {
+    width: 30rem;
+  }
 }
 .top{
 
     background-color: #DBD9FF;
     color: $BlueGlobal;
-    font-size: 1rem;
+    font-size: 1.5rem;
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
 }
 .form{
 
-padding: 2rem;
+//padding: 2rem;
 text-align: left;
-margin: 1rem;
+margin-left: 3.5rem;
+margin-top: 1.5rem;
+margin-bottom: 0.5rem;
+@include mQ(355px) {
+    width: 33rem;
+    margin-left: 2.5rem;
+  }
+  @include mQ(340px) {
+    width: 30rem;
+    margin-left: 1rem;
+  }
 }
 .btn{
 

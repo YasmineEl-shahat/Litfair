@@ -100,7 +100,7 @@ const Navbar = () => {
                           Become A Partner
                         </li>
                       </Link>
-                      <Link href="#contact" passHref>
+                      <Link href="/contact" passHref>
                         <li>
                           <i>
                             <Icon path={mdiForumOutline} size={1} />
@@ -172,7 +172,7 @@ const Navbar = () => {
                           Become A Partner
                         </li>
                       </Link>
-                      <Link href="#contact" passHref>
+                      <Link href="/contact" passHref>
                         <li>
                           <i>
                             <Icon path={mdiForumOutline} size={1} />
