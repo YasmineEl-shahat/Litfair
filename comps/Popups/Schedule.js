@@ -23,18 +23,22 @@ const SchedulePop = ({
     else {
       setError("");
       disableBtn(btn_id);
-      const res = await fetch(baseUrl + "feedback-email/" + job_id, {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer" + " " + auth,
-        },
+      const res = await fetch(
+        baseUrl + "feedback-email/" + job_id + "?hr_inter=true",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer" + " " + auth,
+            "Content-Type": "application/json",
+          },
 
-        body: JSON.stringify({
-          user_id,
-          email_subject: `${job_title} final interview on ${date}`,
-          email_body,
-        }),
-      })
+          body: JSON.stringify({
+            user_id,
+            email_subject: `${job_title} final interview on ${date}`,
+            email_body,
+          }),
+        }
+      )
         .then(async (response) => {
           if (response.ok) {
             setError("");

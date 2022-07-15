@@ -23,6 +23,7 @@ const JobProgress = () => {
   const [progress, setProgress] = useState({});
   const [loading, setLoading] = useState(true);
   const [id, setId] = useState("");
+  const [state, setState] = useState("");
 
   // hooks
   const { auth } = useContext(AuthContext);
@@ -39,7 +40,7 @@ const JobProgress = () => {
 
     setDetail(msg[0].job_post);
     setProgress(msg[0].progress);
-
+    setState(msg[0].user_state);
     setId(msg[0]._id);
     setLoading(false);
   };
@@ -125,8 +126,22 @@ const JobProgress = () => {
                 )
               )}
             </section>
+            {state === "rejected" && (
+              <div className="invalid btn--detail">Rejected!</div>
+            )}
+            {state === "accepted" && (
+              <div className={style.job_type}>Check your acceptance mail.</div>
+            )}
+            {progress.hr_inter &&
+              !progress.feedback_2 &&
+              state === "pending" && (
+                <div className={style.job_type}>
+                  Check your mail for final interview.
+                </div>
+              )}
+
             <div className={styleProg.btn}>
-              {!progress.Live_inter && (
+              {!progress.live_inter && (
                 <button
                   onClick={(e) => {
                     e.preventDefault();

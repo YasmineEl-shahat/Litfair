@@ -23,6 +23,17 @@ body {
     p {
       font-size: $InfoFont;
     }
+    .btn-reject {
+      width: 18.6rem;
+      border: none;
+      color: red;
+      &:hover {
+        border: 1px solid red;
+      }
+      @include mQ(398.9px) {
+        width: 13.5rem;
+      }
+    }
   }
   .selectbtn {
     width: 2.5rem;

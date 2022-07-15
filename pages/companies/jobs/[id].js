@@ -6,11 +6,13 @@ import { useEffect, useContext, useState } from "react";
 import AuthContext from "../../../context/AuthContext";
 import FeedPop from "../../../comps/Popups/FeedPop";
 import SurePop from "../../../comps/Popups/SurePop";
+import SureDelPop from "../../../comps/Popups/SureDelpop";
 import { showElement } from "../../../functions/showElement";
 import { EnableBtn, disableBtn } from "../../../functions/ButtonsFun";
 import { GoLocation } from "react-icons/go";
 import SchedulePop from "../../../comps/Popups/schedule";
 import { hideElement } from "../../../functions/hideElement";
+import { changeState } from "../../../functions/Api/ApplicantsStates";
 
 const baseUrl = process.env.API_URL;
 
@@ -25,6 +27,8 @@ const TopApplicants = () => {
   const [select, setSelect] = useState([]);
   const [email_body, setEmail_body] = useState("");
   const [startDate, setStartDate] = useState([]);
+  const [allPending, setAllPending] = useState(true);
+  const [rejectId, setRejectId] = useState("");
 
   // hooks
   const { auth } = useContext(AuthContext);
@@ -36,11 +40,17 @@ const TopApplicants = () => {
       },
     });
     const { msg } = await res.json();
-    console.log(msg);
     setApplicants(msg.applications);
     setJob_title(msg.job_title);
     setJob_type(msg.job_type);
     setJob_location(msg.job_location);
+
+    for (let i = 0; i < msg.applications.length; i++) {
+      if (msg.applications[i].user_state !== "pending") {
+        setAllPending(false);
+        break;
+      }
+    }
   };
   useEffect(async () => {
     getDetails();
@@ -57,10 +67,18 @@ const TopApplicants = () => {
       newDate = [...newDate, new Date()];
       i++;
     }
-    console.log(newDate);
     setStartDate(newDate);
     hideElement(id);
     showElement("SchedulePop");
+  };
+
+  const rejectHandler = (e, btn_id, id) => {
+    e.preventDefault();
+    disableBtn(btn_id);
+    changeState(history.state.as.substring(16), auth, rejectId, "rejected", "");
+    getDetails();
+    hideElement(id);
+    EnableBtn(btn_id);
   };
   return (
     <>
@@ -88,23 +106,25 @@ const TopApplicants = () => {
             <h4>TOP {applicants.length} APPLICANTS</h4>
             <h5>Select who will do an interview with you!</h5>
             <article>
-              <div className={style.selectAll}>
-                <h5>select all</h5>{" "}
-                <div
-                  onClick={(e) => {
-                    if (select === applicants) {
-                      setSelect([]);
-                      e.target.classList.remove("fa-check");
-                      disableBtn("applybtn");
-                    } else {
-                      setSelect(applicants);
-                      e.target.classList.add("fa-check");
-                      EnableBtn("applybtn");
-                    }
-                  }}
-                  className="selectbtn fa-solid "
-                ></div>
-              </div>
+              {allPending && (
+                <div className={style.selectAll}>
+                  <h5>select all</h5>{" "}
+                  <div
+                    onClick={(e) => {
+                      if (select === applicants) {
+                        setSelect([]);
+                        e.target.classList.remove("fa-check");
+                        disableBtn("applybtn");
+                      } else {
+                        setSelect(applicants);
+                        e.target.classList.add("fa-check");
+                        EnableBtn("applybtn");
+                      }
+                    }}
+                    className="selectbtn fa-solid "
+                  ></div>
+                </div>
+              )}
             </article>
           </section>
           {/* cards wrapper section */}
@@ -122,6 +142,7 @@ const TopApplicants = () => {
                   setNamePop={setNamePop}
                   select={select}
                   setSelect={setSelect}
+                  setRejectId={setRejectId}
                 />
               </div>
             ))}
@@ -146,6 +167,11 @@ const TopApplicants = () => {
         header={`${select.length} job seekers was selected`}
         content="let's schedule your interview hours"
         handler={SureHandler}
+      />
+      <SureDelPop
+        content="Are you sure you want to reject this applicant?"
+        submit="Reject"
+        handler={rejectHandler}
       />
       <SchedulePop
         select={select}
