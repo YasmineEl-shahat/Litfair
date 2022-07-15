@@ -1,0 +1,74 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+.body{
+  
+    @include flexCenter;
+    
+}
+
+.box{
+
+    background-color: $WhiteGlobal;
+ 
+  box-shadow: 0.1rem 0.1rem 1.2rem  #0000005c;
+
+  width: 40rem;
+  height: 40rem;
+  text-align: center;
+  margin-bottom: 4rem;
+  @include mQ(443px) {
+    width: 35rem;
+  }
+  @include mQ(380px) {
+    width: 30rem;
+  }
+  @include mQ(325px) {
+    width: 25rem;
+  }
+}
+.contact{
+
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+.form{
+
+//padding: 2rem;
+text-align: left;
+margin-left: 2.5rem;
+}
+.txtBox{
+
+    width: 35rem;
+    @include mQ(443px) {
+        width: 30rem;
+      }
+      @include mQ(380px) {
+        width: 25rem;
+      }
+      @include mQ(325px) {
+        width: 20rem;
+      }
+}
+.send{
+
+   // max-width: fit-content;
+   width: 8rem;
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    margin-right: 2.5rem;
+    float: right;
+    @include mQ(443px) {
+        width: 7rem;
+      }
+      @include mQ(380px) {
+        width: 6rem;
+        font-size: 1.5rem;
+      }
+      @include mQ(325px) {
+        width: 5rem;
+        font-size: 1.2rem;
+       
+      }
+}

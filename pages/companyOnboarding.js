@@ -3,9 +3,9 @@ import style from "../styles/pages/CompanyOnboard.module.scss";
 import Link from "next/link";
 
 import AuthContext from "../context/AuthContext";
-import { useEffect,  useContext ,useState } from "react";
+import {   useContext ,useState } from "react";
 import { useRouter } from "next/router";
-import { AsyncPaginate } from "react-select-async-paginate";
+
 
 const baseUrl = process.env.API_URL;
 
@@ -75,8 +75,8 @@ if(!name || !phone_number || !company_size || !description)
             Welcome To LitFair!
             </div>
             <form onSubmit={(e) => submit(e)}>
-            <div className={style.form}>
-               <label className="label--global">Company Name</label>
+            <div className="">
+               <label className={`label--global ${style.form}`}>Company Name</label>
                 <input value={name} 
                 onChange={(e) => {
                     setName(e.target.value);}}
@@ -84,7 +84,7 @@ if(!name || !phone_number || !company_size || !description)
                 type="text" className="txt text--big"></input>
 
 
-                <label className="label--global">Mobile Number</label>
+                <label className={`label--global ${style.form}`}>Mobile Number</label>
                 <input
                 value={phone_number} 
                 onChange={(e) => {
@@ -96,7 +96,7 @@ if(!name || !phone_number || !company_size || !description)
 
 
                 
-              <label className="label--global">Company size</label>
+              <label className={`label--global ${style.form}`}>Company size</label>
               <input
               value={company_size}
               onChange={(e) => {
@@ -104,13 +104,13 @@ if(!name || !phone_number || !company_size || !description)
                type="text" className="txt text--big"></input>
 
 
-    <label className="label--global">Description</label>
+    <label className={`label--global ${style.form}`}>Description</label>
               <input
               value={description}
               onChange={(e) => {
                 setDescription(e.target.value);}}
                type="text" className="txt text--big"></input>
-           {}
+          
            <div className="invalid">
               {error}
             </div>
