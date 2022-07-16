@@ -21,7 +21,7 @@ const baseUrl = process.env.API_URL;
 const Jobs = ({ posts, isCompany }) => {
   const [appliedJobs, setAppliedJobs] = useState([]);
   const [savedJobs, setSavedJobs] = useState([]);
-  console.log(posts);
+
   //hooks
   const { auth } = useContext(AuthContext);
   useEffect(async () => {

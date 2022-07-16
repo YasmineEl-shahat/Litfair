@@ -6,7 +6,6 @@ import SeekerNavbar from "./SeekerNavbar";
 import CompanyNavbar from "./CompanyNavbar";
 import { VscMenu } from "react-icons/vsc";
 import Icon from "@mdi/react";
-
 import {
   mdiPencilOutline,
   mdiInformationOutline,
@@ -14,7 +13,7 @@ import {
   mdiForumOutline,
 } from "@mdi/js";
 const Navbar = () => {
-  const { user, logoutUser } = useContext(AuthContext);
+  const { user, logoutUser, name, image } = useContext(AuthContext);
 
   return (
     <>
@@ -61,7 +60,11 @@ const Navbar = () => {
                   }}
                 >
                   <img
-                    src="/assets/profile/blank-profile-picture.png"
+                    src={
+                      image
+                        ? image
+                        : `/assets/profile/blank-profile-picture.png`
+                    }
                     className="photo"
                     alt="pic"
                   ></img>
@@ -70,6 +73,17 @@ const Navbar = () => {
                   </i>
                   <div className="menu">
                     <ul>
+                      <img
+                        src={
+                          image
+                            ? image
+                            : `/assets/profile/blank-profile-picture.png`
+                        }
+                        alt="pic"
+                        width={50}
+                        height={50}
+                      ></img>
+                      <h5>{name}</h5>
                       <Link href="/profile/update/general-info/">
                         <li>
                           <i>
@@ -139,15 +153,30 @@ const Navbar = () => {
                   }}
                 >
                   <img
-                    src="/assets/profile/blank-profile-picture.png"
+                    src={
+                      image
+                        ? image
+                        : `/assets/profile/blank-profile-picture.png`
+                    }
                     className="photo"
                     alt="pic"
-                  ></img>
+                  />
                   <i className="menuIcon">
                     <VscMenu />
                   </i>
                   <div className="menu">
                     <ul>
+                      <img
+                        src={
+                          image
+                            ? image
+                            : `/assets/profile/blank-profile-picture.png`
+                        }
+                        alt="pic"
+                        width={50}
+                        height={50}
+                      ></img>
+                      <h5>{name}</h5>
                       <Link href="#">
                         <li>
                           <i>

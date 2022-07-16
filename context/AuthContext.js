@@ -27,6 +27,16 @@ export const AuthProvider = ({ children }) => {
       ? jwt_decode(cookieCutter.get("auth"))
       : null
   );
+  const [image, setImage] = useState(() =>
+    typeof window !== "undefined" && localStorage.getItem("image")
+      ? JSON.parse(localStorage.getItem("image"))
+      : ""
+  );
+  const [name, setName] = useState(() =>
+    typeof window !== "undefined" && localStorage.getItem("name")
+      ? JSON.parse(localStorage.getItem("name"))
+      : ""
+  );
 
   //log out
   const logoutUser = () => {
@@ -249,14 +259,52 @@ export const AuthProvider = ({ children }) => {
         .then(async (response) => {
           if (response.ok) {
             const res = await response.json();
-            setSubsubmitting(false);
+
             setBackError("");
             const { tokenObject } = res;
             setAuth(tokenObject);
             setUser(jwt_decode(tokenObject));
-
             cookieCutter.set("auth", tokenObject);
-            router.replace("/");
+            if (user.role === "Seeker") {
+              const resDes = await fetch(
+                baseUrl + "seeker/details/view/" + user.id
+              );
+              const { profile_picture } = await resDes.json();
+              setImage(profile_picture);
+              localStorage.setItem("image", JSON.stringify(profile_picture));
+              let response = await fetch(baseUrl + "seeker/profile/info", {
+                headers: {
+                  Authorization: "Bearer" + " " + auth,
+                },
+              });
+              const res = await response.json();
+              if (res) {
+                setName(`${res.fname} ${res.lname}`);
+                localStorage.setItem(
+                  "name",
+                  JSON.stringify(`${res.fname} ${res.lname}`)
+                );
+              }
+              setSubsubmitting(false);
+              router.replace("/");
+            } else {
+              const res = await fetch(
+                baseUrl + "companies/profile/" + user.id,
+                {
+                  headers: {
+                    Authorization: "Bearer" + " " + auth,
+                  },
+                }
+              );
+              const { msg } = await res.json();
+
+              setName(msg.profile.name);
+              setImage(msg.info.logo);
+              localStorage.setItem("name", JSON.stringify(msg.profile.name));
+              localStorage.setItem("image", JSON.stringify(msg.info.logo));
+              setSubsubmitting(false);
+              router.replace("/");
+            }
           }
           if (response.status === 500) {
             // So, a server-side validation error occurred.
@@ -274,7 +322,6 @@ export const AuthProvider = ({ children }) => {
           }
           if (response.status === 502) {
             setBackError("Network response was not ok.");
-
             throw new Error("Network response was not ok.");
           }
         })
@@ -322,6 +369,8 @@ export const AuthProvider = ({ children }) => {
     submitting,
     auth,
     user,
+    name,
+    image,
     logoutUser,
     googleLogin,
     handleGoogleFailure,

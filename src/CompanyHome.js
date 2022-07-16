@@ -38,8 +38,8 @@ const CompanyHome = () => {
     const { msg } = await res.json();
 
     setName(msg.profile.name);
-    setCoverImage({ src: msg.info.cover, image: msg.info.cover });
     setLogoImage({ src: msg.info.logo, image: msg.info.logo });
+    setCoverImage({ src: msg.info.cover, image: msg.info.cover });
     setLoading(false);
   };
   useEffect(() => {
@@ -65,7 +65,6 @@ const CompanyHome = () => {
 
     const response = await fetch(baseUrl + "companies/profile/", {
       method: "PUT",
-
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer" + " " + auth,

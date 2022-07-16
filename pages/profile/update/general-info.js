@@ -4,10 +4,11 @@ import style from "../../../styles/pages/EditProfile.module.scss";
 import carStyle from "../../../styles/pages/Career.module.scss";
 import { useLayoutEffect, useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-
+import axios from "axios";
 import { backgroundSelect } from "../../../functions/backgroundSelect";
 import AuthContext from "../../../context/AuthContext";
 import Spinner from "../../../comps/Spinner";
+import { uploadImg } from "../../../functions/uploadImg";
 
 const baseUrl = process.env.API_URL;
 
@@ -33,6 +34,7 @@ const GeneralInfo = ({ countries }) => {
   const [submitting, setSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [image, setImage] = useState({});
 
   // variables
   const country_list = countries;
@@ -74,8 +76,9 @@ const GeneralInfo = ({ countries }) => {
 
     const user_id = user.id;
     const resDes = await fetch(baseUrl + "seeker/details/view/" + user_id);
-    const { description } = await resDes.json();
+    const { description, profile_picture } = await resDes.json();
     setDescription(description);
+    setImage({ src: profile_picture, image: profile_picture });
   }, []);
 
   const submit = async (e) => {
@@ -156,6 +159,38 @@ const GeneralInfo = ({ countries }) => {
         setError(e.toString());
       });
   };
+
+  //submittion
+  const SubmitImg = async (e, value) => {
+    e.preventDefault();
+    let photo_url = "";
+    if (value) {
+      let data = new FormData();
+      data.append("photo", value);
+      const options = {
+        headers: {
+          Authorization: "Bearer" + " " + auth,
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const res = await axios.post(baseUrl + "upload-photo", data, options);
+      const { msg } = await res.data;
+      photo_url = msg.photo_url;
+    }
+
+    //waiting for api response
+    let response = await fetch(baseUrl + "seeker/details/update", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + " " + auth,
+      },
+      body: JSON.stringify({
+        profile_picture: photo_url,
+      }),
+    });
+  };
   return (
     <main className={` ${style.main}`}>
       <EditProfileSideBar />
@@ -164,124 +199,170 @@ const GeneralInfo = ({ countries }) => {
           <Spinner />
         </div>
       ) : (
-        <section className={style.info}>
-          <h3 className="circlebef">Basic Info</h3>
-          {/* Content Section */}
-          <form onSubmit={(e) => submit(e)}>
-            <section>
-              <div className={carStyle.name}>
-                <label className="label--global" htmlFor="fname">
-                  First Name
-                </label>
+        <>
+          <section className={style.info}>
+            <div className={style.profilePic}>
+              <img
+                src={
+                  image.src
+                    ? image.src
+                    : `/assets/profile/blank-profile-picture.png`
+                }
+                width={100}
+                height={100}
+                alt="logo"
+              />
+              <div>
+                <h3>Profile Photo</h3>
                 <input
-                  className="txt text--big"
-                  type="text"
-                  name="fname"
-                  value={fname}
-                  onChange={(e) => setFname(e.target.value)}
-                />
-              </div>
-              <div className={carStyle.name}>
-                <label className="label--global" htmlFor="lname">
-                  Last Name
-                </label>
-                <input
-                  className="txt text--big"
-                  type="text"
-                  name="lname"
-                  value={lname}
-                  onChange={(e) => setLname(e.target.value)}
-                />
-              </div>
-            </section>
-            <section>
-              <div className={carStyle.name}>
-                <label className="label--global" htmlFor="email">
-                  Email Address<span>(read only)</span>
-                </label>
-                <input
-                  className="txt text--big"
-                  type="text"
-                  name="email"
-                  readOnly="readonly"
-                  value={email}
-                />
-              </div>
-              <div className={carStyle.name}>
-                <label className="label--global" htmlFor="phone">
-                  Phone Number
-                </label>
-                <input
-                  className="txt text--big"
-                  type="text"
-                  name="phone"
-                  value={phone_number}
-                  onChange={(e) => setPhone_number(e.target.value)}
-                />
-              </div>
-            </section>
-            <section>
-              <div className={`${carStyle.name} ${style.txtar}`}>
-                <label className="label--global" htmlFor="Description">
-                  Description
-                </label>
-                <textarea
-                  className="txt txtArea"
-                  name="Description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
-            </section>
-            <h3 className="circlebef">Address</h3>
-            <section>
-              <div className={carStyle.name}>
-                <label className="label--global">Country</label>
-                <input
-                  list="country"
-                  placeholder="Select..."
-                  className="txt text--big text--customBig "
-                  value={country}
+                  type="file"
+                  id="pic"
+                  accept="image/jpg, image/jpeg, image/png"
                   onChange={(e) => {
-                    changeCities(e.target.value);
-                    setCountry(e.target.value);
+                    uploadImg(e, setImage);
+                    SubmitImg(e, e.target.files[0]);
                   }}
                 />
-                <datalist id="country">
-                  {country_list.map((country) => (
-                    <option value={country.country} key={country._id}>
-                      {country.country}
-                    </option>
-                  ))}
-                </datalist>
-              </div>
-              <div className={carStyle.name}>
-                <label className="label--global" htmlFor="city">
-                  City
+
+                <label htmlFor="pic">
+                  <i className="fa-solid fa-arrow-up-from-bracket"></i>
+                  {image.src ? " Upload another photo" : " Upload photo"}
                 </label>
-                <input
-                  list="city"
-                  placeholder="Select..."
-                  className="txt text--big text--customBig "
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                />
-                <datalist id="city">
-                  {cities.map((city) => (
-                    <option value={city.city} key={city._id}>
-                      {city.city}
-                    </option>
-                  ))}
-                </datalist>
+                {image.src && (
+                  <button
+                    onClick={(e) => {
+                      document.getElementById(`pic`).value = "";
+                      setImage({});
+                      SubmitImg(e, "");
+                    }}
+                    className="btn--global btn--detail btn--cancel "
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
-            </section>
-            <span className="invalid cancel--onb">{error}</span>
-            <button className=" btn--global btn--blue  btn--onb" type="submit">
-              {submitting ? "Saving..." : "Save Changes"}
-            </button>
-          </form>
-          {/* End Content Section */}
-        </section>
+            </div>
+            <h3 className="circlebef">Basic Info</h3>
+            {/* Content Section */}
+            <form onSubmit={(e) => submit(e)}>
+              <section>
+                <div className={carStyle.name}>
+                  <label className="label--global" htmlFor="fname">
+                    First Name
+                  </label>
+                  <input
+                    className="txt text--big"
+                    type="text"
+                    name="fname"
+                    value={fname}
+                    onChange={(e) => setFname(e.target.value)}
+                  />
+                </div>
+                <div className={carStyle.name}>
+                  <label className="label--global" htmlFor="lname">
+                    Last Name
+                  </label>
+                  <input
+                    className="txt text--big"
+                    type="text"
+                    name="lname"
+                    value={lname}
+                    onChange={(e) => setLname(e.target.value)}
+                  />
+                </div>
+              </section>
+              <section>
+                <div className={carStyle.name}>
+                  <label className="label--global" htmlFor="email">
+                    Email Address<span>(read only)</span>
+                  </label>
+                  <input
+                    className="txt text--big"
+                    type="text"
+                    name="email"
+                    readOnly="readonly"
+                    value={email}
+                  />
+                </div>
+                <div className={carStyle.name}>
+                  <label className="label--global" htmlFor="phone">
+                    Phone Number
+                  </label>
+                  <input
+                    className="txt text--big"
+                    type="text"
+                    name="phone"
+                    value={phone_number}
+                    onChange={(e) => setPhone_number(e.target.value)}
+                  />
+                </div>
+              </section>
+              <section>
+                <div className={`${carStyle.name} ${style.txtar}`}>
+                  <label className="label--global" htmlFor="Description">
+                    Description
+                  </label>
+                  <textarea
+                    className="txt txtArea"
+                    name="Description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                </div>
+              </section>
+              <h3 className="circlebef">Address</h3>
+              <section>
+                <div className={carStyle.name}>
+                  <label className="label--global">Country</label>
+                  <input
+                    list="country"
+                    placeholder="Select..."
+                    className="txt text--big text--customBig "
+                    value={country}
+                    onChange={(e) => {
+                      changeCities(e.target.value);
+                      setCountry(e.target.value);
+                    }}
+                  />
+                  <datalist id="country">
+                    {country_list.map((country) => (
+                      <option value={country.country} key={country._id}>
+                        {country.country}
+                      </option>
+                    ))}
+                  </datalist>
+                </div>
+                <div className={carStyle.name}>
+                  <label className="label--global" htmlFor="city">
+                    City
+                  </label>
+                  <input
+                    list="city"
+                    placeholder="Select..."
+                    className="txt text--big text--customBig "
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                  />
+                  <datalist id="city">
+                    {cities.map((city) => (
+                      <option value={city.city} key={city._id}>
+                        {city.city}
+                      </option>
+                    ))}
+                  </datalist>
+                </div>
+              </section>
+              <span className="invalid cancel--onb">{error}</span>
+              <button
+                className=" btn--global btn--blue  btn--onb"
+                type="submit"
+              >
+                {submitting ? "Saving..." : "Save Changes"}
+              </button>
+            </form>
+            {/* End Content Section */}
+          </section>
+        </>
       )}
     </main>
   );
