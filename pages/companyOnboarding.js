@@ -31,7 +31,7 @@ const CompanyOnboarding = () => {
         Authorization: "Bearer" + " " + auth,
       },
       body: JSON.stringify({
-        cname,
+        name: cname,
         phone_number,
         company_size,
         description,
