@@ -14,7 +14,7 @@ import axios from "axios";
 const baseUrl = process.env.API_URL;
 
 const CompanyHome = () => {
-  const { auth, user } = useContext(AuthContext);
+  const { auth, user, setImage } = useContext(AuthContext);
 
   // state
   const [posts, setPosts] = useState([]);
@@ -77,7 +77,16 @@ const CompanyHome = () => {
           : JSON.stringify({
               cover: photo_url,
             }),
-    });
+    })
+      .then(async (response) => {
+        if (response.ok && key === "logo") {
+          setImage(photo_url);
+          localStorage.setItem("image", JSON.stringify(photo_url));
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
   return loading ? (
     <Spinner />

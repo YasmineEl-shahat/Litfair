@@ -34,7 +34,7 @@ const GeneralInfo = ({ countries }) => {
   const [submitting, setSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [image, setImage] = useState({});
+  const [sImage, setSImage] = useState({});
 
   // variables
   const country_list = countries;
@@ -51,7 +51,7 @@ const GeneralInfo = ({ countries }) => {
   };
 
   //hooks
-  const { auth, user } = useContext(AuthContext);
+  const { auth, user, setName, setImage } = useContext(AuthContext);
   const router = useRouter();
   useLayoutEffect(() => {
     backgroundSelect("generalSide");
@@ -78,7 +78,7 @@ const GeneralInfo = ({ countries }) => {
     const resDes = await fetch(baseUrl + "seeker/details/view/" + user_id);
     const { description, profile_picture } = await resDes.json();
     setDescription(description);
-    setImage({ src: profile_picture, image: profile_picture });
+    setSImage({ src: profile_picture, image: profile_picture });
   }, []);
 
   const submit = async (e) => {
@@ -135,6 +135,11 @@ const GeneralInfo = ({ countries }) => {
           })
             .then((res) => {
               if (response.ok) {
+                setName(fname + " " + lname);
+                localStorage.setItem(
+                  "name",
+                  JSON.stringify(fname + " " + lname)
+                );
                 setSubmitting(false);
                 router.push("/");
               }
@@ -189,6 +194,11 @@ const GeneralInfo = ({ countries }) => {
       body: JSON.stringify({
         profile_picture: photo_url,
       }),
+    }).then((response) => {
+      if (response.ok) {
+        setImage(photo_url);
+        localStorage.setItem("image", JSON.stringify(photo_url));
+      }
     });
   };
   return (
@@ -204,8 +214,8 @@ const GeneralInfo = ({ countries }) => {
             <div className={style.profilePic}>
               <img
                 src={
-                  image.src
-                    ? image.src
+                  sImage.src
+                    ? sImage.src
                     : `/assets/profile/blank-profile-picture.png`
                 }
                 width={100}
@@ -219,20 +229,20 @@ const GeneralInfo = ({ countries }) => {
                   id="pic"
                   accept="image/jpg, image/jpeg, image/png"
                   onChange={(e) => {
-                    uploadImg(e, setImage);
+                    uploadImg(e, setSImage);
                     SubmitImg(e, e.target.files[0]);
                   }}
                 />
 
                 <label htmlFor="pic">
                   <i className="fa-solid fa-arrow-up-from-bracket"></i>
-                  {image.src ? " Upload another photo" : " Upload photo"}
+                  {sImage.src ? " Upload another photo" : " Upload photo"}
                 </label>
-                {image.src && (
+                {sImage.src && (
                   <button
                     onClick={(e) => {
                       document.getElementById(`pic`).value = "";
-                      setImage({});
+                      setSImage({});
                       SubmitImg(e, "");
                     }}
                     className="btn--global btn--detail btn--cancel "

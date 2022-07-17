@@ -43,7 +43,8 @@ export const AuthProvider = ({ children }) => {
     setAuth(null);
     setUser(null);
     document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-
+    localStorage.removeItem("name");
+    localStorage.removeItem("image");
     router.replace("/");
   };
 
@@ -169,9 +170,12 @@ export const AuthProvider = ({ children }) => {
           const { TokenObject } = res;
           setAuth(TokenObject);
           setUser(jwt_decode(TokenObject));
-
+          setName(`${firstName} ${lastName}`);
+          localStorage.setItem(
+            "name",
+            JSON.stringify(`${firstName} ${lastName}`)
+          );
           cookieCutter.set("auth", TokenObject);
-
           router.replace("/registeredSuccessfully");
         }
         if (response.status === 400) {
@@ -370,6 +374,8 @@ export const AuthProvider = ({ children }) => {
     auth,
     user,
     name,
+    setName,
+    setImage,
     image,
     logoutUser,
     googleLogin,
