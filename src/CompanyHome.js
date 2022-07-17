@@ -173,7 +173,7 @@ const CompanyHome = () => {
                 : `/assets/empty/empty-comp-cover.png`
             }
             width="100%"
-            height={200}
+            height={120}
             alt="cover"
           />
           <input
