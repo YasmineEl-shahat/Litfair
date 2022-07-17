@@ -26,8 +26,8 @@ const Saved = () => {
     const jobJson = await resjob.json();
     const jobs = jobJson.msg[0].current_data;
 
-    getSaved(auth);
-    let saved = [];
+    await getSaved(auth);
+    let saved = posts;
 
     jobs.map((job) => (savedArray.includes(job._id) ? saved.push(job) : ""));
     setPosts(saved);
