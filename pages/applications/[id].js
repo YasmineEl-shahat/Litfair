@@ -154,7 +154,7 @@ const JobProgress = () => {
                 </button>
               )}
 
-              {progress.Cv_scanned && !progress.live_inter && (
+              {progress.cv_scanned && !progress.live_inter && (
                 <Link
                   href={{
                     pathname: "/application/interview/",
