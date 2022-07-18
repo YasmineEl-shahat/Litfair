@@ -1,7 +1,7 @@
 import style from "../styles/pages/companyRegister.module.scss";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
-import Head from "next/Head";
+import Head from "next/head";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";

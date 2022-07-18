@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import Spinner from "../comps/Spinner";
 import Jobs from "../comps/jobs";
 import { ActivateBar } from "../functions/ActivateBar";
-import Layout from "../comps/layout";
+import Layout from "../comps/Layout";
 import Empty from "../comps/empty";
 import { postArray, getPosts } from "../functions/Api/posts";
 

@@ -1,6 +1,6 @@
 import style from "../styles/pages/Contact.module.scss";
 
-import Layout from "../comps/layout";
+import Layout from "../comps/Layout";
 
 import AuthContext from "../context/AuthContext";
 import { useContext, useState } from "react";

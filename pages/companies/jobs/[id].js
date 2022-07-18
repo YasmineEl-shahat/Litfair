@@ -1,4 +1,4 @@
-import Layout from "../../../comps/layout";
+import Layout from "../../../comps/Layout";
 import styleVid from "../../../styles/pages/Interview.module.scss";
 import style from "../../../styles/pages/Applicants.module.scss";
 import { Card } from "../../../comps/applicant-card";
@@ -10,7 +10,7 @@ import SureDelPop from "../../../comps/Popups/SureDelpop";
 import { showElement } from "../../../functions/showElement";
 import { EnableBtn, disableBtn } from "../../../functions/ButtonsFun";
 import { GoLocation } from "react-icons/go";
-import SchedulePop from "../../../comps/Popups/schedule";
+import SchedulePop from "../../../comps/Popups/Schedule";
 import { hideElement } from "../../../functions/hideElement";
 import { changeState } from "../../../functions/Api/ApplicantsStates";
 
