@@ -16,7 +16,7 @@ module.exports = {
       config.plugins = [
         ...config.plugins,
         new webpack.DefinePlugin({
-          "process.env.API_URL": JSON.stringify("http://40.83.32.70/api/"),
+          "process.env.API_URL": JSON.stringify("http://40.83.32.70/"),
           "process.env.GOOGLE_CLIENT_ID": JSON.stringify(
             "949595271924-fbib85lq135e1c08e659u3tnv1ggd551.apps.googleusercontent.com"
           ),
@@ -28,7 +28,7 @@ module.exports = {
       config.plugins = [
         ...config.plugins,
         new webpack.DefinePlugin({
-          "process.env.API_URL": JSON.stringify("http://40.83.32.70/api/"),
+          "process.env.API_URL": JSON.stringify("http://40.83.32.70/"),
           "process.env.GOOGLE_CLIENT_ID": JSON.stringify(
             "949595271924-fbib85lq135e1c08e659u3tnv1ggd551.apps.googleusercontent.com"
           ),
