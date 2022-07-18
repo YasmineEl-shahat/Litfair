@@ -10,7 +10,7 @@ import SureDelPop from "../../../comps/Popups/SureDelpop";
 import { showElement } from "../../../functions/showElement";
 import { EnableBtn, disableBtn } from "../../../functions/ButtonsFun";
 import { GoLocation } from "react-icons/go";
-import SchedulePop from "../../../comps/Popups/Schedule";
+import SchedulePop from "../../../comps/Popups/schedule";
 import { hideElement } from "../../../functions/hideElement";
 import { changeState } from "../../../functions/Api/ApplicantsStates";
 
