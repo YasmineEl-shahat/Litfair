@@ -21,6 +21,7 @@
     "@hookform/resolvers": "^2.8.8",
     "@mdi/js": "^6.6.95",
     "@mdi/react": "^1.5.0",
+    "@popperjs/core": "^2.11.5",
     "@react-oauth/google": "^0.2.2",
     "axios": "^0.27.2",
     "babel-eslint": "^10.1.0",
