@@ -133,7 +133,7 @@ const TopApplicants = () => {
               <div key={applicant._id}>
                 <Card
                   applicant={applicant}
-                  imgSrc="/assets/profile/blank-profile-picture.png"
+                  imgSrc={applicant.profile_picture}
                   name={applicant.fname + " " + applicant.lname}
                   rate={applicant.feedback_1.total_score}
                   applicationId={applicant._id}

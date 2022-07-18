@@ -26,8 +26,10 @@ const CompanyHome = () => {
   const getData = async () => {
     // Fetch data from external API
     await getPosts(auth);
-
-    const tempPost = postArray.slice(postArray.length - 4, postArray.length);
+    let tempPost = postArray;
+    if (postArray.length > 4) {
+      tempPost = postArray.slice(postArray.length - 4, postArray.length);
+    }
     setPosts(tempPost.reverse());
 
     const res = await fetch(baseUrl + "companies/profile/" + user.id, {

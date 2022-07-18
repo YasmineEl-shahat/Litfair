@@ -27,14 +27,15 @@ export const AuthProvider = ({ children }) => {
       ? jwt_decode(cookieCutter.get("auth"))
       : null
   );
-  const [image, setImage] = useState(() =>
-    typeof window !== "undefined" && localStorage.getItem("image")
-      ? JSON.parse(localStorage.getItem("image"))
+  const [name, setName] = useState(() =>
+    typeof window !== "undefined" && localStorage.getItem("name") != "undefined"
+      ? JSON.parse(localStorage.getItem("name"))
       : ""
   );
-  const [name, setName] = useState(() =>
-    typeof window !== "undefined" && localStorage.getItem("name")
-      ? JSON.parse(localStorage.getItem("name"))
+  const [image, setImage] = useState(() =>
+    typeof window !== "undefined" &&
+    localStorage.getItem("image") != "undefined"
+      ? JSON.parse(localStorage.getItem("image"))
       : ""
   );
 
