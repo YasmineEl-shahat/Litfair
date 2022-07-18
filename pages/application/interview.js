@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import Layout from "../../comps/layout";
+import Layout from "../../comps/Layout";
 import VideoRecorder from "react-video-recorder";
 import style from "../../styles/pages/Interview.module.scss";
 import AuthContext from "../../context/AuthContext";
