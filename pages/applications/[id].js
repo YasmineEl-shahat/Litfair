@@ -40,6 +40,7 @@ const JobProgress = () => {
 
     setDetail(msg[0].job_post);
     setProgress(msg[0].progress);
+
     setState(msg[0].user_state);
     setId(msg[0]._id);
     setLoading(false);
@@ -153,7 +154,7 @@ const JobProgress = () => {
                 </button>
               )}
 
-              {progress.Cv_scanned && !progress.Live_inter && (
+              {progress.Cv_scanned && !progress.live_inter && (
                 <Link
                   href={{
                     pathname: "/application/interview/",
