@@ -11,7 +11,7 @@ import AuthContext from "../../context/AuthContext";
 import CVComp from "../../comps/CV";
 
 const baseUrl = process.env.API_URL;
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const res = await fetch(baseUrl + "job-config");
   const { msg } = await res.json();
 

@@ -13,12 +13,16 @@ import AuthContext from "../../context/AuthContext";
 import Spinner from "../../comps/Spinner";
 const baseUrl = process.env.API_URL;
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
+  let job = {};
   const res = await fetch(baseUrl + "job-config");
-  const { msg } = await res.json();
+  if (res) {
+    const { msg } = await res.json();
+    job = msg;
+  }
 
   return {
-    props: { job: msg },
+    props: { job },
   };
 };
 const Career = (job) => {

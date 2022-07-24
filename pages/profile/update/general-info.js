@@ -12,9 +12,10 @@ import { uploadImg } from "../../../functions/uploadImg";
 
 const baseUrl = process.env.API_URL;
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
+  let countries = [];
   const res = await fetch(baseUrl + "location/countries");
-  const countries = await res.json();
+  if (res) countries = await res.json();
 
   return {
     props: { countries },
