@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useEffect, useContext, useState } from "react";
 
-import Layout from "../../comps/layout";
+import Layout from "../../comps/Layout";
 import AuthContext from "../../context/AuthContext";
 import style from "../../styles/pages/SeekerHome.module.scss";
 import Spinner from "../../comps/Spinner";

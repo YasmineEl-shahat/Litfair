@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import style from "../styles/pages/About.module.scss";
-import Layout from "../comps/layout";
+import Layout from "../comps/Layout";
 
 const About = () => {
   return (

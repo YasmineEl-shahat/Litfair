@@ -1,4 +1,4 @@
-import Layout from "../comps/layout";
+import Layout from "../comps/Layout";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import Landing from "../src/LandingPage";

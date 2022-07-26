@@ -1,4 +1,4 @@
-import Layout from "../../../comps/layout";
+import Layout from "../../../comps/Layout";
 import styleVid from "../../../styles/pages/Interview.module.scss";
 import style from "../../../styles/pages/Applicants.module.scss";
 import { Card } from "../../../comps/applicant-card";

@@ -4,7 +4,7 @@ import { BsCheck2 } from "react-icons/bs";
 import { useEffect, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Layout from "../../comps/layout";
+import Layout from "../../comps/Layout";
 import AuthContext from "../../context/AuthContext";
 import style from "../../styles/pages/SeekerHome.module.scss";
 import styleProg from "../../styles/pages/Progress.module.scss";

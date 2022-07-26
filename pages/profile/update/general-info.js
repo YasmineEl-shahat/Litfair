@@ -1,4 +1,4 @@
-import Layout from "../../../comps/layout";
+import Layout from "../../../comps/Layout";
 import EditProfileSideBar from "../../../comps/EditProfileSideBar";
 import style from "../../../styles/pages/EditProfile.module.scss";
 import carStyle from "../../../styles/pages/Career.module.scss";

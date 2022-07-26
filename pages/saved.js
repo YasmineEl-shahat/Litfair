@@ -4,7 +4,7 @@ import Jobs from "../comps/jobs";
 import { ActivateBar } from "../functions/ActivateBar";
 import { getSaved, savedArray } from "../functions/Api/Savedjobs";
 
-import Layout from "../comps/layout";
+import Layout from "../comps/Layout";
 import AuthContext from "../context/AuthContext";
 
 import Empty from "../comps/empty";

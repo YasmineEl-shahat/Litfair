@@ -1,4 +1,4 @@
-import Layout from "../comps/layout";
+import Layout from "../comps/Layout";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";

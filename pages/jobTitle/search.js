@@ -1,6 +1,6 @@
 import Jobs from "../../comps/jobs";
 const baseUrl = process.env.API_URL;
-import Layout from "../../comps/layout";
+import Layout from "../../comps/Layout";
 export async function getServerSideProps({ query }) {
   const searchQuery = query.jobTitle || "";
 

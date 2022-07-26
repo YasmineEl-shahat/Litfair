@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { AsyncPaginate } from "react-select-async-paginate";
 
-import Layout from "../comps/layout";
+import Layout from "../comps/Layout";
 import Spinner from "../comps/Spinner";
 import style from "../styles/pages/Career.module.scss";
 
