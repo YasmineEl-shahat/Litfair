@@ -84,7 +84,7 @@ const Landing = () => {
                 <Image
                   width={80}
                   height={80}
-                  src="/assets/landing/graphic-design-svgrepo-com.png"
+                  src="/assets/Landing/graphic-design-svgrepo-com.png"
                   alt="lol"
                 />
               </div>
@@ -98,7 +98,7 @@ const Landing = () => {
                 <Image
                   width={80}
                   height={80}
-                  src="/assets/landing/helmet-industry-business-construction-engineer-worker-engineering-svgrepo-com.png"
+                  src="/assets/Landing/helmet-industry-business-construction-engineer-worker-engineering-svgrepo-com.png"
                   alt="lol"
                 />
               </div>
