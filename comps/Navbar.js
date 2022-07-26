@@ -177,7 +177,7 @@ const Navbar = () => {
                         height={50}
                       ></img>
                       <h5>{name}</h5>
-                      <Link href="#">
+                      <Link href="/profile/update/company/">
                         <li>
                           <i>
                             <Icon path={mdiPencilOutline} size={1} />

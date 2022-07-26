@@ -30,7 +30,7 @@ const Password = () => {
   //submittion
 
   const submit = async (pass, val) => {
-    setSubmitting(true);
+    if (currentPass) setSubmitting(true);
     let response = await fetch(baseUrl + "user/changePassword", {
       method: "PUT",
       headers: {

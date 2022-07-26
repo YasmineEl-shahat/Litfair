@@ -172,6 +172,7 @@ export const AuthProvider = ({ children }) => {
           setAuth(TokenObject);
           setUser(jwt_decode(TokenObject));
           setName(`${firstName} ${lastName}`);
+          setBackError("");
           localStorage.setItem(
             "name",
             JSON.stringify(`${firstName} ${lastName}`)
@@ -221,7 +222,7 @@ export const AuthProvider = ({ children }) => {
             const { TokenObject } = res;
             setAuth(TokenObject);
             setUser(jwt_decode(TokenObject));
-
+            setBackError("");
             cookieCutter.set("auth", TokenObject);
             router.replace("/companyOnboarding");
           } else {
