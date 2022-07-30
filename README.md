@@ -8,7 +8,7 @@ The platform provides a faster, friendlier, and more stable recruiting experienc
 
 # Demo-Preview
 
-# Table of contents
+## Table of contents
 
 - [About Litfair](#about-litfair)
 - [Demo-Preview](#demo-preview)
@@ -16,8 +16,8 @@ The platform provides a faster, friendlier, and more stable recruiting experienc
 - [Deployed website](#deployed-website)
 - [Installation and usage](#installation-and-usage)
 
-# Deployed website
+## Deployed website
 
 http://40.122.108.109
 
-# Installation and usage
+## Installation and usage
