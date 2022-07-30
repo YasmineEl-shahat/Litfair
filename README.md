@@ -28,16 +28,10 @@ http://40.122.108.109
 
 for production mode use these commands:
 
-```
-npm run build
-```
+`npm run build`
 
-```
 `npm start`
-```
 
 for development mode use these commands:
 
-```
 `npm run dev`
-```
