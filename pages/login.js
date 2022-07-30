@@ -150,7 +150,7 @@ const Login = () => {
               <span className={style.googleIcon}>
                 <FcGoogle />
               </span>
-              Sign Up With Google
+              Sign In With Google
             </button>
             {/* <GoogleLogin
               // className="btn btn--big btn--white"

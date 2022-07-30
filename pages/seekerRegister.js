@@ -231,10 +231,7 @@ const SeekerRegister = () => {
                 ></i>
               </div>
 
-              <div className={style.forget}>
-                <span href="">Forget Password?</span>
-              </div>
-
+              <br />
               <div>
                 <button
                   className="btn--global btn--big btn--blue "
