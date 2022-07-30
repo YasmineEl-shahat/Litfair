@@ -8,6 +8,11 @@ The platform provides a faster, friendlier, and more stable recruiting experienc
 
 ## Demo-Preview
 
+
+https://user-images.githubusercontent.com/58048543/181996139-1d9d421e-3978-40f4-8c10-0bccd29eb986.mp4
+
+
+
 ## Table of contents
 
 - [About Litfair](#about-litfair)
