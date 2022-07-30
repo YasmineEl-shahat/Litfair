@@ -15,6 +15,7 @@ The platform provides a faster, friendlier, and more stable recruiting experienc
 - [Table of contents](#table-of-contents)
 - [Deployed website](#deployed-website)
 - [Installation and usage](#installation-and-usage)
+- [Next up](#next-up)
 
 ## Deployed website
 
@@ -35,3 +36,11 @@ for production mode use these commands:
 for development mode use these commands:
 
 `npm run dev`
+
+
+## Next up
+
+- Testing (Unit testing using JEST)
+- Fix bugs
+
+
