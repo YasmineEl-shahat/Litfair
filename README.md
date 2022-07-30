@@ -11,3 +11,13 @@ The platform provides a faster, friendlier, and more stable recruiting experienc
 # Table of contents
 
 - [About Litfair](#about-litfair)
+- [Demo-Preview](#demo-preview)
+- [Table of contents](#table-of-contents)
+- [Deployed website](#deployed-website)
+- [Installation and usage](#installation-and-usage)
+
+# Deployed website
+
+http://40.122.108.109
+
+# Installation and usage
