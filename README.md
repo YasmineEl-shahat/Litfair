@@ -6,7 +6,7 @@ This project is an AI-powered platform that enhances the recruiting process by p
 
 The platform provides a faster, friendlier, and more stable recruiting experience with the help of automated CV Screening and video interviewing software that uses a powerful AI to pre-screen and shortlist candidates, bringing the best talents out there for the role you’re looking for. Which cuts the time of unnecessary pre-interviews, giving you more time to focus on what’s really important.
 
-# Demo-Preview
+## Demo-Preview
 
 ## Table of contents
 
@@ -21,3 +21,13 @@ The platform provides a faster, friendlier, and more stable recruiting experienc
 http://40.122.108.109
 
 ## Installation and usage
+
+`git init`
+`git clone https://github.com/YasmineEl-shahat/Litfair.git`
+
+for production mode use these commands:
+
+`npm run build`
+`npm start`
+for development mode use these commands:
+`npm run dev`
