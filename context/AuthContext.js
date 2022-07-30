@@ -71,7 +71,12 @@ export const AuthProvider = ({ children }) => {
 
   //renew token on every reload
   useEffect(() => {
-    const path = ["/login", "/seekerRegister", "/companyRegister"];
+    const path = [
+      "/login",
+      "/seekerRegister",
+      "/companyRegister",
+      "/forgot-password",
+    ];
     if (!path.includes(router.asPath) && auth) checkToken();
     else if (!path.includes(router.asPath) && router.asPath !== "/")
       router.replace("/");

@@ -37,7 +37,8 @@
 .forget {
   text-align: right;
   font-family: "inter";
-  font-size: $GlobalFont;
+  font-size: 1rem;
+  cursor: pointer;
   color: $BlueGlobal;
   margin-bottom: 1rem;
   margin-top: 0.5rem;

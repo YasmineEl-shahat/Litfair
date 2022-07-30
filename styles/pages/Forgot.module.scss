@@ -1,0 +1,39 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+.main {
+  @include flexCenter;
+  flex-direction: column;
+  margin-bottom: 10rem;
+  section {
+    margin: 0 1.5rem;
+  }
+  @include mQ(2000px, 400px) {
+    section {
+      min-width: 370px;
+      max-width: 380px;
+    }
+  }
+  h4 {
+    font-weight: 900;
+    font-size: $SHeadFont;
+  }
+  p {
+    font-size: $InfoFont;
+    line-height: 2rem;
+    margin-top: 1rem;
+    color: $DarkGray;
+  }
+  label {
+    font-weight: 900;
+    color: #212529;
+  }
+  input,
+  button {
+    width: 100%;
+    margin: 1rem 0;
+  }
+  button {
+    padding: 0.3rem;
+  }
+}

@@ -131,9 +131,11 @@ const Login = () => {
               {errors.password ? errors.password : ""}
             </div>
 
-            <div className={style.forget}>
-              <span href="">Forget Password?</span>
-            </div>
+            <Link href="/forgot-password" passHref>
+              <div className={style.forget}>
+                <span href="">Forget Password?</span>
+              </div>
+            </Link>
 
             <div>
               <button className="btn--global btn--big btn--blue " type="submit">
