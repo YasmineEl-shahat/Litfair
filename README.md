@@ -10,4 +10,4 @@ The platform provides a faster, friendlier, and more stable recruiting experienc
 
 # Table of contents
 
--[About Litfair](https://github.com/YasmineEl-shahat/Litfair#about-litfair)
+- [About Litfair](https://github.com/YasmineEl-shahat/Litfair#about-litfair)
