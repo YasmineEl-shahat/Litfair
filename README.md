@@ -22,18 +22,14 @@ http://40.122.108.109
 
 ## Installation and usage
 
-```
 `git init`
-```
 
-```
 `git clone https://github.com/YasmineEl-shahat/Litfair.git`
-```
 
 for production mode use these commands:
 
 ```
-`npm run build`
+npm run build
 ```
 
 ```
