@@ -39,7 +39,6 @@ const JobDetails = () => {
   const [isSaved, setIsSaved] = useState(false);
 
   const getDetails = async () => {
-    // const path = router.asPath.substring(1);
     const path = history.state.as.substring(1);
 
     const res = await fetch(baseUrl + path, {
@@ -47,16 +46,19 @@ const JobDetails = () => {
         Authorization: "Bearer" + " " + auth,
       },
     });
-    const { msg } = await res.json();
+    if (!res.ok) {
+      await router.replace("/404");
+    } else {
+      const { msg } = await res.json();
 
-    setDetail(msg);
-    console.log(msg);
+      setDetail(msg);
 
-    if (user.role === "Seeker") {
-      await getSaved(auth);
-      if (savedArray.includes(msg._id)) setIsSaved(true);
+      if (user.role === "Seeker") {
+        await getSaved(auth);
+        if (savedArray.includes(msg._id)) setIsSaved(true);
+      }
+      setLoading(false);
     }
-    setLoading(false);
   };
   useEffect(async () => {
     await getDetails();

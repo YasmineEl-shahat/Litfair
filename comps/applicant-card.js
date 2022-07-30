@@ -37,7 +37,11 @@ export const Card = ({
           </div>
         )}
 
-        <img src={imgSrc} className="card-photo" alt="pic"></img>
+        <img
+          src={imgSrc ? imgSrc : `/assets/profile/blank-profile-picture.png`}
+          className="card-photo"
+          alt="pic"
+        ></img>
         <h4>{name}</h4>
         <section className="starWrap">
           {stars.map((star) =>

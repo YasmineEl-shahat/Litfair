@@ -13,6 +13,7 @@ import { GoLocation } from "react-icons/go";
 import SchedulePop from "../../../comps/Popups/schedule";
 import { hideElement } from "../../../functions/hideElement";
 import { changeState } from "../../../functions/Api/ApplicantsStates";
+import { useRouter } from "next/router";
 
 const baseUrl = process.env.API_URL;
 
@@ -32,6 +33,7 @@ const TopApplicants = () => {
 
   // hooks
   const { auth } = useContext(AuthContext);
+  const router = useRouter();
   const getDetails = async () => {
     const path = history.state.as.substring(1);
     const res = await fetch(baseUrl + path, {
@@ -39,16 +41,20 @@ const TopApplicants = () => {
         Authorization: "Bearer" + " " + auth,
       },
     });
-    const { msg } = await res.json();
-    setApplicants(msg.applications);
-    setJob_title(msg.job_title);
-    setJob_type(msg.job_type);
-    setJob_location(msg.job_location);
+    if (!res.ok) {
+      await router.replace("/404");
+    } else {
+      const { msg } = await res.json();
+      setApplicants(msg.applications);
+      setJob_title(msg.job_title);
+      setJob_type(msg.job_type);
+      setJob_location(msg.job_location);
 
-    for (let i = 0; i < msg.applications.length; i++) {
-      if (msg.applications[i].user_state !== "pending") {
-        setAllPending(false);
-        break;
+      for (let i = 0; i < msg.applications.length; i++) {
+        if (msg.applications[i].user_state !== "pending") {
+          setAllPending(false);
+          break;
+        }
       }
     }
   };
@@ -72,10 +78,16 @@ const TopApplicants = () => {
     showElement("SchedulePop");
   };
 
-  const rejectHandler = (e, btn_id, id) => {
+  const rejectHandler = async (e, btn_id, id) => {
     e.preventDefault();
     disableBtn(btn_id);
-    changeState(history.state.as.substring(16), auth, rejectId, "rejected", "");
+    await changeState(
+      history.state.as.substring(16),
+      auth,
+      rejectId,
+      "rejected",
+      ""
+    );
     getDetails();
     hideElement(id);
     EnableBtn(btn_id);

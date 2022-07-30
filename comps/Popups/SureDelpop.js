@@ -12,7 +12,7 @@ const SureDelPop = ({ content, submit, handler }) => {
             Cancel
           </button>
           <button
-            onClick={async (e) => await handler(e, "Del_btn", "sureDel")}
+            onClick={(e) => handler(e, "Del_btn", "sureDel")}
             className="btn--global btn--blue btn--detail"
             id="Del_btn"
             type="submit"

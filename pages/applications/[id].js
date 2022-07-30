@@ -36,14 +36,18 @@ const JobProgress = () => {
         Authorization: "Bearer" + " " + auth,
       },
     });
-    const { msg } = await res.json();
+    if (!res.ok) {
+      await router.replace("/404");
+    } else {
+      const { msg } = await res.json();
 
-    setDetail(msg[0].job_post);
-    setProgress(msg[0].progress);
+      setDetail(msg[0].job_post);
+      setProgress(msg[0].progress);
 
-    setState(msg[0].user_state);
-    setId(msg[0]._id);
-    setLoading(false);
+      setState(msg[0].user_state);
+      setId(msg[0]._id);
+      setLoading(false);
+    }
   };
 
   useEffect(async () => {
@@ -141,46 +145,48 @@ const JobProgress = () => {
                 </div>
               )}
 
-            <div className={styleProg.btn}>
-              {!progress.live_inter && (
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    showElement("sure");
-                  }}
-                  className="btn--cancel btn--remove"
-                >
-                  Decline
-                </button>
-              )}
+            {state === "pending" && (
+              <div className={styleProg.btn}>
+                {!progress.live_inter && (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      showElement("sure");
+                    }}
+                    className="btn--cancel btn--remove"
+                  >
+                    Decline
+                  </button>
+                )}
 
-              {progress.cv_scanned && !progress.live_inter && (
-                <Link
-                  href={{
-                    pathname: "/application/interview/",
-                    query: { id },
-                  }}
-                  passHref
-                >
-                  <button className={`btn--global btn--blue btn--detail `}>
-                    Go To Interview
-                  </button>
-                </Link>
-              )}
-              {progress.feedback_1 && (
-                <Link
-                  href={{
-                    pathname: "/feed",
-                    query: { id },
-                  }}
-                  passHref
-                >
-                  <button className={`btn--global btn--blue btn--detail `}>
-                    View FeedBack1
-                  </button>
-                </Link>
-              )}
-            </div>
+                {progress.cv_scanned && !progress.live_inter && (
+                  <Link
+                    href={{
+                      pathname: "/application/interview/",
+                      query: { id },
+                    }}
+                    passHref
+                  >
+                    <button className={`btn--global btn--blue btn--detail `}>
+                      Go To Interview
+                    </button>
+                  </Link>
+                )}
+                {progress.feedback_1 && (
+                  <Link
+                    href={{
+                      pathname: "/feed",
+                      query: { id },
+                    }}
+                    passHref
+                  >
+                    <button className={`btn--global btn--blue btn--detail `}>
+                      View FeedBack1
+                    </button>
+                  </Link>
+                )}
+              </div>
+            )}
           </div>
 
           <div className={style.boxDetails}>

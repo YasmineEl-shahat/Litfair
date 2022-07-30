@@ -77,7 +77,11 @@ const SchedulePop = ({
             <div className="appointment">
               <article>
                 <img
-                  src={applicant.profile_picture}
+                  src={
+                    applicant.profile_picture
+                      ? applicant.profile_picture
+                      : `/assets/profile/blank-profile-picture.png`
+                  }
                   alt="pic"
                   className="card-photo"
                 />
