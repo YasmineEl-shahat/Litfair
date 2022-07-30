@@ -41,6 +41,6 @@ for development mode use these commands:
 ## Next up
 
 - Testing (Unit testing using JEST)
-- Fix bugs
+- Fixing bugs
 
 
